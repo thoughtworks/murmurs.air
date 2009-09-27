@@ -1,0 +1,16 @@
+body {
+  background: #E0E0E0;
+}
+
+#container {
+  padding-left:1em;
+}
+
+#status_bar {
+  font-size: 75%;
+  bottom: 0;
+  background: #A7A7A7;
+  position: fixed;
+  width: 100%;
+}
+
