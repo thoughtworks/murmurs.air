@@ -17,8 +17,8 @@
 		<maximizable>true</maximizable>
 		<resizable>true</resizable>
 		<visible> true </visible>
-		<width>350</width>
-		<height>580</height>
+		<width>420</width>
+		<height>650</height>
 		<!-- The window's minimum size, specified as a width/height pair, such as "400 200". Optional. -->
 		<minSize>280 200</minSize>
 		<x>150</x>
