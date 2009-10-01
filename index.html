@@ -13,18 +13,34 @@
        var arrow = $('<span class="arrow-to-right"><span></span></span>')
 	     var author = $('<span class="author"></span>').text(murmur.author.name)
        var content = $('<div class="content"></div>').text(murmur.content)
-       var body = $('<div class="body"></div>').append(arrow).append(author).append(content)
+       var created_at = $('<span class="created-at"></span>').text(murmur.created_at)
+       var body = $('<div class="body"></div>').append(arrow).append(created_at).append(author).append(content)
        var icon = $('<div class="icon-wrapper"><img class="icon" src="' + murmur.author.icon_path + '"></img>')
        var murmur_element = $('<div class="murmur"></div>').append(icon).append(body)
        container.append(murmur_element)
-	   }
+     }
+   }
+   
+   Murmur = function() {}
+   
+   Murmur.parse = function(xml) {
+     var murmur = new Murmur()
+     murmur.content = $("body", xml).text()
+     murmur.created_at = $("created_at", xml).text()
+
+     murmur.author = {
+         name: $("author name", xml).text(),
+         icon_path: "http://localhost:3000" + $("author icon_path", xml).text()
+     }
+     return murmur
 	 }
+
 	 
 	 function url(user, password) {
       return "http://localhost:3000/api/v2/projects/alm/murmurs.xml";
 	 }
 	 
-	 $(function() {
+	 $(document).ready(function() {
 	   $("#status").text("loading...")
 	   $.ajax({ 
   	   dataType: 'xml',
@@ -34,14 +50,7 @@
   	   success: function(xml) {
          $("#status").text("")
   	     $("murmurs murmur", xml).each(function(){
-  	       var murmur = {
-             content: $("body", this).text(),
-             author: {
-               name: $("author name", this).text(),
-               icon_path: "http://localhost:3000" + $("author icon_path", this).text()
-             }
-  	       }
-  	       new MurmurView(murmur).render($("#container"))
+  	       new MurmurView(Murmur.parse(this)).render($("#container"))
   	     })
   	   }
   	  });

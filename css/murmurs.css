@@ -76,6 +76,15 @@ body {
   position:relative;
 }
 
+.murmur .created-at {
+  font-size: 70%;
+  font-style: italic;
+  font-weight: lighter;
+  position: absolute;
+  right: 0;
+  padding-right: 0.5em;
+}
+
 .murmur .author {
   font-size: 120%;
   font-weight: bold;
