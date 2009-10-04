@@ -40,6 +40,7 @@ if (window.runtime)
     air.HTTPStatusEvent = window.runtime.flash.events.HTTPStatusEvent;
     air.IOErrorEvent = window.runtime.flash.events.IOErrorEvent;
     air.InvokeEvent = window.runtime.flash.events.InvokeEvent;
+    air.InvokeEventReason = window.runtime.flash.desktop.InvokeEventReason;
     air.NetStatusEvent = window.runtime.flash.events.NetStatusEvent;
     air.OutputProgressEvent = window.runtime.flash.events.OutputProgressEvent;
     air.ProgressEvent = window.runtime.flash.events.ProgressEvent;

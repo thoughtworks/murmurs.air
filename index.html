@@ -4,10 +4,18 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="css/murmurs.css" type="text/css" media="screen" charset="utf-8" />
 	<title>Mingle Murmurs</title>
-  <!-- <script src="vendor/air/AIRIntrospector.js" type="text/javascript" charset="utf-8"></script> -->
+	<!-- The AIR aliases definitions -->
+	<script src="vendor/air/AIRAliases.js" type="text/javascript" charset="utf-8"></script>
+
+  <script src="vendor/air/AIRIntrospector.js" type="text/javascript" charset="utf-8"></script>
 	<script src="vendor/jquery/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="vendor/jquery/webtoolkit.base64.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
-   // window.console = air.Introspector.Console;
+   window.console = air.Introspector.Console
+   host = "http://localhost:3000"
+   project_id = "n1"
+   username = "wpc"
+   password = "pass"
    
    Murmur = function() {}
    
@@ -18,7 +26,7 @@
 
      murmur.author = {
          name: $("author name", xml).text(),
-         icon_path: "http://localhost:3000" + $("author icon_path", xml).text()
+         icon_path: host + $("author icon_path", xml).text()
      }
      return murmur
 	 }
@@ -47,27 +55,47 @@
        }
      }
    }()
-
-	 
-	 function url(user, password) {
-      return "http://localhost:3000/api/v2/projects/alm/murmurs.xml";
-	 }
+   
+   $(document).ready(function() {
+     var targetMenu = air.NativeApplication.nativeApplication.menu; 
+     
+     var murMenu = targetMenu.addItem(new air.NativeMenuItem("Mur"));
+     murMenu.submenu = new air.NativeMenu();
+     var refresh = murMenu.submenu.addItem(new air.NativeMenuItem("refresh"))
+     refresh.addEventListener(air.Event.SELECT, refreshMurmur)
+   })
+   
+   function make_base_auth(user, password) {
+     var tok = user + ':' + password;
+     var hash = Base64.encode(tok);
+     return "Basic " + hash;
+   }
+   
+   function refreshMurmur() {
+     StatusBar.text("loading...")
+     $.ajax({ 
+       dataType: 'xml',
+       url: host + "/api/v2/projects/" + project_id + "/murmurs.xml", 
+       cache: false,
+              
+       beforeSend: function(xhr) {
+         xhr.setRequestHeader('Authorization', make_base_auth(username, password))
+       },
+   
+       success: function(xml) {
+         StatusBar.text("")
+         $("#container").html("")
+         
+         $("murmurs murmur", xml).each(function(){
+           new MurmurView(Murmur.parse(this)).render($("#container"))
+         })
+        
+       }
+      })
+   }
 	 
 	 $(document).ready(function() {
-	   StatusBar.text("loading...")
-	   
-	   $.ajax({ 
-  	   dataType: 'xml',
-  	   url: url(), 
-  	   cache: false,
-
-  	   success: function(xml) {
-         StatusBar.text("")
-  	     $("murmurs murmur", xml).each(function(){
-  	       new MurmurView(Murmur.parse(this)).render($("#container"))
-  	     })
-  	   }
-  	  });
+	   refreshMurmur()
 	 })
 	 
 	</script>
