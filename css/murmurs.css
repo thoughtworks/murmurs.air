@@ -1,12 +1,13 @@
 body {
-  background: #E0E0E0;
+  background: #D2D2D2;
 }
 
 #container {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 96%;
   position:fixed;
   display:block;
+  width:100%;
 }
 
 #status_bar {
@@ -38,7 +39,7 @@ body {
   height: 0px;
 
   border: 7px solid transparent;
-  border-right: 7px solid #ffffff;
+  border-right: 7px solid #FBFBFB;
   position: absolute;
   
   left: -6px;
@@ -50,7 +51,6 @@ body {
   font-size: 75%;  
   margin: 0.5em;
   margin-left: 0.2em;
-  margin-top: 0.7em;
 }
 
 
@@ -74,7 +74,7 @@ body {
   border: 1px solid #A7A7A7;
   border-right: 2px solid #A7A7A7;
   border-bottom: 2px solid #A7A7A7;
-  background-color: #fff;
+  background-color: #FBFBFB;
   -khtml-border-radius: 5px;
   padding: 0.5em;
   min-height: 45px;

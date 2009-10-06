@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/css/preference.css" type="text/css" media="screen" charset="utf-8" />
+  <title>Preference</title>
+  <script src="/vendor/air/AIRAliases.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script src="/vendor/air/AIRIntrospector.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/vendor/jquery/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script src="/vendor/jquery/webtoolkit.base64.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/lib/utils.js" type="text/javascript" charset="utf-8"></script>
+
+  <script src="/app/models/preference.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script type="text/javascript" charset="utf-8">
+    window.opener.Preference = Preference
+    
+    $(document).ready(function() {
+      
+      $('input').each(function(){
+        this.value = Preference[this.id]()
+      })
+      
+      $('input').bind('change', function(){
+        Preference[this.id](this.value)
+      })
+    })
+  </script>
+</head>
+<body>
+  <div id="content">
+    <p>
+      <label for="host"> Mingle instance address: <span class="note">(e.g. https://mingle.host.com:8080)</span></label>
+      <input type="text" id="host" size="35" />
+    </p>
+    
+    <p>
+      <label for="project_id"> Project identifier: </label>
+      <input type="text" id="project_id" />
+    </p>
+    
+    <p>
+      <label for="username"> Mingle login: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <input type="text" id="username" />
+    </p>
+    
+    <p>
+      <label for="password"> Mingle password: </label>
+      <input type="password", id="password" />
+    </p>
+  </div>
+</body>
+</html>

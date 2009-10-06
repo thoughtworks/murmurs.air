@@ -1,0 +1,26 @@
+body {
+  background-color: #e8e8e8;
+}
+
+#content {
+  margin: 1em;
+}
+
+label {
+  font-size: 80%;
+}
+
+input[type=text], input[type=password] {
+  border: 2px solid #888;
+}
+
+input[type=button] {
+  font-size: 70%;
+  margin-left:80%;  
+}
+
+.note {
+  font-size: 70%;
+  font-style: italic;
+  font-weight: lighter;
+}
