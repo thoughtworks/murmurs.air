@@ -18,7 +18,7 @@ Screw.Unit(function() {
     })
     
     describe("basic authentication token", function() {
-      it("should be made from user/pass base64 encoding", function(){
+      it("should be made from user/pass using base64 encoding", function(){
         Preference.username("wpc")
         Preference.password("pass")
         expect(Preference.base_auth_token()).to(equal, make_base_auth("wpc", "pass"))
