@@ -16,6 +16,8 @@
 	<script src="app/models/murmur.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="app/controllers/preference_controller.js" type="text/javascript" charset="utf-8"></script>
+	<script src="app/controllers/status_bar.js" type="text/javascript" charset="utf-8"></script>
+	<script src="app/controllers/menu.js" type="text/javascript" charset="utf-8"></script>
 	
 	
 	<script type="text/javascript" charset="utf-8">
@@ -32,31 +34,6 @@
        container.append(murmur_element)
      }
    }
-   
-   StatusBar = function() {
-     var element = function() {
-       return $('#status')
-     }
-     
-     return {
-       text: function(t) {
-         element().text(t)
-       }
-     }
-   }()
-   
-   $(document).ready(function() {
-     var targetMenu = air.NativeApplication.nativeApplication.menu; 
-     
-     var murMenu = targetMenu.addItem(new air.NativeMenuItem("Mur"));
-     murMenu.submenu = new air.NativeMenu();
-     var preference = murMenu.submenu.addItem(new air.NativeMenuItem("Preference"))
-     preference.addEventListener(air.Event.SELECT, PreferenceController.open)
-     var refresh = murMenu.submenu.addItem(new air.NativeMenuItem("refresh"))
-     refresh.addEventListener(air.Event.SELECT, refreshMurmur)
-
-   })
-   
    
    function refreshMurmur() {
      if(!Preference.host()) return
@@ -84,6 +61,7 @@
    }
 	 
 	 $(document).ready(function() {
+	   StatusBar.init($("#status"))
 	   refreshMurmur()
 	 })
 	 
