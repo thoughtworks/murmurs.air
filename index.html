@@ -6,26 +6,19 @@
 	<title>Mingle Murmurs</title>
 	<!-- The AIR aliases definitions -->
 	<script src="vendor/air/AIRAliases.js" type="text/javascript" charset="utf-8"></script>
-
   <script src="vendor/air/AIRIntrospector.js" type="text/javascript" charset="utf-8"></script>
 	<script src="vendor/jquery/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="vendor/jquery/webtoolkit.base64.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script src="lib/utils.js" type="text/javascript" charset="utf-8"></script>
 	
+	<script src="app/models/preference.js" type="text/javascript" charset="utf-8"></script>
+	<script src="app/models/murmur.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="app/controllers/preference_controller.js" type="text/javascript" charset="utf-8"></script>
+	
+	
 	<script type="text/javascript" charset="utf-8">
-   
-   Murmur = function() {}
-   
-   Murmur.parse = function(xml) {
-     var murmur = new Murmur()
-     murmur.content = $("body", xml).text()
-     murmur.created_at = $("created_at", xml).text()
-
-     murmur.author = {
-       name: $("author name", xml).text(),
-       icon_path: Preference.host() + $("author icon_path", xml).text()
-     }
-     return murmur
-	 }
 	 
 	 MurmurView = function(murmur) {	   
 	   this.render = function(container) {
@@ -58,10 +51,7 @@
      var murMenu = targetMenu.addItem(new air.NativeMenuItem("Mur"));
      murMenu.submenu = new air.NativeMenu();
      var preference = murMenu.submenu.addItem(new air.NativeMenuItem("Preference"))
-     preference.addEventListener(air.Event.SELECT, function() {
-       var win = window.open("app/views/preference.html", "Preference")
-       win.resizeTo(400, 250)
-     })
+     preference.addEventListener(air.Event.SELECT, PreferenceController.open)
      var refresh = murMenu.submenu.addItem(new air.NativeMenuItem("refresh"))
      refresh.addEventListener(air.Event.SELECT, refreshMurmur)
 
@@ -69,7 +59,8 @@
    
    
    function refreshMurmur() {
-     if( typeof Preference === 'undefined' ) return
+     if(!Preference.host()) return
+     
      StatusBar.text("loading...")
 
      $.ajax({ 
