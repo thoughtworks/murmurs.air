@@ -1,7 +1,7 @@
 StatusBar = function() {
  var element = null
  
- return {
+ var public = {
    init: function(el) {
      element = el
    },
@@ -10,5 +10,7 @@ StatusBar = function() {
      element.text(t)
    }
  }
+ 
+ return public
 }()
  

@@ -1,5 +1,5 @@
 Preference = function() {
-  var attr_store = new MemAttributesStore()
+  var attr_store = new XMLFileAttributesStore("preferences.xml")
   
   var public = {
     host: function(v) { return attr('host', v, attr_store) },
