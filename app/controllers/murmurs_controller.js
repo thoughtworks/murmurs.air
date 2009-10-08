@@ -1,9 +1,26 @@
+MurmursContainer = function(element) {
+  var murmur_ids = []
+  
+  var add = function(murmur) {
+    if(murmur_ids.indexOf(murmur.id) != -1) { return }
+    murmur_ids.push(murmur.id)
+    element.prepend(new MurmurView(murmur).render())
+  }
+  
+  return {
+    addAll: function(murmurs) {
+      murmurs.sort(Murmur.id_asc_order).each(function() { add(this) })
+    }
+  }
+}
+
+
 MurmursController = function() {
   var container = null
   
   var public = {
     init: function(container_element) { 
-      container = container_element
+      container = new MurmursContainer(container_element)
     },
     
     refresh: function() {
@@ -21,12 +38,13 @@ MurmursController = function() {
 
         success: function(xml) {
           StatusBar.text("")
-          container.html("")
-          Murmur.parse_collection(xml).each(function() {
-            new MurmurView(this).render(container)
-          })
+          container.addAll(Murmur.parse_collection(xml))
         }
        })
+    },
+    
+    loop_refresh: function() {
+      setInterval(public.refresh, 30 * 1000)
     }
   }
   
