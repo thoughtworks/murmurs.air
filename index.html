@@ -1,79 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="css/murmurs.css" type="text/css" media="screen" charset="utf-8" />
-	<title>Mingle Murmurs</title>
-	<!-- The AIR aliases definitions -->
-	<script src="vendor/air/AIRAliases.js" type="text/javascript" charset="utf-8"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="css/murmurs.css" type="text/css" media="screen" charset="utf-8" />
+  <title>Mingle Murmurs</title>
+  <!-- The AIR aliases definitions -->
+  <script src="vendor/air/AIRAliases.js" type="text/javascript" charset="utf-8"></script>
   <script src="vendor/air/AIRIntrospector.js" type="text/javascript" charset="utf-8"></script>
-	<script src="vendor/jquery/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
-	<script src="vendor/jquery/webtoolkit.base64.js" type="text/javascript" charset="utf-8"></script>
-	
-	<script src="lib/utils.js" type="text/javascript" charset="utf-8"></script>
-	<script src="lib/attributes_store.js" type="text/javascript" charset="utf-8"></script>
-	
-	<script src="app/models/preference.js" type="text/javascript" charset="utf-8"></script>
-	<script src="app/models/murmur.js" type="text/javascript" charset="utf-8"></script>
-	
-	<script src="app/controllers/preference_controller.js" type="text/javascript" charset="utf-8"></script>
-	<script src="app/controllers/status_bar.js" type="text/javascript" charset="utf-8"></script>
-	<script src="app/controllers/menu.js" type="text/javascript" charset="utf-8"></script>
-	
-	
-	<script type="text/javascript" charset="utf-8">
-	 
-	 MurmurView = function(murmur) {	   
-	   this.render = function(container) {
-       var arrow = $('<span class="arrow-to-right"><span></span></span>')
-	     var author = $('<span class="author"></span>').text(murmur.author.name)
-       var content = $('<div class="content"></div>').text(murmur.content)
-       var created_at = $('<span class="created-at"></span>').text(murmur.created_at)
-       var body = $('<div class="body"></div>').append(arrow).append(created_at).append(author).append(content)
-       var icon = $('<div class="icon-wrapper"><img class="icon" src="' + murmur.author.icon_path + '"></img>')
-       var murmur_element = $('<div class="murmur"></div>').append(icon).append(body)
-       container.append(murmur_element)
-     }
-   }
-   
-   function refreshMurmur() {
-     if(!Preference.host()) return
-     
-     StatusBar.text("loading...")
+  <script src="vendor/jquery/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+  <script src="vendor/jquery/webtoolkit.base64.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script src="lib/utils.js" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/attributes_store.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script src="app/models/preference.js" type="text/javascript" charset="utf-8"></script>
+  <script src="app/models/murmur.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script src="app/controllers/preference_controller.js" type="text/javascript" charset="utf-8"></script>
+  <script src="app/controllers/status_bar.js" type="text/javascript" charset="utf-8"></script>
 
-     $.ajax({ 
-       dataType: 'xml',
-       url: Preference.api_url(),
+  <script src="app/views/murmur_view.js" type="text/javascript" charset="utf-8"></script>
+  <script src="app/controllers/murmurs_controller.js" type="text/javascript" charset="utf-8"></script>
 
-       beforeSend: function(xhr) {
-         xhr.setRequestHeader('Authorization', Preference.base_auth_token())
-       },
-   
-       success: function(xml) {
-         StatusBar.text("")
-         $("#container").html("")
-         
-         $("murmurs murmur", xml).each(function(){
-           new MurmurView(Murmur.parse(this)).render($("#container"))
-         })
-        
-       }
-      })
-   }
-	 
-	 $(document).ready(function() {
-	   StatusBar.init($("#status"))
-	   refreshMurmur()
-	 })
-	 
-	</script>
-	<body>
-	  <div id="container">
-	  </div>
-	  
-	  <div id="status_bar">
-	    <button>post</button>
-	    <span id="status"></span>
-	  </div>
+  <script src="app/controllers/menu.js" type="text/javascript" charset="utf-8"></script>
+  
+  
+  <script type="text/javascript" charset="utf-8">
+   $(document).ready(function() {
+     StatusBar.init($("#status"))
+     MurmursController.init($("#container"))
+     MurmursController.refresh()
+   })
+  </script>
+  <body>
+    <div id="container">
+    </div>
+    
+    <div id="status_bar">
+      <button>post</button>
+      <span id="status"></span>
+    </div>
   </body>
 </html>
