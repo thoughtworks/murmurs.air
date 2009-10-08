@@ -1,5 +1,7 @@
 Preference = function() {
-  var attr_store = new XMLFileAttributesStore("preferences.xml")
+  
+  var preferences_file = env.testing ? "test_preferences.xml" : "preferences.xml"
+  var attr_store = new XMLFileAttributesStore(preferences_file)
   
   var public = {
     host: function(v) { return attr('host', v, attr_store) },
@@ -13,6 +15,10 @@ Preference = function() {
     
     api_url: function(){
       return public.host() + "/api/v2/projects/" + public.project_id() + "/murmurs.xml"
+    },
+    
+    reset: function() {
+      attr_store.reset();
     }
   }
   

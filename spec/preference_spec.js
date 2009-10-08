@@ -1,6 +1,10 @@
 Screw.Unit(function() {
   describe("Preference", function() {
     
+    before(function() {
+      Preference.reset()
+    })
+    
     describe("when set a item", function() {
       it("should be able to get it using getter", function() {
         Preference.host("http://example.com")
