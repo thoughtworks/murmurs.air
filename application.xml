@@ -1,51 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <application 
-	xmlns="http://ns.adobe.com/air/application/1.5">
+  xmlns="http://ns.adobe.com/air/application/1.5">
 <!-- AIR Application Descriptor File. See
-	http://www.adobe.com/go/air_1.1_application_descriptor. -->
-	<id>com.thoughtworks.mingle.murmurs.air</id>
-	<name>Murmurs</name>
-	<version>0.1</version>
-	<filename>Murmurs</filename>
-	<description>A Twitter like client for Mingle murmurs</description>
-	<copyright>Copyright Thoughtworks Inc.</copyright>
-	<initialWindow>
-		<content>index.html</content>
-		<title>Mingle Murmur</title>
-		<transparent>false</transparent>
-		<minimizable>true</minimizable>
-		<maximizable>true</maximizable>
-		<resizable>true</resizable>
-		<visible> true </visible>
-		<width>420</width>
-		<height>650</height>
-		<!-- The window's minimum size, specified as a width/height pair, such as "400 200". Optional. -->
-		<minSize>280 200</minSize>
-		<x>150</x>
-		<y>150</y>
-	</initialWindow>
+  http://www.adobe.com/go/air_1.1_application_descriptor. -->
+  <id>com.thoughtworks.mingle.murmurs.air</id>
+  <name>Murmurs</name>
+  <version>0.1</version>
+  <filename>Murmurs</filename>
+  <description>A Twitter like client for Mingle murmurs</description>
+  <copyright>Copyright Thoughtworks Inc.</copyright>
+  <initialWindow>
+    <content>index.html</content>
+    <title>Mingle Murmur</title>
+    <transparent>false</transparent>
+    <minimizable>true</minimizable>
+    <maximizable>true</maximizable>
+    <resizable>true</resizable>
+    <visible> true </visible>
+    <width>420</width>
+    <height>650</height>
+    <!-- The window's minimum size, specified as a width/height pair, such as "400 200". Optional. -->
+    <minSize>280 200</minSize>
+    <x>150</x>
+    <y>150</y>
+  </initialWindow>
   <programMenuFolder>Murmurs</programMenuFolder>
-  <!-- <icon>  
-    <image128x128>images/spaz-icon-alpha.png</image128x128>
-    <image48x48>images/spaz-icon-alpha_48.png</image48x48>
-    <image32x32>images/spaz-icon-alpha_32.png</image32x32>
-    <image16x16>images/spaz-icon-alpha_16.png</image16x16>
-  </icon> -->
-	<customUpdateUI>false</customUpdateUI>
-	<allowBrowserInvocation>false</allowBrowserInvocation>
-	<!-- <fileTypes>
-		<fileType>
-			<name>com.example</name>
-			<extension>xmpl</extension>
-			<description>Example file</description>
-			<contentType>example/x-data-type</contentType>
-			<icon>
-				<image16x16>icons/AIRApp_16.png</image16x16>      
-				<image32x32>icons/AIRApp_32.png</image32x32>      
-				<image48x48>icons/AIRApp_48.png</image48x48>     
-				<image128x128>icons/AIRApp_128.png</image128x128>
+  <icon>  
+    <image128x128>images/icon128.png</image128x128>
+    <image48x48>images/icon48.png</image48x48>
+    <image32x32>images/icon32.png</image32x32>
+    <image16x16>images/icon16.png</image16x16>
+  </icon>
+  <customUpdateUI>false</customUpdateUI>
+  <allowBrowserInvocation>false</allowBrowserInvocation>
 
-			</icon>
-		</fileType>
-	</fileTypes> -->
 </application>
