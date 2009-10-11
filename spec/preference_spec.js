@@ -1,5 +1,5 @@
 Screw.Unit(function() {
-  describe("p", function() {
+  describe("Preference", function() {
     var p
     
     before(function() {

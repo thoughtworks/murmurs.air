@@ -1,13 +1,13 @@
-Murmur = function() {
+Murmur = function(id) {
+  this.id = id
   this.content = null
   this.created_at = null
   this.author = null
-  this.id = null
 }
 
 Murmur.parse = function(xml) {
-  var murmur = new Murmur()
-  murmur.id = parseInt($("id", xml)[0].textContent)
+  var id = parseInt($("id", xml)[0].textContent)
+  var murmur = new Murmur(id)
   murmur.content = $("body", xml).text()
   murmur.created_at = $("created_at", xml).text()
 

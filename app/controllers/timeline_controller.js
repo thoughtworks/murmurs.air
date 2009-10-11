@@ -2,8 +2,13 @@ TimelineController = function() {
   var timeline
   
   var public = {
-    init: function(container_element) { 
-      timeline = new Timeline(container_element)
+    init: function(container) { 
+      timeline = new Timeline()
+      timeline.onchange(function(event, murmur) {
+        if(event == "prepend") {
+          container.prepend(new MurmurView(murmur).render())
+        }
+      })
     },
     
     refresh: function() {
