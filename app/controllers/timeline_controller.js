@@ -1,14 +1,15 @@
 TimelineController = function() {
-  var timeline
+  var timeline = new Timeline()
   
   var public = {
     init: function(container) { 
-      timeline = new Timeline()
       timeline.onchange(function(event, murmur) {
         if(event == "prepend") {
           container.prepend(new MurmurView(murmur).render())
         }
       })
+      
+      $("button.post").click(PostController.open)
     },
     
     refresh: function() {
