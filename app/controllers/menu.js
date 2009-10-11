@@ -7,4 +7,4 @@ var preference = murMenu.submenu.addItem(new air.NativeMenuItem("Preference...")
 preference.addEventListener(air.Event.SELECT, PreferenceController.open)
 
 var refresh = murMenu.submenu.addItem(new air.NativeMenuItem("Refresh"))
-refresh.addEventListener(air.Event.SELECT, MurmursController.refresh)
+refresh.addEventListener(air.Event.SELECT, TimelineController.refresh)

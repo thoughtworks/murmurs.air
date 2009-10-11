@@ -1,4 +1,4 @@
-MurmursController = function() {
+TimelineController = function() {
   var timeline
   
   var public = {
