@@ -13,7 +13,7 @@ Murmur.parse = function(xml) {
 
   murmur.author = {
    name: $("author name", xml).text(),
-   icon_path: Preference.host() + $("author icon_path", xml).text()
+   icon_path: new Preference().host() + $("author icon_path", xml).text()
   }
   return murmur
 }

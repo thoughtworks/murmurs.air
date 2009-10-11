@@ -17,13 +17,14 @@
   
   <script type="text/javascript" charset="utf-8">    
     $(document).ready(function() {
+      var preference = new Preference()
       
       $('input').each(function(){
-        this.value = Preference[this.id]()
+        this.value = preference[this.id]()
       })
       
       $('input').bind('change', function(){
-        Preference[this.id](this.value)
+        preference[this.id](this.value)
       })
     })
   </script>

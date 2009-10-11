@@ -1,31 +1,41 @@
 Screw.Unit(function() {
-  describe("Preference", function() {
+  describe("p", function() {
+    var p
     
     before(function() {
-      Preference.reset()
+      p = new Preference()
+      p.reset();
     })
     
     describe("when set a item", function() {
       it("should be able to get it using getter", function() {
-        Preference.host("http://example.com")
-        expect(Preference.host()).to(equal, "http://example.com")
+        p.host("http://example.com")
+        expect(p.host()).to(equal, "http://example.com")
         
-        Preference.project_id("n1")
-        expect(Preference.project_id()).to(equal, "n1")
+        p.project_id("n1")
+        expect(p.project_id()).to(equal, "n1")
         
-        Preference.username("wpc")
-        expect(Preference.username()).to(equal, "wpc")
+        p.username("wpc")
+        expect(p.username()).to(equal, "wpc")
         
-        Preference.password("123")
-        expect(Preference.password()).to(equal, "123")
+        p.password("123")
+        expect(p.password()).to(equal, "123")
       })
     })
     
     describe("basic authentication token", function() {
       it("should be made from user/pass using base64 encoding", function(){
-        Preference.username("wpc")
-        Preference.password("pass")
-        expect(Preference.base_auth_token()).to(equal, make_base_auth("wpc", "pass"))
+        p.username("wpc")
+        p.password("pass")
+        expect(p.base_auth_token()).to(equal, make_base_auth("wpc", "pass"))
+      })
+    })
+    
+    describe("when set attribute to one instance", function() {
+      it("should change attribute to all the other instances", function() {
+        var p1 = new Preference();
+        p.host("some host")
+        expect(p1.host()).to(equal, p.host())
       })
     })
   })

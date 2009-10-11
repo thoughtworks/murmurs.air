@@ -23,4 +23,4 @@ Preference = function() {
   }
   
   return public
-}()
+}

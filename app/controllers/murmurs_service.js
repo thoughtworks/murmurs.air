@@ -1,16 +1,18 @@
 MurmursService = function() {
+  var preference = new Preference()
+  
   var public = {
     fetch: function(callback) {
-      if(!Preference.host()) return
+      if(!preference.host()) return
 
       StatusBar.text("loading...")
 
       $.ajax({
         dataType: 'xml',
-        url: Preference.api_url(),
+        url: preference.api_url(),
 
         beforeSend: function(xhr) {
-          xhr.setRequestHeader('Authorization', Preference.base_auth_token())
+          xhr.setRequestHeader('Authorization', preference.base_auth_token())
         },
 
         success: function(xml) {
