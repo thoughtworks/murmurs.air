@@ -1,4 +1,4 @@
-MurmursContainer = function(element) {
+Timeline = function(element) {
   var murmur_ids = []
   
   var already_added = function(murmur) {

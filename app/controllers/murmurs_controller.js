@@ -1,13 +1,13 @@
 MurmursController = function() {
-  var container = null
+  var timeline
   
   var public = {
     init: function(container_element) { 
-      container = new MurmursContainer(container_element)
+      timeline = new Timeline(container_element)
     },
     
     refresh: function() {
-      MurmursService.fetch(container.prependAll)
+      MurmursService.fetch(timeline.prependAll)
     },
     
     loop_refresh: function() {
