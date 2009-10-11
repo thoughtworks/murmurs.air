@@ -14,19 +14,10 @@
   <script src="/lib/attributes_store.js" type="text/javascript" charset="utf-8"></script>
 
   <script src="/app/models/preference.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/controllers/preference_controller.js" type="text/javascript" charset="utf-8"></script>
   
   <script type="text/javascript" charset="utf-8">    
-    $(document).ready(function() {
-      var preference = new Preference()
-      
-      $('input').each(function(){
-        this.value = preference[this.id]()
-      })
-      
-      $('input').bind('change', function(){
-        preference[this.id](this.value)
-      })
-    })
+    $(document).ready(function() { PreferenceController.init() })
   </script>
 </head>
 <body>
