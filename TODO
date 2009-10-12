@@ -1,5 +1,4 @@
 * installer
-* sync preference attributes before window close
 
 ----------release 0.1------------------
 * murmur.content -> murmur.body
