@@ -59,5 +59,13 @@ Screw.Unit(function() {
         expect(authors[0].name).to(equal, 'wpc')
       })
     })
+    
+    describe("rendered content", function() {
+      it("should append cr with br", function() {
+        var m = new Murmur(0)
+        m.content("sss\nxxx")
+        expect(m.rendered_content()).to(equal, "sss\n<br/>xxx")
+      })
+    })
   })
 })

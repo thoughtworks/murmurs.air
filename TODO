@@ -1,7 +1,7 @@
-* cr in murmur
 * installer
 * encrypt password
 * sync preference attributes before window close
+* html injection in murmurs
 
 ----------release 0.1------------------
 * murmur.content -> murmur.body
