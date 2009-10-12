@@ -1,10 +1,11 @@
+* status bar refactoring
 * spinner
 * cr in murmur
 * installer
 * encrypt password
-* status bar refactoring
 * simple error handling
 * murmur.content -> murmur.body
+
 ----------release 0.1------------------
 
 * anonymous author
@@ -17,3 +18,5 @@
 * spellchecking
 * image inline display
 * shorten url
+* team member auto complete
+* reply
