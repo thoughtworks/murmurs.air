@@ -1,13 +1,11 @@
-* status bar refactoring
-* spinner
 * cr in murmur
 * installer
 * encrypt password
-* simple error handling
 * murmur.content -> murmur.body
 
 ----------release 0.1------------------
 
+* spinner
 * anonymous author
 * util style window
 * link in murmur content

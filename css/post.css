@@ -16,5 +16,12 @@ textarea {
 
 #status_bar button {
   position: absolute;
-  right: 1em;
+  right: 5px;
+}
+
+
+#status_bar .info-panel {
+  position: absolute;
+  left: 5px;
+  top: 5px;
 }
