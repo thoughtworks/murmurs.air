@@ -1,4 +1,4 @@
-StatusBar = function() {
+StatusBarController = function() {
  var element = null
  
  var public = {

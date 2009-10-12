@@ -3,6 +3,7 @@
 <head>
   <title>Post to Mingle:</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/css/statusbar.css" type="text/css" media="screen" charset="utf-8" />
   <link rel="stylesheet" href="/css/post.css" type="text/css" media="screen" charset="utf-8" />
   <script src="/vendor/air/AIRAliases.js" type="text/javascript" charset="utf-8"></script>
   
@@ -16,14 +17,19 @@
   <script src="/app/models/preference.js" type="text/javascript" charset="utf-8"></script>
   <script src="/app/controllers/murmurs_service.js" type="text/javascript" charset="utf-8"></script>
   <script src="/app/controllers/post_controller.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/controllers/status_bar_controller.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">    
-    $(document).ready(function() { PostController.init() })
+    $(document).ready(function() { 
+      StatusBarController.init($("#status"))
+      PostController.init()
+    })
   </script>
 </head>
 <body>
   <textarea></textarea>
   <div id="status_bar">
     <button class="post">Post</button>
+    <span id="status"></span>
   </div>
 </body>
 </html>

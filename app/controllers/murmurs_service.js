@@ -9,18 +9,20 @@ MurmursService = function() {
     }      
   }
 
-  var request = function(options) {
+  var request = function(options) {    
+    if(!preference.host()) return
+    StatusBarController.text("request sending to server")
     $.ajax($.extend({}, general_request_options, options))
   }
   
   var public = {
     post: function(murmur) {
-      if(!preference.host()) return
       request({
         type: "POST",
         data: {'murmur[body]': murmur.content() },
         async: false,
         success: function() {
+          StatusBarController.text("")
           window.opener.TimelineController.refresh()
           window.close()
         }
@@ -28,11 +30,9 @@ MurmursService = function() {
     },
     
     fetch: function(callback) {
-      if(!preference.host()) return
-      StatusBar.text("request sending to server")
       request({
         success: function(xml) {
-          StatusBar.text("")
+          StatusBarController.text("")
           callback(Murmur.parse_collection(xml))
         }
        })

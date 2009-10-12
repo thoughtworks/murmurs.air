@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="css/statusbar.css" type="text/css" media="screen" charset="utf-8" />
   <link rel="stylesheet" href="css/murmurs.css" type="text/css" media="screen" charset="utf-8" />
   <title>Mingle Murmurs</title>
   <!-- The AIR aliases definitions -->
@@ -18,7 +19,7 @@
   <script src="app/models/timeline.js" type="text/javascript" charset="utf-8"></script>
   
   <script src="app/controllers/preference_controller.js" type="text/javascript" charset="utf-8"></script>
-  <script src="app/controllers/status_bar.js" type="text/javascript" charset="utf-8"></script>
+  <script src="app/controllers/status_bar_controller.js" type="text/javascript" charset="utf-8"></script>
 
   <script src="app/views/murmur_view.js" type="text/javascript" charset="utf-8"></script>
   <script src="app/controllers/murmurs_service.js" type="text/javascript" charset="utf-8"></script>
@@ -30,7 +31,7 @@
   
   <script type="text/javascript" charset="utf-8">
    $(document).ready(function() {
-     StatusBar.init($("#status"))
+     StatusBarController.init($("#status"))
      TimelineController.init($("#container"))
      TimelineController.loop_refresh()
    })

@@ -10,10 +10,6 @@ textarea {
 
 
 #status_bar {
-  font-size: 70%;
-  bottom: 0;
-  background: #A7A7A7;
-  position: absolute;
   width: 400px;
   height: 30px;
 }
