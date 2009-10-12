@@ -7,7 +7,7 @@ Murmur = function(id) {
     author: function(v) { return attr('author', v, attr_store)},
     
     rendered_content: function() {
-      return public.content().replace(/\n/g, "\n<br/>")
+      return public.content().escapeHTML().replace(/\n/g, "\n<br/>")
     }
   }
   

@@ -61,10 +61,20 @@ Screw.Unit(function() {
     })
     
     describe("rendered content", function() {
-      it("should append cr with br", function() {
-        var m = new Murmur(0)
+      var m
+      
+      before(function() {
+        m = new Murmur(0)
+      })
+      
+      it("should append cr with br", function() {        
         m.content("sss\nxxx")
         expect(m.rendered_content()).to(equal, "sss\n<br/>xxx")
+      })
+      
+      it("should escape html tag", function() {
+        m.content("<h1>dddd</h1>")
+        expect(m.rendered_content()).to(equal, "&lt;h1&gt;dddd&lt;/h1&gt;")
       })
     })
   })
