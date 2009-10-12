@@ -1,10 +1,10 @@
 * cr in murmur
 * installer
 * encrypt password
-* murmur.content -> murmur.body
+* sync preference attributes before window close
 
 ----------release 0.1------------------
-
+* murmur.content -> murmur.body
 * spinner
 * anonymous author
 * util style window
