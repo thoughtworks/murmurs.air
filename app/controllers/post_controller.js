@@ -5,7 +5,7 @@ PostController = function() {
     init: function() {
       $("button.post").click(public.post)
       $("textarea").change(function() {
-        new_murmur.content = this.value
+        new_murmur.content(this.value)
       })
       $("textarea").focus()
     },

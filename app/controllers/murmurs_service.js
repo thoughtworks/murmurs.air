@@ -18,7 +18,7 @@ MurmursService = function() {
       if(!preference.host()) return
       request({
         type: "POST",
-        data: {'murmur[murmur]': murmur.content },
+        data: {'murmur[body]': murmur.content() },
         async: false,
         success: function() {
           window.opener.TimelineController.refresh()

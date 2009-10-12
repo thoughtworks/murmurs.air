@@ -2,9 +2,12 @@
 * cr in murmur
 * installer
 * encrypt password
+* status bar refactoring
+* simple error handling
+* murmur.content -> murmur.body
+----------release 0.1------------------
 
-----------------------------
-
+* anonymous author
 * util style window
 * link in murmur content
 * card number in murmur content
