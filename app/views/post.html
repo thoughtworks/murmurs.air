@@ -20,7 +20,7 @@
   <script src="/app/controllers/status_bar_controller.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">    
     $(document).ready(function() { 
-      StatusBarController.init($("#status"))
+      StatusBarController.init($("#status_bar"))
       PostController.init()
     })
   </script>
@@ -29,7 +29,7 @@
   <textarea></textarea>
   <div id="status_bar">
     <button class="post">Post</button>
-    <span id="status"></span>
+    <span class="info-panel"></span>
   </div>
 </body>
 </html>

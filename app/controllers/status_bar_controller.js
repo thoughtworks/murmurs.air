@@ -1,13 +1,13 @@
 StatusBarController = function() {
- var element = null
+ var container
  
  var public = {
-   init: function(el) {
-     element = el
+   init: function(element) {
+     container = element
    },
    
    text: function(t) {
-     element.text(t)
+     $(".info-panel", container).text(t)
    }
  }
  

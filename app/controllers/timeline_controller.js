@@ -1,5 +1,6 @@
 TimelineController = function() {
   var timeline = new Timeline()
+  var interval = 30 * 1000
   
   var public = {
     init: function(container) { 
@@ -10,6 +11,8 @@ TimelineController = function() {
       })
       
       $("button.post").click(PostController.open)
+
+      public.loop_refresh()
     },
     
     refresh: function() {
@@ -18,7 +21,7 @@ TimelineController = function() {
     
     loop_refresh: function() {
       public.refresh()
-      setInterval(public.refresh, 30 * 1000)
+      setInterval(public.refresh, interval)
     }
   }
   
