@@ -54,4 +54,32 @@ Screw.Unit(function() {
       expect(s1.get('k3')).to(be_null)
     })
   })
+  
+  describe("EncryptedAttrStore", function() {
+    
+    var s
+    
+    before(function(){
+      s = new EncryptedAttrStore('s')
+    })
+    
+    it("should be able to get set value", function() {
+      s.set('k1', 'v1')
+      expect(s.get('k1')).to(equal, 'v1')
+    })
+    
+    it("should be able to reset all value", function() {
+      s.set('k1', 'v1')
+      s.reset()
+      expect(s.get('k1')).to(be_null)
+    })
+        // todo
+        // it("should only reset other instance when it has a different namespace", function() {
+        //   s.set('k1', 'v1')
+        //   var s2 = new EncryptedAttrStore('s2')
+        //   s2.set('k1', 'v1')
+        //   s.reset()
+        //   expect(s2.get('k1')).to(equal, 'v1')
+        // })
+  })
 })

@@ -7,6 +7,15 @@ Screw.Unit(function() {
       p.reset();
     })
     
+    describe("when nothing set", function() {
+      it("attributes should all be null", function() {
+        expect(p.host()).to(be_null)
+        expect(p.project_id()).to(be_null)
+        expect(p.username()).to(be_null)
+        expect(p.password()).to(be_null)
+      })
+    })
+    
     describe("when set a item", function() {
       it("should be able to get it using getter", function() {
         p.host("http://example.com")
