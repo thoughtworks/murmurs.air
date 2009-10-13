@@ -1,25 +1,11 @@
 Murmur = function(id) {
   var attr_store = new MemAttributesStore()
-  
-  var sub_card = function(content) {
-    var p = new Preference()
-    return content.gsub(/#(\d+)/, function(matches) {
-      return '<a href="'+ p.card_html_url(matches[1]) +'">' + matches[0] + '</a>'
-    })
-  }
-  
-  var public = {
+  return {
     'id': id,
     content: function(v) { return attr('content', v, attr_store) },
     created_at: function(v) { return attr('created_at', v, attr_store) },
-    author: function(v) { return attr('author', v, attr_store)},
-    
-    rendered_content: function() {
-      return sub_card(public.content().escapeHTML().replace(/\n/g, "\n<br/>"))
-    }
+    author: function(v) { return attr('author', v, attr_store)}
   }
-  
-  return public
 }
 
 Murmur.parse = function(xml) {

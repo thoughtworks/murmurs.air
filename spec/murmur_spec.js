@@ -59,37 +59,5 @@ Screw.Unit(function() {
         expect(authors[0].name).to(equal, 'wpc')
       })
     })
-    
-    describe("rendered content", function() {
-      var m
-      var preference
-      
-      before(function() {
-        m = new Murmur(0)
-        preference = new Preference()
-        preference.reset()
-      })
-            
-      it("should append cr with br", function() {        
-        m.content("sss\nxxx")
-        expect(m.rendered_content()).to(equal, "sss\n<br/>xxx")
-      })
-      
-      it("should escape html tag", function() {
-        m.content("<h1>dddd</h1>")
-        expect(m.rendered_content()).to(equal, "&lt;h1&gt;dddd&lt;/h1&gt;")
-      })
-      
-      describe("card number substitution", function(){
-        it("should replace #ddd with card link", function() {
-          m.content("fix bug #111.")
-          preference.host("http://example.com")
-          preference.project_id("n1")
-          expect(m.rendered_content()).to(equal, 'fix bug <a href="http://example.com/projects/n1/cards/111">#111</a>.')
-        })
-        
-      })
-      
-    })
   })
 })
