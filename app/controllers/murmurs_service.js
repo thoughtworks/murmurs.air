@@ -17,15 +17,12 @@ MurmursService = function() {
   }
   
   var public = {
-    post: function(murmur) {
+    post: function(murmur, callback) {
       request({
         type: "POST",
         data: {'murmur[body]': murmur.content() },
         async: false,
-        success: function() {
-          window.opener.TimelineController.refresh()
-          window.close()
-        }
+        success: function() { callback() }
       })
     },
     

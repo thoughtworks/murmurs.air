@@ -19,6 +19,10 @@ PreferenceController = function() {
       window.nativeWindow.addEventListener(air.Event.DEACTIVATE, function() {
         $('input').each(change_listener)
       });
+      
+      window.nativeWindow.addEventListener(air.Event.CLOSE, function() {
+        window.opener.TimelineController.refresh()
+      });
     }
   }
   

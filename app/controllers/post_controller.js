@@ -15,7 +15,10 @@ PostController = function() {
     },
     
     post: function() {
-      MurmursService.post(new_murmur)
+      MurmursService.post(new_murmur, function() {
+        window.opener.TimelineController.refresh()
+        window.close()
+      })
     }
   }
   
