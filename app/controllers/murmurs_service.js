@@ -1,17 +1,19 @@
 MurmursService = function() {
   var preference = new Preference()
   
-  var general_request_options = {
-    dataType: 'xml',
-    url: preference.api_url(),
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', preference.base_auth_token())
-    }      
-  }
+  var general_request_options = function(){
+    return {
+      dataType: 'xml',
+      url: preference.api_url(),
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', preference.base_auth_token())
+      }      
+    }
+  } 
 
   var request = function(options) {    
     if(!preference.host()) return
-    $.ajax($.extend({}, general_request_options, options))
+    $.ajax($.extend(general_request_options(), options))
   }
   
   var public = {

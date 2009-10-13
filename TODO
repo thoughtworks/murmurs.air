@@ -1,13 +1,19 @@
-* installer
+done
+---------- release 0.1 preview -------------
+* card number in murmur content
+* auto updater
+
+(http://robertnyman.com/2008/06/09/how-to-update-adobe-air-applications-automatically-with-javascript-airupdaterjs)
+
 
 ----------release 0.1------------------
+
 * meaningful error message
 * murmur.content -> murmur.body
 * spinner
 * anonymous author
 * util style window
 * link in murmur content
-* card number in murmur content
 * tray icon
 * docbar notification
 * stackbar notification
