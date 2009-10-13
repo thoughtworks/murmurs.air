@@ -14,7 +14,7 @@ Preference = function() {
       return make_base_auth(public.username(), public.password())
     },
     
-    api_url: function(){
+    murmurs_url: function(){
       return public.host() + "/api/v2/projects/" + public.project_id() + "/murmurs.xml"
     },
     

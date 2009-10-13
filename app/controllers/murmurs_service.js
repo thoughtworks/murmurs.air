@@ -4,7 +4,7 @@ MurmursService = function() {
   var general_request_options = function(){
     return {
       dataType: 'xml',
-      url: preference.api_url(),
+      url: preference.murmurs_url(),
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', preference.base_auth_token())
       }      
