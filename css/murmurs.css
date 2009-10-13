@@ -96,3 +96,8 @@ body {
   padding-bottom: 0.5em;
   overflow: hidden;
 }
+
+.murmur .content a {
+  text-decoration: none;
+  font-weight: bold;
+}

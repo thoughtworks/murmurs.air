@@ -1,5 +1,13 @@
 Murmur = function(id) {
   var attr_store = new MemAttributesStore()
+  
+  var sub_card = function(content) {
+    var p = new Preference()
+    return content.gsub(/#(\d+)/, function(matches) {
+      return '<a href="'+ p.card_html_url(matches[1]) +'">' + matches[0] + '</a>'
+    })
+  }
+  
   var public = {
     'id': id,
     content: function(v) { return attr('content', v, attr_store) },
@@ -7,7 +15,7 @@ Murmur = function(id) {
     author: function(v) { return attr('author', v, attr_store)},
     
     rendered_content: function() {
-      return public.content().escapeHTML().replace(/\n/g, "\n<br/>")
+      return sub_card(public.content().escapeHTML().replace(/\n/g, "\n<br/>"))
     }
   }
   

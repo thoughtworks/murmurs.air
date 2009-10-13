@@ -1,14 +1,17 @@
 done
 ---------- release 0.1 preview -------------
+* shortcut for new murmur (cmd + n)
 * card number in murmur content
 * auto updater
 
 (http://robertnyman.com/2008/06/09/how-to-update-adobe-air-applications-automatically-with-javascript-airupdaterjs)
 
+* video tutorial
 
 ----------release 0.1------------------
 
 * meaningful error message
+* menu reorganize
 * murmur.content -> murmur.body
 * spinner
 * anonymous author
@@ -16,9 +19,10 @@ done
 * link in murmur content
 * tray icon
 * docbar notification
-* stackbar notification
+* tray icon notification
 * spellchecking
 * image inline display
 * shorten url
 * team member auto complete
 * reply
+* remurmur

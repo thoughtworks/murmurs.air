@@ -10,6 +10,12 @@ PreferenceController = function() {
       window.open("/app/views/preference.html", "Preference").resizeTo(400, 250)
     },
     
+    open_if_empty: function() {
+      if(!preference.host()) {
+        public.open()
+      }
+    },
+    
     init: function() {    
       $('input').each(function() {
         this.value = preference[this.id]()

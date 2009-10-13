@@ -18,6 +18,10 @@ Preference = function() {
       return public.host() + "/api/v2/projects/" + public.project_id() + "/murmurs.xml"
     },
     
+    card_html_url: function(number) {
+      return public.host() + "/projects/" + public.project_id() + "/cards/" + number
+    },
+    
     reset: function() {
       attr_store.reset();
       encrypted_attr_store.reset();
