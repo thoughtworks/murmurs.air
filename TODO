@@ -1,6 +1,7 @@
 * installer
 
 ----------release 0.1------------------
+* meaningful error message
 * murmur.content -> murmur.body
 * spinner
 * anonymous author
