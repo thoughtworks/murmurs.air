@@ -102,4 +102,9 @@ body {
   text-decoration: none;
   font-size: 95%;
   font-weight: bold;
+  color: #1A67CC;
+}
+
+.murmur .content .murmurer {
+  color: #1A67CC;
 }

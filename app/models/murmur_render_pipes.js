@@ -30,7 +30,14 @@ MurmurRenderPipes.add(function(content) {
     return new Preference().card_html_url(number)
   }
   
-  return content.gsub(/#(\d+)/, function(matches) {
-    return '<a href="'+ card_url(matches[1]) +'">' + matches[0] + '</a>'
+  return content.gsub(/#(\d+)/, function(match) {
+    return '<a href="'+ card_url(match[1]) +'">' + match[0] + '</a>'
+  })
+})
+
+// extract murmurer
+MurmurRenderPipes.add(function(content) {
+  return content.gsub(/@\w+/, function(match) {
+    return '<span class="murmurer">'+ match[0] + '</span>'
   })
 })
