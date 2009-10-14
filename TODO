@@ -1,15 +1,15 @@
 ---------- release 0.1 preview -------------
 done
 ----------release 0.1------------------
-* shortcut for new murmur (cmd + n)
-* auto updater
 
-(http://robertnyman.com/2008/06/09/how-to-update-adobe-air-applications-automatically-with-javascript-airupdaterjs)
-
+* colorful user
 * video tutorial
+
 ------------ backlog -----------------
-
-
+- auto updater
+(http://robertnyman.com/2008/06/09/how-to-update-adobe-air-applications-automatically-with-javascript-airupdaterjs)
+* shortcut for new murmur (cmd + n)
+* body wrapping on more char other than just space
 * meaningful error message
 * menu reorganize
 * murmur.content -> murmur.body
@@ -18,10 +18,12 @@ done
 * util style window
 * link in murmur content
 * tray icon
-* docbar notification
+* doc icon notification
 * tray icon notification
 * spellchecking
-* image inline display
+* image inline display thumbnail
+* image viewer
+* drop image
 * shorten url
 * team member auto complete
 * reply
