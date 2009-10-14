@@ -7,7 +7,7 @@ PreferenceController = function() {
   
   var public =  {
     open: function() {
-      window.open("/app/views/preference.html", "Preference").resizeTo(400, 250)
+      window.open("/app/views/preference.html", "Preference").resizeTo(400, 280)
     },
     
     open_if_empty: function() {
@@ -16,19 +16,23 @@ PreferenceController = function() {
       }
     },
     
-    init: function() {    
-      $('input').each(function() {
+    init: function() {
+      var inputs = $('input[type=text], input[type=password]')
+      
+      inputs.each(function() {
         this.value = preference[this.id]()
       })
       
-      $('input').change(change_listener)
+      inputs.change(change_listener)
+      
       window.nativeWindow.addEventListener(air.Event.DEACTIVATE, function() {
-        $('input').each(change_listener)
-      });
+        inputs.each(change_listener)
+      })
       
       window.nativeWindow.addEventListener(air.Event.CLOSE, function() {
         window.opener.TimelineController.refresh()
-      });
+      })
+      
     }
   }
   

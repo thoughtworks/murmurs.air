@@ -15,8 +15,8 @@ input[type=text], input[type=password] {
 }
 
 input[type=button] {
-  font-size: 70%;
-  margin-left:80%;  
+  font-size: 90%;
+  margin-left: 85%;
 }
 
 .note {

@@ -26,3 +26,5 @@ done
 * team member auto complete
 * reply
 * remurmur
+* validating null murmur posting
+* highlight murmur related to current user (using @login or @(first part of username))
