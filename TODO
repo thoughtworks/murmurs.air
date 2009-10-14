@@ -1,14 +1,14 @@
-done
 ---------- release 0.1 preview -------------
+done
+----------release 0.1------------------
 * shortcut for new murmur (cmd + n)
-* card number in murmur content
 * auto updater
 
 (http://robertnyman.com/2008/06/09/how-to-update-adobe-air-applications-automatically-with-javascript-airupdaterjs)
 
 * video tutorial
+------------ backlog -----------------
 
-----------release 0.1------------------
 
 * meaningful error message
 * menu reorganize
