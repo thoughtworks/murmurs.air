@@ -35,9 +35,9 @@ MurmurRenderPipes.add(function(content) {
   })
 })
 
-// extract murmurer
+// extract mentions
 MurmurRenderPipes.add(function(content) {
   return content.gsub(/@\w+/, function(match) {
-    return '<span class="murmurer">'+ match[0] + '</span>'
+    return '<span class="mention">'+ match[0] + '</span>'
   })
 })
