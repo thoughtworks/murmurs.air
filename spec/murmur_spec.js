@@ -59,5 +59,25 @@ Screw.Unit(function() {
         expect(authors[0].name).to(equal, 'wpc')
       })
     })
+    
+    describe("when you have a valid murmur", function() {
+      var murmurWithMention
+      var murmurWithoutMention
+      before(function() {
+        murmurWithMention = new Murmur('one')
+        murmurWithMention.content('hello there @wpc')
+        
+        murmurWithoutMention = new Murmur('two')
+        murmurWithoutMention.content('no mention wpc')
+      })
+      
+      it("should know when murmur mentions user", function() {
+        expect(murmurWithMention.mentions_user('wpc')).to(equal, true)
+        expect(murmurWithMention.mentions_user('WpC')).to(equal, true)
+        expect(murmurWithoutMention.mentions_user('wpc')).to(equal, false)
+        expect(murmurWithMention.mentions_user('qianqian')).to(equal, false)
+      })
+    })
+    
   })
 })

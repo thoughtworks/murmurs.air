@@ -4,7 +4,11 @@ Murmur = function(id) {
     'id': id,
     content: function(v) { return attr('content', v, attr_store) },
     created_at: function(v) { return attr('created_at', v, attr_store) },
-    author: function(v) { return attr('author', v, attr_store)}
+    author: function(v) { return attr('author', v, attr_store) },
+    mentions_user: function(user) {
+      var userTag = '@' + user
+      return this.content().toLowerCase().include(userTag.toLowerCase())
+    }
   }
 }
 
