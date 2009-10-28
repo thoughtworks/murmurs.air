@@ -8,6 +8,10 @@ Murmur = function(id) {
     mentions_user: function(user) {
       var userTag = '@' + user
       return this.content().toLowerCase().include(userTag.toLowerCase())
+    },
+    
+    blank: function() {
+      return this.content() == null || this.content().blank()
     }
   }
 }

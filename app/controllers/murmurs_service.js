@@ -18,6 +18,8 @@ MurmursService = function() {
   
   var public = {
     post: function(murmur, callback) {
+      if(murmur.blank()) return
+      
       request({
         type: "POST",
         data: {'murmur[body]': murmur.content() },

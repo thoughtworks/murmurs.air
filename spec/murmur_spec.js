@@ -64,10 +64,10 @@ Screw.Unit(function() {
       var murmurWithMention
       var murmurWithoutMention
       before(function() {
-        murmurWithMention = new Murmur('one')
+        murmurWithMention = new Murmur(1)
         murmurWithMention.content('hello there @wpc')
         
-        murmurWithoutMention = new Murmur('two')
+        murmurWithoutMention = new Murmur(2)
         murmurWithoutMention.content('no mention wpc')
       })
       
@@ -77,6 +77,32 @@ Screw.Unit(function() {
         expect(murmurWithoutMention.mentions_user('wpc')).to(equal, false)
         expect(murmurWithMention.mentions_user('qianqian')).to(equal, false)
       })
+    })
+    
+    describe("murmur is blank when", function() {
+      it("content is null", function() {
+        var murmur = new Murmur(1)
+        expect(murmur.blank()).to(be_true)
+      })
+      
+      it("content is empty string", function() {
+        var murmur = new Murmur(1)
+        murmur.content("")
+        expect(murmur.blank()).to(be_true)
+      })
+      
+      it("content only contain spaces", function() {
+        var murmur = new Murmur(1)
+        murmur.content("    ")
+        expect(murmur.blank()).to(be_true)
+      })
+      
+      it("content only contain cr or spaces", function() {
+        var murmur = new Murmur(1)
+        murmur.content("  \n  ")
+        expect(murmur.blank()).to(be_true)
+      })
+      
     })
     
   })
