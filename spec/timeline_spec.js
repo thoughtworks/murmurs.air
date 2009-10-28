@@ -6,6 +6,12 @@ Screw.Unit(function() {
       timeline = new Timeline()
     })
     
+    describe("after freshly created", function() {
+      it("should not have latest id", function() {
+        expect(timeline.latest_id()).to(be_null)
+      })
+    })
+    
     describe("when prepend a murmur", function() {
       it("should notify listeners", function() {
         var notified
@@ -36,6 +42,11 @@ Screw.Unit(function() {
         var murmurs = [new Murmur(3), new Murmur(1), new Murmur(2)]
         timeline.prependAll(murmurs)
         expect($.map(murmurs, function(m) { return m.id })).to(equal, [3, 1, 2])
+      })
+      
+      it("should record largest id as latest murmur id", function() {
+        timeline.prependAll([new Murmur(3), new Murmur(1), new Murmur(2)])
+        expect(timeline.latest_id()).to(equal, 3)
       })
     })
     

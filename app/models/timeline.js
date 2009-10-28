@@ -1,6 +1,7 @@
 Timeline = function() {
   var murmur_ids = []
   var listeners = []
+  var latest_id = null
   
   var already_added = function(murmur) {
     return murmur_ids.indexOf(murmur.id) != -1
@@ -12,6 +13,7 @@ Timeline = function() {
     }
     
     murmur_ids.push(murmur.id)
+    latest_id = murmur.id
     $.each(listeners, function() { this("prepend", murmur) })
   }
   
@@ -24,6 +26,10 @@ Timeline = function() {
     
     onchange: function(listener) {
       listeners.push(listener)
+    },
+    
+    latest_id: function() {
+      return latest_id
     }
   }
 }

@@ -28,13 +28,14 @@ MurmursService = function() {
       })
     },
     
-    fetch: function(callback) {
+    fetch_since: function(since_id, callback) {
       request({
+        data: (since_id ? {'since_id': since_id} : {}),
         success: function(xml) {
           callback(Murmur.parse_collection(xml))
         }
-       })
-    },
+      })
+    }
   }
   
   return public
