@@ -1,9 +1,13 @@
 Timeline = function() {
-  var murmur_ids = []
+  var murmurs = []
   var listeners = []
-  var latest_id = null
+  var latest = null
   
   var already_added = function(murmur) {
+    var murmur_ids = []
+     $.each(murmurs, function(){
+      murmur_ids.push(this.id)
+    })
     return murmur_ids.indexOf(murmur.id) != -1
   }
   
@@ -12,8 +16,8 @@ Timeline = function() {
       return 
     }
     
-    murmur_ids.push(murmur.id)
-    latest_id = murmur.id
+    murmurs.push(murmur)
+    latest = murmur
     $.each(listeners, function() { this("prepend", murmur) })
   }
   
@@ -29,7 +33,17 @@ Timeline = function() {
     },
     
     latest_id: function() {
-      return latest_id
-    }
+      return latest == null ? null : latest.id
+    },
+    
+    find: function(id){
+      var result = null;
+      $.each(murmurs, function(){
+        if(this.id.toString() == id.toString()){
+          result = this
+        }
+      })
+      return result
+    },
   }
 }

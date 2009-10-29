@@ -48,6 +48,13 @@ Screw.Unit(function() {
         timeline.prependAll([new Murmur(3), new Murmur(1), new Murmur(2)])
         expect(timeline.latest_id()).to(equal, 3)
       })
+      
+      it("can find murmur by id", function(){
+        var murmurOne = new Murmur(1)
+        timeline.prependAll([new Murmur(3), murmurOne, new Murmur(2)])
+        expect(murmurOne).to(equal, timeline.find(1))
+        expect(murmurOne).to(equal, timeline.find('1'))
+      })
     })
     
     describe("when prepend already prepended murmur to timeline", function() {
@@ -59,6 +66,6 @@ Screw.Unit(function() {
         timeline.prependAll([new Murmur(1), new Murmur(1), new Murmur(2)])
         expect(ids).to(equal, [1, 2])
       })
-    })
+    })    
   })
 })
