@@ -18,7 +18,7 @@ Murmur = function(id) {
     
     remurmur:function() {
       var to = this.author() ? this.author().login : this.jabber_user_name()
-      return 'RM @' + to + ' : ' + this.content() + ' // '
+      return 'RM @' + to + ': ' + this.content() + ' // '
     }
   }
 }

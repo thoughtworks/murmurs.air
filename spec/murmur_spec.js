@@ -111,14 +111,14 @@ Screw.Unit(function() {
         var murmur = new Murmur(1)
         murmur.author({login : 'phoenix'})
         murmur.content('hi')
-        expect(murmur.remurmur()).to(equal, 'RM @phoenix : hi // ')
+        expect(murmur.remurmur()).to(equal, 'RM @phoenix: hi // ')
       })
       
       it("to valide jabber user name", function(){
         var murmur = new Murmur(1)
         murmur.jabber_user_name('phoenix')
         murmur.content('hi')
-        expect(murmur.remurmur()).to(equal, 'RM @phoenix : hi // ')
+        expect(murmur.remurmur()).to(equal, 'RM @phoenix: hi // ')
       })
     })
     
