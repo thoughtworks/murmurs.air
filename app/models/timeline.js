@@ -1,31 +1,31 @@
 Timeline = function() {
   var murmurs = []
   var listeners = []
-  var latest = null
-  
-  var already_added = function(murmur) {
-    var murmur_ids = []
-     $.each(murmurs, function(){
-      murmur_ids.push(this.id)
-    })
-    return murmur_ids.indexOf(murmur.id) != -1
+
+  var find = function(id){
+    for(var i in murmurs) {
+      if(id_equal(murmurs[i].id, id)) {
+        return murmurs[i]
+      }
+    }
   }
   
   var prepend = function(murmur) {
-    if(already_added(murmur)) { 
-      return 
-    }
-    
+    if(find(murmur.id)) return
+
     murmurs.push(murmur)
-    latest = murmur
     $.each(listeners, function() { this("prepend", murmur) })
   }
   
+  var id_equal = function(left_id, right_id) {
+    return left_id.toString() === right_id.toString()
+  }
+  
   return {
-    prependAll: function(come_in_murmurs) {
-      var murmurs = clone_array(come_in_murmurs)
-      murmurs.sort(Murmur.id_asc_order)
-      $.each(murmurs, function() { prepend(this) })
+    prepend_all: function(come_in_murmurs) {
+      var ms = clone_array(come_in_murmurs)
+      ms.sort(Murmur.id_asc_order)
+      $.each(ms, function() { prepend(this) })
     },
     
     onchange: function(listener) {
@@ -33,17 +33,10 @@ Timeline = function() {
     },
     
     latest_id: function() {
-      return latest == null ? null : latest.id
+      var m = murmurs[murmurs.length - 1]
+      return m && m.id
     },
     
-    find: function(id){
-      var result = null;
-      $.each(murmurs, function(){
-        if(this.id.toString() == id.toString()){
-          result = this
-        }
-      })
-      return result
-    },
+    'find': find
   }
 }

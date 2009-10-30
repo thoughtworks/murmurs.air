@@ -35,7 +35,7 @@ TimelineController = function() {
     },
 
     refresh: function() {
-      MurmursService.fetch_since(timeline.latest_id(), timeline.prependAll)
+      MurmursService.fetch_since(timeline.latest_id(), timeline.prepend_all)
     }
   }
   
