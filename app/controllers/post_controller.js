@@ -2,23 +2,22 @@ PostController = function() {
   var new_murmur = new Murmur()
   
   var public = {
-    init: function(params) {
+    init: function() {
       $("button.post").click(public.post)
       $("textarea").change(function() {
         new_murmur.content(this.value)
       })
       $("textarea").focus()
-      if(params){
-        $("textarea").text("RM @" + params['to'] + ' ' + params['content'] + ' //')
+
+      if(window.params && window.params['init_content']){
+        $("textarea").text(window.params['init_content'])
       }
     },
     
-    open: function() {
-      window.open("/app/views/post.html").resizeTo(400, 150)
-    },
-    
-    reply: function(to, content){
-      window.open("/app/views/post.html?to=" + to + "&content=" + content).resizeTo(400, 150)
+    open: function(params) {
+      var post_win = window.open("/app/views/post.html")
+      post_win.resizeTo(400, 150)
+      post_win.params = params
     },
     
     post: function() {

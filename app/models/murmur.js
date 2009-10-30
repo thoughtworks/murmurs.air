@@ -5,6 +5,7 @@ Murmur = function(id) {
     content: function(v) { return attr('content', v, attr_store) },
     created_at: function(v) { return attr('created_at', v, attr_store) },
     author: function(v) { return attr('author', v, attr_store) },
+    jabber_user_name: function(v){ return attr('jabber_user_name', v, attr_store) },
     mentions_user: function(user) {
       var userTag = '@' + user
       return this.content().toLowerCase().include(userTag.toLowerCase())
@@ -12,6 +13,12 @@ Murmur = function(id) {
     
     blank: function() {
       return this.content() == null || this.content().blank()
+    },
+    
+    
+    remurmur:function() {
+      var to = this.author() ? this.author().login : this.jabber_user_name()
+      return 'RM @' + to + ' : ' + this.content() + ' // '
     }
   }
 }
@@ -24,7 +31,8 @@ Murmur.parse = function(xml) {
 
   murmur.author({
    name: $("author name", xml).text(),
-   icon_path: new Preference().host() + $("author icon_path", xml).text()
+   icon_path: new Preference().host() + $("author icon_path", xml).text(),
+   login: $("author login", xml).text()
   })
   return murmur
 }

@@ -54,9 +54,10 @@ Screw.Unit(function() {
         expect($.invoke(murmurs, 'created_at')).to(equal, ['Sun Sep 27 14:50:34 UTC 2009', 'Wed Sep 30 02:50:04 UTC 2009', 'Wed Sep 30 02:50:16 UTC 2009'])
       })
       
-      it("should extract author name when it exists", function() {
+      it("should extract author when it exists", function() {
         var authors = $.invoke(murmurs, 'author')
         expect(authors[0].name).to(equal, 'wpc')
+        expect(authors[0].login).to(equal, 'wpc')
       })
     })
     
@@ -104,6 +105,23 @@ Screw.Unit(function() {
       })
       
     })
+    
+    describe("remurmur", function(){
+      it("to valide author", function(){
+        var murmur = new Murmur(1)
+        murmur.author({login : 'phoenix'})
+        murmur.content('hi')
+        expect(murmur.remurmur()).to(equal, 'RM @phoenix : hi // ')
+      })
+      
+      it("to valide jabber user name", function(){
+        var murmur = new Murmur(1)
+        murmur.jabber_user_name('phoenix')
+        murmur.content('hi')
+        expect(murmur.remurmur()).to(equal, 'RM @phoenix : hi // ')
+      })
+    })
+    
     
   })
 })

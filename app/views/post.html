@@ -10,7 +10,6 @@
   <script src="/vendor/air/AIRIntrospector.js" type="text/javascript" charset="utf-8"></script>
   <script src="/vendor/jquery/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
   <script src="/vendor/jquery/webtoolkit.base64.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/vendor/jquery/jquery.url.js" type="text/javascript" charset="utf-8"></script>
   
   <script src="/lib/utils.js" type="text/javascript" charset="utf-8"></script>
   <script src="/lib/attributes_store.js" type="text/javascript" charset="utf-8"></script>
@@ -21,11 +20,8 @@
   <script src="/app/controllers/status_bar_controller.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">    
     $(document).ready(function() {
-      var to = jQuery.url.param('to')
-      var content = jQuery.url.param('content')
       StatusBarController.init($("#status_bar"))
-      params = to ? {to : to, content : content} : null
-      PostController.init(params)
+      PostController.init()
     })
   </script>
 </head>
