@@ -4,7 +4,7 @@ TimelineController = function() {
   
   var create_context_menu = function(murmur){
     var menu = new air.NativeMenu()
-    var remurmur_item = new air.NativeMenuItem("Remurmur")
+    var remurmur_item = new air.NativeMenuItem("Remurmur...")
     remurmur_item.addEventListener(air.Event.SELECT, function() { do_remurmur(murmur) });
     menu.addItem(remurmur_item)
     return menu
