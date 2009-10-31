@@ -65,6 +65,9 @@ Screw.Unit(function() {
       var murmur_with_mention
       var murmur_without_mention
       before(function() {
+        p = new Preference()
+        p.reset();
+        
         murmur_with_mention = new Murmur(1)
         murmur_with_mention.content('hello there @wpc')
         
@@ -83,6 +86,16 @@ Screw.Unit(function() {
       
       it("should only find user xyz if mention is @xyz", function() {
         expect(murmur_with_mention.mentions_user('qianqian')).to(equal, false)
+      })
+      
+      it("should find current user", function() {
+        p.username("wpc")
+        expect(murmur_with_mention.mentions_current_user()).to(equal, true)
+      })
+      
+      it("should only find current user if s/he is mentioned", function() {
+        p.username("phoenix")
+        expect(murmur_with_mention.mentions_current_user()).to(equal, false)
       })
       
     })

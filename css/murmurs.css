@@ -108,6 +108,12 @@ body {
   color: #1A67CC;
 }
 
+.murmur .body.mention {
+  border: 1px solid #orange;
+  border-right: 2px solid #orange;
+  border-bottom: 2px solid #orange;
+}
+
 .murmur .content .mention {
   color: #1A67CC;
 }

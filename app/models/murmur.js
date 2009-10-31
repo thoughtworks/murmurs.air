@@ -6,6 +6,11 @@ Murmur = function(id) {
     created_at: function(v) { return attr('created_at', v, attr_store) },
     author: function(v) { return attr('author', v, attr_store) },
     jabber_user_name: function(v){ return attr('jabber_user_name', v, attr_store) },
+    
+    mentions_current_user: function() {
+      return this.mentions_user(new Preference().username())
+    },
+    
     mentions_user: function(user) {
       var user_tag = '@' + user
       return this.content().toLowerCase().include(user_tag.toLowerCase())
