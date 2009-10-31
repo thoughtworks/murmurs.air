@@ -35,7 +35,16 @@ MurmursService = function() {
           callback(Murmur.parse_collection(xml))
         }
       })
-    }
+    },
+    
+    fetch_before: function(before_id, callback) {
+      request({
+        data: (before_id ? {'before_id': before_id} : {}),
+        success: function(xml) {
+          callback(Murmur.parse_collection(xml))
+        }
+      })
+    }    
   }
   
   return public

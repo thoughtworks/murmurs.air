@@ -17,8 +17,11 @@ TimelineController = function() {
   var public = {
     init: function(container) {
       timeline.onchange(function(event, murmur) {
+        var view = new MurmurView(murmur).render()
         if(event == "prepend") {
-          container.prepend(new MurmurView(murmur).render())
+          container.prepend(view)
+        } else if (event == "append") {
+          container.append(view)
         }
       })
       
@@ -28,6 +31,12 @@ TimelineController = function() {
         var menu = create_context_menu(timeline.find($(this).attr('murmur_id')))
         event.preventDefault()
         menu.display(window.nativeWindow.stage, event.clientX, event.clientY)
+      })
+      
+      container.scroll(function() {
+        if(this.scrollHeight == this.scrollTop + this.offsetHeight) { //bottom
+          MurmursService.fetch_before(timeline.earliest_id(), timeline.append_all)
+        }
       })
       
       public.refresh()

@@ -17,6 +17,12 @@ Timeline = function() {
     $.each(listeners, function() { this("prepend", murmur) })
   }
   
+  var append = function(murmur) {
+    if(find(murmur.id)) return
+    murmurs.unshift(murmur)
+    $.each(listeners, function() { this("append", murmur) })
+  }
+  
   var id_equal = function(left_id, right_id) {
     return left_id.toString() === right_id.toString()
   }
@@ -28,12 +34,23 @@ Timeline = function() {
       $.each(ms, function() { prepend(this) })
     },
     
+    append_all: function(come_in_murmurs) {
+      var ms = clone_array(come_in_murmurs)
+      ms.sort(Murmur.id_desc_order)
+      $.each(ms, function() { append(this) })
+    },
+    
     onchange: function(listener) {
       listeners.push(listener)
     },
     
     latest_id: function() {
       var m = murmurs[murmurs.length - 1]
+      return m && m.id
+    },
+    
+    earliest_id: function() {
+      var m = murmurs[0]
       return m && m.id
     },
     
