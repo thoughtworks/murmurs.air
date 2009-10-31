@@ -16,13 +16,10 @@ TimelineController = function() {
   
   var public = {
     init: function(container) {
+      var view = new TimelineView(container)
+      
       timeline.onchange(function(event, murmur) {
-        var view = new MurmurView(murmur).render()
-        if(event == "prepend") {
-          container.prepend(view)
-        } else if (event == "append") {
-          container.append(view)
-        }
+        view[event](murmur)
       })
       
       $("button.post").click(PostController.open)
@@ -33,10 +30,14 @@ TimelineController = function() {
         menu.display(window.nativeWindow.stage, event.clientX, event.clientY)
       })
       
-      container.scroll(function() {
-        if($.atScrollBottom(this)) {
-          MurmursService.fetch_before(timeline.oldest_id(), timeline.append_all)
-        }
+      view.scroll(function() {
+        if(!view.at_bottom() || view.has_spinner()) { return }
+        
+        view.append_spinner()
+        MurmursService.fetch_before(timeline.oldest_id(), function(murmurs) {
+          view.remove_spinner()
+          timeline.append_all(murmurs)
+        })
       })
       
       public.refresh()
