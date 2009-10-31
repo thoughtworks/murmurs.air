@@ -7,8 +7,8 @@ Murmur = function(id) {
     author: function(v) { return attr('author', v, attr_store) },
     jabber_user_name: function(v){ return attr('jabber_user_name', v, attr_store) },
     mentions_user: function(user) {
-      var userTag = '@' + user
-      return this.content().toLowerCase().include(userTag.toLowerCase())
+      var user_tag = '@' + user
+      return this.content().toLowerCase().include(user_tag.toLowerCase())
     },
     
     blank: function() {

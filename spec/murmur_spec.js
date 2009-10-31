@@ -61,23 +61,30 @@ Screw.Unit(function() {
       })
     })
     
-    describe("when you have a valid murmur", function() {
-      var murmurWithMention
-      var murmurWithoutMention
+    describe("a valid murmur can detect mentions", function() {
+      var murmur_with_mention
+      var murmur_without_mention
       before(function() {
-        murmurWithMention = new Murmur(1)
-        murmurWithMention.content('hello there @wpc')
+        murmur_with_mention = new Murmur(1)
+        murmur_with_mention.content('hello there @wpc')
         
-        murmurWithoutMention = new Murmur(2)
-        murmurWithoutMention.content('no mention wpc')
+        murmur_without_mention = new Murmur(2)
+        murmur_without_mention.content('no mention wpc')
       })
       
-      it("should know when murmur mentions user", function() {
-        expect(murmurWithMention.mentions_user('wpc')).to(equal, true)
-        expect(murmurWithMention.mentions_user('WpC')).to(equal, true)
-        expect(murmurWithoutMention.mentions_user('wpc')).to(equal, false)
-        expect(murmurWithMention.mentions_user('qianqian')).to(equal, false)
+      it("should be case insensitive", function() {
+        expect(murmur_with_mention.mentions_user('WpC')).to(equal, true)
       })
+      
+      it("should be in form @xxx", function() {
+        expect(murmur_with_mention.mentions_user('wpc')).to(equal, true)
+        expect(murmur_without_mention.mentions_user('wpc')).to(equal, false)
+      })
+      
+      it("should only find user xyz if mention is @xyz", function() {
+        expect(murmur_with_mention.mentions_user('qianqian')).to(equal, false)
+      })
+      
     })
     
     describe("murmur is blank when", function() {
