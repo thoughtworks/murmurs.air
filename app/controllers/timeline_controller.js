@@ -11,7 +11,7 @@ TimelineController = function() {
   }
   
   var do_remurmur = function(murmur) {
-    PostController.open({ 'init_content' : murmur.remurmur()} )
+    PostController.open({ init_content : murmur.remurmur()} )
   }
   
   var public = {
@@ -34,8 +34,8 @@ TimelineController = function() {
       })
       
       container.scroll(function() {
-        if(this.scrollHeight == this.scrollTop + this.offsetHeight) { //bottom
-          MurmursService.fetch_before(timeline.earliest_id(), timeline.append_all)
+        if($.atScrollBottom(this)) {
+          MurmursService.fetch_before(timeline.oldest_id(), timeline.append_all)
         }
       })
       

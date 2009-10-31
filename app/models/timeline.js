@@ -49,7 +49,7 @@ Timeline = function() {
       return m && m.id
     },
     
-    earliest_id: function() {
+    oldest_id: function() {
       var m = murmurs[0]
       return m && m.id
     },

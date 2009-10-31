@@ -11,8 +11,8 @@ Screw.Unit(function() {
         expect(timeline.latest_id()).to(be_null)
       })
       
-      it("should not have earliest id", function() {
-        expect(timeline.earliest_id()).to(be_null)
+      it("should not have oldest id", function() {
+        expect(timeline.oldest_id()).to(be_null)
       })
     })
     
@@ -53,9 +53,9 @@ Screw.Unit(function() {
         expect(timeline.latest_id()).to(equal, 3)
       })
       
-      it("should record smallest id as earliest murmur id", function() {
+      it("should record smallest id as oldest murmur id", function() {
         timeline.prepend_all([new Murmur(3), new Murmur(1), new Murmur(2)])
-        expect(timeline.earliest_id()).to(equal, 1)
+        expect(timeline.oldest_id()).to(equal, 1)
       })
     })
     
@@ -76,9 +76,9 @@ Screw.Unit(function() {
         expect($.map(murmurs, function(m) { return m.id })).to(equal, [3, 1, 2])
       })
       
-      it("should record smallest id as earliest murmur id", function() {
+      it("should record smallest id as oldest murmur id", function() {
         timeline.append_all([new Murmur(3), new Murmur(1), new Murmur(2)])
-        expect(timeline.earliest_id()).to(equal, 1)
+        expect(timeline.oldest_id()).to(equal, 1)
       })
     })
     
