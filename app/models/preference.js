@@ -9,6 +9,7 @@ Preference = function() {
     project_id: function(v) { return attr('project_id', v, attr_store) },
     username: function(v) { return attr('username', v, attr_store) },
     password: function(v) { return attr('password', v, encrypted_attr_store) },
+    display_name: function(v) { return attr('display_name', v, attr_store) },
     
     base_auth_token: function() {
       return make_base_auth(public.username(), public.password())
@@ -20,6 +21,10 @@ Preference = function() {
     
     card_html_url: function(number) {
       return public.host() + "/projects/" + public.project_id() + "/cards/" + number
+    },
+    
+    users_list_url: function() {
+      return public.host() + "/api/v2/users.xml"
     },
     
     reset: function() {
