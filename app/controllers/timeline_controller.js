@@ -4,14 +4,25 @@ TimelineController = function() {
   
   var create_context_menu = function(murmur){
     var menu = new air.NativeMenu()
+    
     var remurmur_item = new air.NativeMenuItem("Remurmur...")
     remurmur_item.addEventListener(air.Event.SELECT, function() { do_remurmur(murmur) });
     menu.addItem(remurmur_item)
+    
+    var copy_item = new air.NativeMenuItem("Copy")
+    copy_item.addEventListener(air.Event.SELECT, function(event) { do_copy() })
+    menu.addItem(copy_item)
+    
     return menu
   }
   
   var do_remurmur = function(murmur) {
     PostController.open({ init_content : murmur.remurmur()} )
+  }
+  
+  var do_copy = function() {
+    air.Clipboard.generalClipboard.clear();
+    air.Clipboard.generalClipboard.setData(air.ClipboardFormats.TEXT_FORMAT, window.getSelection());
   }
   
   var public = {
