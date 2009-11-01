@@ -11,15 +11,15 @@ TimelineController = function() {
   }
   
   var do_remurmur = function(murmur) {
-    PostController.open({ 'init_content' : murmur.remurmur()} )
+    PostController.open({ init_content : murmur.remurmur()} )
   }
   
   var public = {
     init: function(container) {
+      var view = new TimelineView(container)
+      
       timeline.onchange(function(event, murmur) {
-        if(event == "prepend") {
-          container.prepend(new MurmurView(murmur).render())
-        }
+        view[event](murmur)
       })
       
       $("button.post").click(PostController.open)
@@ -28,6 +28,16 @@ TimelineController = function() {
         var menu = create_context_menu(timeline.find($(this).attr('murmur_id')))
         event.preventDefault()
         menu.display(window.nativeWindow.stage, event.clientX, event.clientY)
+      })
+      
+      view.scroll(function() {
+        if(!view.at_bottom() || view.has_spinner()) { return }
+        
+        view.append_spinner()
+        MurmursService.fetch_before(timeline.oldest_id(), function(murmurs) {
+          view.remove_spinner()
+          timeline.append_all(murmurs)
+        })
       })
       
       public.refresh()

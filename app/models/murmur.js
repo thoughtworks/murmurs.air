@@ -61,3 +61,8 @@ Murmur.id_asc_order = function(left, right) {
   if(left.id == right.id) { return 0 }
   return left.id > right.id ? 1 : -1
 }
+
+Murmur.id_desc_order = function(left, right) {
+  if(left.id == right.id) { return 0 }
+  return left.id < right.id ? 1 : -1
+}

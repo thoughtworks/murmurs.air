@@ -17,6 +17,7 @@ MurmursService = function() {
   }
   
   var public = {
+    // create new murmur on mingle
     post: function(murmur, callback) {
       if(murmur.blank()) return
       
@@ -28,6 +29,8 @@ MurmursService = function() {
       })
     },
     
+    // return 25 murmurs since a murmur's id, 
+    // return latest 25 murmurs if since_id is null
     fetch_since: function(since_id, callback) {
       request({
         data: (since_id ? {'since_id': since_id} : {}),
@@ -35,7 +38,17 @@ MurmursService = function() {
           callback(Murmur.parse_collection(xml))
         }
       })
-    }
+    },
+    
+    // return 25 mururs happened before a murmur id
+    fetch_before: function(before_id, callback) {
+      request({
+        data: (before_id ? {'before_id': before_id} : {}),
+        success: function(xml) {
+          callback(Murmur.parse_collection(xml))
+        }
+      })
+    }    
   }
   
   return public

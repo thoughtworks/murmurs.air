@@ -10,6 +10,11 @@ body {
   width:100%;
 }
 
+#container .spinner {
+  text-align: center;
+  padding-bottom: 0.5em;
+}
+
 .arrow-to-right {
   font-size: 0px; 
   line-height: 0%; 
