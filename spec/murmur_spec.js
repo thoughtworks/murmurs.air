@@ -75,47 +75,39 @@ Screw.Unit(function() {
         murmur_without_mention.content('no mention wpc')
       })
       
-      it("should be case insensitive", function() {
-        expect(murmur_with_mention.mentions_user('WpC')).to(equal, true)
-      })
-      
-      it("should be in form @xxx", function() {
-        expect(murmur_with_mention.mentions_user('wpc')).to(equal, true)
-        expect(murmur_without_mention.mentions_user('wpc')).to(equal, false)
-      })
-      
-      it("should only find user xyz if mention is @xyz", function() {
-        expect(murmur_with_mention.mentions_user('qianqian')).to(equal, false)
-      })
-      
-      it("should find current user", function() {
-        p.username("wpc")
+      it("when username is different case", function() {
+        p.username('WpC')
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
-      it("should only find current user if s/he is mentioned", function() {
-        p.username("phoenix")
-        expect(murmur_with_mention.mentions_current_user()).to(equal, false)
+      it("when form is @login", function() {
+        p.username('wpc')
+        expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
-      it("when it is in form @first_part_of_display_name", function() {
+      it("unless there is no @ symbol", function() {
+        p.username('wpc')
+        expect(murmur_without_mention.mentions_current_user()).to(equal, false)
+      })
+      
+      it("when form is @first_part_of_display_name", function() {
         p.username("mike")
         p.display_name("space garbage")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
-      it("when it is in form @last_part_of_display_name", function() {
+      it("when form is @last_part_of_display_name", function() {
         p.username("mike")
         p.display_name("yucky bug")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
-      it("should not detect mentions that just begin with username", function() {
+      it("unless they only begin with username", function() {
         p.username("wp")
         expect(murmur_with_mention.mentions_current_user()).to(equal, false)
       })
       
-      it("should detect mention ending with a non-word character", function() {
+      it("when they end with a non-word character", function() {
         p.display_name('space baby')
         murmur_with_mention.content("@space: what's up?")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
