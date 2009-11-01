@@ -1,6 +1,7 @@
 Murmur = function(id) {
   var attr_store = new MemAttributesStore()
-  return {
+  
+  var public = {
     'id': id,
     content: function(v) { return attr('content', v, attr_store) },
     created_at: function(v) { return attr('created_at', v, attr_store) },
@@ -8,24 +9,32 @@ Murmur = function(id) {
     jabber_user_name: function(v){ return attr('jabber_user_name', v, attr_store) },
     
     mentions_current_user: function() {
-      return this.mentions_user(new Preference().username())
+      var p = new Preference()
+      var possible_mention_strings = [p.username()]
+      if (p.display_name()) {
+        possible_mention_strings = possible_mention_strings.concat(p.display_name().split(' '))
+      }
+      return $.any(possible_mention_strings, function(index, str) {
+        return public.mentions_user(str)
+      })
     },
     
     mentions_user: function(user) {
-      var user_tag = '@' + user
-      return this.content().toLowerCase().include(user_tag.toLowerCase())
+      var tag_reg_exp = new RegExp('@' + user + '\\b', 'i')
+      return (this.content().match(tag_reg_exp) != null)
     },
     
     blank: function() {
       return this.content() == null || this.content().blank()
     },
     
-    
     remurmur:function() {
       var to = this.author() ? this.author().login : this.jabber_user_name()
       return 'RM @' + to + ': ' + this.content() + ' // '
     }
   }
+  
+  return public
 }
 
 Murmur.parse = function(xml) {

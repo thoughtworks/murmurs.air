@@ -61,7 +61,7 @@ Screw.Unit(function() {
       })
     })
     
-    describe("a valid murmur can detect mentions", function() {
+    describe("a murmur can detect mentions", function() {
       var murmur_with_mention
       var murmur_without_mention
       before(function() {
@@ -69,7 +69,7 @@ Screw.Unit(function() {
         p.reset();
         
         murmur_with_mention = new Murmur(1)
-        murmur_with_mention.content('hello there @wpc')
+        murmur_with_mention.content('@space @bug hello there @wpc')
         
         murmur_without_mention = new Murmur(2)
         murmur_without_mention.content('no mention wpc')
@@ -98,6 +98,28 @@ Screw.Unit(function() {
         expect(murmur_with_mention.mentions_current_user()).to(equal, false)
       })
       
+      it("when it is in form @first_part_of_display_name", function() {
+        p.username("mike")
+        p.display_name("space garbage")
+        expect(murmur_with_mention.mentions_current_user()).to(equal, true)
+      })
+      
+      it("when it is in form @last_part_of_display_name", function() {
+        p.username("mike")
+        p.display_name("yucky bug")
+        expect(murmur_with_mention.mentions_current_user()).to(equal, true)
+      })
+      
+      it("should not detect mentions that just begin with username", function() {
+        p.username("wp")
+        expect(murmur_with_mention.mentions_current_user()).to(equal, false)
+      })
+      
+      it("should detect mention ending with a non-word character", function() {
+        p.display_name('space baby')
+        murmur_with_mention.content("@space: what's up?")
+        expect(murmur_with_mention.mentions_current_user()).to(equal, true)
+      })
     })
     
     describe("murmur is blank when", function() {
