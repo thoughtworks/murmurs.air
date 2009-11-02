@@ -114,24 +114,12 @@ body {
 }
 
 .murmur .body.mention {
-  border: 2px solid #800000;
-  border-right: 3px solid #800000;
-  border-bottom: 3px solid #800000;
-}
-
-.arrow-to-right.mention {
-  border: 10px solid transparent;
-  border-right: 10px solid #800000;
-  left: -20px;
+  background-color: #cfebff;
 }
 
 .arrow-to-right.mention span{
-  border: 10px solid transparent;
-  border-right: 10px solid #FBFBFB;
-  position: absolute;
-  top: -10px;
+  border-right: 7px solid #cfebff;
 }
-
 
 .murmur .content .mention {
   color: #1A67CC;
