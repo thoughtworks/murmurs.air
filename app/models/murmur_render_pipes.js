@@ -24,6 +24,13 @@ MurmurRenderPipes.add(function(content) {
   return content.replace(/\n/g, "\n<br/>")
 })
 
+// general link
+MurmurRenderPipes.add(function(content){
+  return content.gsub(/http:\/\/[\w\d.?=]*/, function(match){
+    return '<a href="'+ match[0] +'">'+ match[0] +'</a>'
+  }) 
+})
+
 // card link
 MurmurRenderPipes.add(function(content) {
   var card_url = function(number) {
