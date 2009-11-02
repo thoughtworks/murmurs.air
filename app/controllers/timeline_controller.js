@@ -5,13 +5,13 @@ TimelineController = function() {
   var create_context_menu = function(murmur){
     var menu = new air.NativeMenu()
     
-    var remurmur_item = new air.NativeMenuItem("Remurmur...")
-    remurmur_item.addEventListener(air.Event.SELECT, function() { do_remurmur(murmur) });
-    menu.addItem(remurmur_item)
-    
     var copy_item = new air.NativeMenuItem("Copy")
     copy_item.addEventListener(air.Event.SELECT, function(event) { do_copy() })
     menu.addItem(copy_item)
+    
+    var remurmur_item = new air.NativeMenuItem("Remurmur...")
+    remurmur_item.addEventListener(air.Event.SELECT, function() { do_remurmur(murmur) });
+    menu.addItem(remurmur_item)
     
     return menu
   }
