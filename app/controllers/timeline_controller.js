@@ -1,5 +1,6 @@
 TimelineController = function() {
   var timeline = new Timeline()
+  var view
   var interval = 30 * 1000
   
   var create_context_menu = function(murmur){
@@ -20,14 +21,21 @@ TimelineController = function() {
     PostController.open({ init_content : murmur.remurmur()} )
   }
   
-  var do_copy = function() {
-    air.Clipboard.generalClipboard.clear();
-    air.Clipboard.generalClipboard.setData(air.ClipboardFormats.TEXT_FORMAT, window.getSelection());
+  var do_copy = copy_to_clipboard
+    
+  var do_scroll = function() {
+    if(!view.at_bottom() || view.has_spinner()) { return }
+    view.append_spinner()
+    MurmursService.fetch_before(
+      timeline.oldest_id(), 
+      timeline.append_all, 
+      { complete: view.remove_spinner }
+    )
   }
   
   var public = {
     init: function(container) {
-      var view = new TimelineView(container)
+      view = new TimelineView(container)
       
       timeline.onchange(function(event, murmur) {
         view[event](murmur)
@@ -36,20 +44,12 @@ TimelineController = function() {
       $("button.post").click(PostController.open)
       
       $('.murmur').live('contextmenu', function(event){
-        var menu = create_context_menu(timeline.find($(this).attr('murmur_id')))
         event.preventDefault()
+        var menu = create_context_menu(timeline.find($(this).attr('murmur_id')))
         menu.display(window.nativeWindow.stage, event.clientX, event.clientY)
       })
       
-      view.scroll(function() {
-        if(!view.at_bottom() || view.has_spinner()) { return }
-        
-        view.append_spinner()
-        MurmursService.fetch_before(timeline.oldest_id(), function(murmurs) {
-          view.remove_spinner()
-          timeline.append_all(murmurs)
-        })
-      })
+      view.scroll(do_scroll)
       
       public.refresh()
       setInterval(public.refresh, interval)

@@ -20,8 +20,13 @@ TimelineView = function(container) {
       container.append('<div class="spinner"><img src="/images/spinner-big.gif"/></div>')
     },
     
-    remove_spinner: function() {
-      $('.spinner', container).remove()
+    remove_spinner: function() { 
+      // because it at_bottom calc is not in time after appending element
+      // we need keep the spinner a little longer to block the concurrent event firing
+      $('.spinner', container).hide()
+      setTimeout(function() {
+        $('.spinner', container).remove()
+      }, 10)
     },
     
     has_spinner: function() {
