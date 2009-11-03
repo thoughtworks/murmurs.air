@@ -104,6 +104,7 @@ body {
   padding-top: 1.8em;
   padding-bottom: 0.1em;
   overflow: hidden;
+  word-wrap: break-word;
 }
 
 .murmur .content a {
