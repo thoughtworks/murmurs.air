@@ -26,7 +26,7 @@ MurmurRenderPipes.add(function(content) {
 
 // general link
 MurmurRenderPipes.add(function(content){
-  return content.gsub(/(http|https):\/\/[\w\-.+?&#;=/^s]*/, function(match){
+  return content.gsub(/(http:\/\/|https:\/\/|www)[\w\-.+:?&#;=/^s]*/, function(match){
     return '<a href="'+ match[0].replace(/&amp;/g, "&") +'">'+ match[0].replace(/&amp;/g, "&") +'</a>'
   }) 
 })
