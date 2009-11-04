@@ -26,8 +26,8 @@ MurmurRenderPipes.add(function(content) {
 
 // general link
 MurmurRenderPipes.add(function(content){
-  return content.gsub(/http:\/\/[^\s]*/, function(match){
-    return '<a href="'+ match[0].unescapeHTML() +'">'+ match[0].unescapeHTML() +'</a>'
+  return content.gsub(/(http|https):\/\/[\w.?&#;=^s]*/, function(match){
+    return '<a href="'+ match[0].replace(/&amp;/g, "&") +'">'+ match[0].replace(/&amp;/g, "&") +'</a>'
   }) 
 })
 
@@ -38,7 +38,7 @@ MurmurRenderPipes.add(function(content) {
   }
   
   return content.gsub(/#(\d+)/, function(match) {
-    return '<a href="'+ card_url(match[1]) +'">' + match[0] + '</a>'
+    return '<a class="card-number" href="'+ card_url(match[1]) +'">' + match[0] + '</a>'
   })
 })
 

@@ -110,8 +110,11 @@ body {
 .murmur .content a {
   text-decoration: none;
   font-size: 95%;
-  font-weight: bold;
   color: #1A67CC;
+}
+
+.murmur .content .card-number {
+  font-weight: bold;
 }
 
 .murmur .body.mention {

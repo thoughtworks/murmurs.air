@@ -22,7 +22,7 @@ Screw.Unit(function() {
     it("should replace #ddd with card link", function() {
       preference.host("http://example.com")
       preference.project_id("n1")
-      expect(render("fix bug #111.")).to(equal, 'fix bug <a href="http://example.com/projects/n1/cards/111">#111</a>.')
+      expect(render("fix bug #111.")).to(equal, 'fix bug <a class="card-number" href="http://example.com/projects/n1/cards/111">#111</a>.')
     })
     
     it("should extract mentions", function() {
@@ -36,10 +36,21 @@ Screw.Unit(function() {
       expect(render("this is http://phoenixchu.com web site")).to(equal, link_html)
     })
     
-    it('should replace special char in url', function(){
-      link_html = 'this is <a href="http://phoenixchu.com?blog_id=3&page=1#middle">http://phoenixchu.com?blog_id=3&page=1#middle</a>'
-      expect(render("this is http://phoenixchu.com?blog_id=3&page=1#middle")).to(equal, link_html)
+    it("should replace https://bla.bla with link", function(){
+      link_html = 'this is <a href="https://phoenixchu.com">https://phoenixchu.com</a>'
+      expect(render("this is https://phoenixchu.com")).to(equal, link_html)
     })
+    
+    it('should replace special char in url', function(){
+      link_html = 'this is <a href="http://phoenixchu.com?blog_id=3&page=1&icon=1#middle">http://phoenixchu.com?blog_id=3&page=1&icon=1#middle</a>'
+      expect(render("this is http://phoenixchu.com?blog_id=3&page=1&icon=1#middle")).to(equal, link_html)
+    })
+    
+    it('should not be too greedy on link matching', function() {
+      link_html = 'this is <a href="https://phoenixchu.com">https://phoenixchu.com</a>(haha)'
+      expect(render("this is https://phoenixchu.com(haha)")).to(equal, link_html)
+    })
+    
     // todo
     // it("should should not take nonesense as mentions", function() {
     //   expect(render("obama:a@localhost:8080")).to(equal, 'obama:a@localhost:8080')
