@@ -51,6 +51,11 @@ Screw.Unit(function() {
         link_html = 'this is <a href="http://phoenixchu.com?blogs/blog_id=1">http://phoenixchu.com?blogs/blog_id=1</a>'
         expect(render("this is http://phoenixchu.com?blogs/blog_id=1")).to(equal, link_html)
       })
+      
+      it('should replace url with - and +', function(){
+        link_html = 'this is <a href="http://phoenixchu.com?blog_name=i-hate-gfw+stupidness">http://phoenixchu.com?blog_name=i-hate-gfw+stupidness</a>'
+        expect(render("this is http://phoenixchu.com?blog_name=i-hate-gfw+stupidness")).to(equal, link_html)
+      })
 
       it('should not be too greedy on link matching', function() {
         link_html = 'this is <a href="https://phoenixchu.com">https://phoenixchu.com</a>(haha)'
