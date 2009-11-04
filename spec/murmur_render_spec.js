@@ -37,8 +37,8 @@ Screw.Unit(function() {
     })
     
     it('should replace special char in url', function(){
-      link_html = 'this is <a href="http://phoenixchu.com?blog_id=3">http://phoenixchu.com?blog_id=3</a>'
-      expect(render("this is http://phoenixchu.com?blog_id=3")).to(equal, link_html)
+      link_html = 'this is <a href="http://phoenixchu.com?blog_id=3&page=1#middle">http://phoenixchu.com?blog_id=3&page=1#middle</a>'
+      expect(render("this is http://phoenixchu.com?blog_id=3&page=1#middle")).to(equal, link_html)
     })
     // todo
     // it("should should not take nonesense as mentions", function() {
