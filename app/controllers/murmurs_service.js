@@ -41,13 +41,13 @@ MurmursService = function() {
     },
     
     // return 25 mururs happened before a murmur id
-    fetch_before: function(before_id, callback) {
-      request({
-        data: (before_id ? {'before_id': before_id} : {}),
+    fetch_before: function(before_id, callback, options) {
+      request($.extend({
+        data: {'before_id': before_id},
         success: function(xml) {
           callback(Murmur.parse_collection(xml))
         }
-      })
+      }, options))
     }    
   }
   
