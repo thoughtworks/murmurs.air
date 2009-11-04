@@ -52,9 +52,9 @@ Screw.Unit(function() {
         expect(render("this is http://phoenixchu.com?blogs/blog_id=1")).to(equal, link_html)
       })
       
-      it('should replace url with - + :', function(){
-        link_html = 'this is <a href="http://phoenixchu.com?blog_name=i-hate-gfw+stupidness:foolish">http://phoenixchu.com?blog_name=i-hate-gfw+stupidness:foolish</a>'
-        expect(render("this is http://phoenixchu.com?blog_name=i-hate-gfw+stupidness:foolish")).to(equal, link_html)
+      it('should replace url with - + : %', function(){
+        link_html = 'this is <a href="http://phoenixchu.com?blog_name=i-hate-gfw+stupidness:foolish%damn">http://phoenixchu.com?blog_name=i-hate-gfw+stupidness:foolish%damn</a>'
+        expect(render("this is http://phoenixchu.com?blog_name=i-hate-gfw+stupidness:foolish%damn")).to(equal, link_html)
       })
       
       it('should match url starts with www', function(){
