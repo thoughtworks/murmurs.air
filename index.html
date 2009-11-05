@@ -13,6 +13,7 @@
   <script src="vendor/jquery/webtoolkit.base64.js" type="text/javascript" charset="utf-8"></script>
   
   <script src="lib/utils.js" type="text/javascript" charset="utf-8"></script>
+  <script src="lib/normalize_air_link.js" type="text/javascript" charset="utf-8"></script>
   <script src="lib/prototypelize.js" type="text/javascript" charset="utf-8"></script>
   <script src="lib/attributes_store.js" type="text/javascript" charset="utf-8"></script>
   
@@ -32,23 +33,12 @@
   <script src="app/controllers/users_service.js" type="text/javascript" charset="utf-8"></script>
   <script src="app/controllers/timeline_controller.js" type="text/javascript" charset="utf-8"></script>
   <script src="app/controllers/post_controller.js" type="text/javascript" charset="utf-8"></script>
-
-  <script src="app/controllers/menu.js" type="text/javascript" charset="utf-8"></script>
-  
-  
   
   <script type="text/javascript" charset="utf-8">
    $(document).ready(function() {
      ApplicationController.init()
-     
      StatusBarController.init($("#status_bar"))
      TimelineController.init($("#container"))
-     PreferenceController.open_if_empty()
-     
-     $('a[href^=http]').live("click", function(event){
-        event.preventDefault()
-        air.navigateToURL(new air.URLRequest(this.href))
-     })
    })
   </script>
   <body>
