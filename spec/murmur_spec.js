@@ -65,8 +65,8 @@ Screw.Unit(function() {
       var murmur_with_mention
       var murmur_without_mention
       before(function() {
-        p = new Preference()
-        p.reset();
+        User.current_user = new User()
+        User.current_user.name('wang pengchao')
         
         murmur_with_mention = new Murmur(1)
         murmur_with_mention.content('@space @bug hello there @wpc')
@@ -76,39 +76,40 @@ Screw.Unit(function() {
       })
       
       it("when username is different case", function() {
-        p.username('WpC')
+        User.current_user.login('WpC')
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
       it("when form is @login", function() {
-        p.username('wpc')
+        User.current_user.login('wpc')
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
       it("unless there is no @ symbol", function() {
-        p.username('wpc')
+        User.current_user.login('wpc')
         expect(murmur_without_mention.mentions_current_user()).to(equal, false)
       })
       
       it("when form is @first_part_of_display_name", function() {
-        p.username("mike")
-        p.display_name("space garbage")
+        User.current_user.login("mike")
+        User.current_user.name("space garbage")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
       it("when form is @last_part_of_display_name", function() {
-        p.username("mike")
-        p.display_name("yucky bug")
+        User.current_user.login("mike")
+        User.current_user.name("yucky bug")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
       it("unless they only begin with username", function() {
-        p.username("wp")
+        User.current_user.login("wp")
         expect(murmur_with_mention.mentions_current_user()).to(equal, false)
       })
       
       it("when they end with a non-word character", function() {
-        p.display_name('space baby')
+        User.current_user.login('maleksiu')
+        User.current_user.name('space baby')
         murmur_with_mention.content("@space: what's up?")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
