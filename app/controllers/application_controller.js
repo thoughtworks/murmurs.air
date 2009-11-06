@@ -1,6 +1,10 @@
 ApplicationController = function() {
   var updater = new air.ApplicationUpdaterUI()
+  var timeline_window
   
+  var open_timeline = function() {
+    timeline_window = TimelineController.open()
+  }
   
   var setup_auto_updater = function() {
     updater.configurationFile = new air.File("app:/config/update_config.xml")
@@ -21,7 +25,7 @@ ApplicationController = function() {
     preference.addEventListener(air.Event.SELECT, PreferenceController.open)
 
     var refresh = murMenu.submenu.addItem(new air.NativeMenuItem("Refresh"))
-    refresh.addEventListener(air.Event.SELECT, TimelineController.refresh)
+    refresh.addEventListener(air.Event.SELECT, public.refresh_timeline)
 
     var checkupdate = murMenu.submenu.addItem(new air.NativeMenuItem("Check for Updates..."))
     checkupdate.addEventListener(air.Event.SELECT, public.check_updates)
@@ -31,12 +35,22 @@ ApplicationController = function() {
     init: function() {
       setup_menu()
       setup_auto_updater()
-      PreferenceController.open_if_empty()
+      
+      if( new Preference().host() ) {
+        open_timeline()
+      } else {
+        PreferenceController.open()
+      }
     }, 
     
     check_updates: function() {
       updater.checkNow()
-    }
+    },
+    
+    
+    refresh_timeline: function() {
+      
+    },
   }
   
   return public

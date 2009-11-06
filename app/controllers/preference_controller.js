@@ -10,11 +10,6 @@ PreferenceController = function() {
       window.open("/app/views/preference.html", "Preference").resizeTo(400, 280)
     },
     
-    open_if_empty: function() {
-      if(!preference.host()) {
-        public.open()
-      }
-    },
     
     init: function() {
       var inputs = $('input[type=text], input[type=password]')
@@ -30,7 +25,7 @@ PreferenceController = function() {
       })
       
       window.nativeWindow.addEventListener(air.Event.CLOSE, function() {
-        window.opener.TimelineController.refresh()
+        window.opener.ApplicationController.refresh_timeline()
       })
       
     }

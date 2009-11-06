@@ -26,6 +26,11 @@ TimelineController = function() {
   }
   
   var public = {
+    open: function() {
+      var win = window.open("/app/views/timeline.html", "Mingle Murmurs").resizeTo(420, 650)
+      
+    },
+    
     init: function(container) {
       view = new TimelineView(container)
       

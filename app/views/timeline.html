@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/css/statusbar.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="/css/murmurs.css" type="text/css" media="screen" charset="utf-8" />
+  <title>Mingle Murmurs</title>
+  <!-- The AIR aliases definitions -->
+  <script src="/vendor/air/AIRAliases.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/vendor/air/AIRIntrospector.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/vendor/air/applicationupdater_ui.swf" type="application/x-shockwave-flash"></script>
+  <script src="/vendor/jquery/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/vendor/jquery/webtoolkit.base64.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script src="/lib/utils.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/lib/normalize_air_link.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/lib/prototypelize.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/lib/attributes_store.js" type="text/javascript" charset="utf-8"></script>
+
+
+  <script src="/app/models/preference.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/models/user.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/models/murmur.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/models/murmur_render_pipes.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/models/timeline.js" type="text/javascript" charset="utf-8"></script>
+  
+
+  <script src="/app/views/murmur_view.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/views/timeline_view.js" type="text/javascript" charset="utf-8"></script>
+
+  <script src="/app/controllers/murmurs_service.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/controllers/users_service.js" type="text/javascript" charset="utf-8"></script>
+
+  <script src="/app/controllers/preference_controller.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/controllers/status_bar_controller.js" type="text/javascript" charset="utf-8"></script>  
+  <script src="/app/controllers/timeline_controller.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/controllers/post_controller.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script type="text/javascript" charset="utf-8">
+   $(document).ready(function() {
+     StatusBarController.init($("#status_bar"))
+     TimelineController.init($("#container"))
+   })
+  </script>
+  <body>
+    <div id="container">
+    </div>
+    
+    <div id="status_bar">
+      <button class="post">new</button>
+      <span class="info-panel"></span>
+    </div>
+  </body>
+</html>
