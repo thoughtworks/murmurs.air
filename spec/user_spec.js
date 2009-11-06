@@ -49,5 +49,13 @@ Screw.Unit(function() {
       })
     })
     
+    describe("keywords used for mentions", function() {
+      it("should include login and all words in name", function() {
+        user = new User()
+        user.login('the_login')
+        user.name('the name')
+        expect(user.possible_mention_strings()).to(equal, ['the_login', 'the', 'name'])
+      })
+    })
   })
 })

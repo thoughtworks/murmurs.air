@@ -1,18 +1,9 @@
 Murmur = function(id) {
   var attr_store = new MemAttributesStore()
   
-  var mentions_user = function(user) {
+  var mentions_user = function(index, user) {
     var tag_reg_exp = new RegExp('@' + user + '\\b', 'i')
     return (public.content().match(tag_reg_exp) != null)
-  }
-  
-  var possible_mention_strings = function() {
-    var p = new Preference()
-    var possible_mention_strings = [p.username()]
-    if (p.display_name()) {
-      possible_mention_strings = possible_mention_strings.concat(p.display_name().split(' '))
-    }
-    return possible_mention_strings
   }
   
   var public = {
@@ -23,9 +14,7 @@ Murmur = function(id) {
     jabber_user_name: function(v){ return attr('jabber_user_name', v, attr_store) },
     
     mentions_current_user: function() {
-      return $.any(possible_mention_strings(), function(index, str) {
-        return mentions_user(str)
-      })
+      return $.any(User.current().possible_mention_strings(), mentions_user)
     },
     
     blank: function() {
