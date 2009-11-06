@@ -33,8 +33,15 @@ Murmur = function(id) {
     },
     
     remurmur:function() {
-      var to = this.author() ? this.author().login : this.jabber_user_name()
-      return 'RM @' + to + ': ' + this.content() + ' // '
+      return 'RM @' + this.display_name() + ': ' + this.content() + ' // '
+    },
+    
+    reply:function(){
+      return "@" + this.display_name() + " "
+    },
+    
+    display_name: function(){
+      return this.author() ? this.author().login : this.jabber_user_name()
     }
   }
   

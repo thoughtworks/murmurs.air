@@ -156,6 +156,20 @@ Screw.Unit(function() {
       })
     })
     
+    describe("reply", function(){
+      it("valid user login", function(){
+        var murmur = new Murmur(1)
+        murmur.author({login : 'phoenix'})
+        expect(murmur.reply()).to(equal, '@phoenix ')
+      })
+      
+      it("valid user jabber user name", function(){
+        var murmur = new Murmur(1)
+        murmur.jabber_user_name('phoenix')
+        expect(murmur.reply()).to(equal, '@phoenix ')
+      })
+    })
+    
     
   })
 })
