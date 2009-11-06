@@ -4,21 +4,11 @@ TimelineController = function() {
   var interval = 30 * 1000
   
   var create_context_menu = function(murmur){
-    var menu = new air.NativeMenu()
-    
-    var copy_item = new air.NativeMenuItem("Copy")
-    copy_item.addEventListener(air.Event.SELECT, function(event) { do_copy() })
-    menu.addItem(copy_item)
-
-    var reply_item = new air.NativeMenuItem("Reply...")
-    reply_item.addEventListener(air.Event.SELECT, function() { do_reply(murmur) });
-    menu.addItem(reply_item)
-    
-    var remurmur_item = new air.NativeMenuItem("Remurmur...")
-    remurmur_item.addEventListener(air.Event.SELECT, function() { do_remurmur(murmur) });
-    menu.addItem(remurmur_item)
-    
-    return menu
+    return air_menu([
+      ['Copy', copy_to_clipboard ], 
+      ['Reply...', function() { do_reply(murmur) } ], 
+      ['Remurmur...', function() { do_remurmur(murmur) } ]
+    ])
   }
   
   var do_reply = function(murmur){
@@ -29,16 +19,10 @@ TimelineController = function() {
     PostController.open({ init_content : murmur.remurmur()} )
   }
   
-  var do_copy = copy_to_clipboard
-    
   var do_scroll = function() {
     if(!view.at_bottom() || view.has_spinner()) { return }
     view.append_spinner()
-    MurmursService.fetch_before(
-      timeline.oldest_id(), 
-      timeline.append_all, 
-      { complete: view.remove_spinner }
-    )
+    MurmursService.fetch_before(timeline.oldest_id(), timeline.append_all, { complete: view.remove_spinner })
   }
   
   var public = {
@@ -52,9 +36,10 @@ TimelineController = function() {
       $("button.post").click(PostController.open)
       
       $('.murmur').live('contextmenu', function(event){
-        event.preventDefault()
-        var menu = create_context_menu(timeline.find($(this).attr('murmur_id')))
-        menu.display(window.nativeWindow.stage, event.clientX, event.clientY)
+        var murmur = timeline.find($(this).attr('murmur_id'))
+        air_show_context_menu(event, function() {
+          return create_context_menu(murmur)
+        })
       })
       
       view.scroll(do_scroll)
