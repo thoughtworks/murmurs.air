@@ -46,7 +46,7 @@ User.parse = function(xml) {
 }
 
 User.parse_collection = function(xml) {
-  return $("users user", xml).map(function() {
+  return $("projects_members projects_member user", xml).map(function() {
     return User.parse(this)
   })
 }

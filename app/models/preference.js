@@ -24,7 +24,7 @@ Preference = function() {
     },
     
     users_list_url: function() {
-      return public.host() + "/api/v2/users.xml"
+      return public.host() + "/api/v2/projects/" + public.project_id() + "/users.xml"
     },
     
     reset: function() {
