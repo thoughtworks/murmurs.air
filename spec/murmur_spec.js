@@ -74,7 +74,7 @@ Screw.Unit(function() {
         murmur_without_mention = new Murmur(2)
         murmur_without_mention.content('no mention wpc')
       })
-      
+
       it("when username is different case", function() {
         User.current_user.login('WpC')
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
@@ -83,6 +83,16 @@ Screw.Unit(function() {
       it("when form is @login", function() {
         User.current_user.login('wpc')
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
+      })
+      
+      it("unless current user can not be detected", function() {
+        var backup = User.current
+        try {
+          User.current = function() { return null }
+          expect(murmur_with_mention.mentions_current_user()).to(equal, false)          
+        } finally {
+          User.current = backup          
+        }
       })
       
       it("unless there is no @ symbol", function() {

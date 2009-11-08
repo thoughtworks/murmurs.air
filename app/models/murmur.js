@@ -14,6 +14,7 @@ Murmur = function(id) {
     jabber_user_name: function(v){ return attr('jabber_user_name', v, attr_store) },
     
     mentions_current_user: function() {
+      if(!User.current()) { return false }
       return $.any(User.current().possible_mention_strings(), mentions_user)
     },
     
