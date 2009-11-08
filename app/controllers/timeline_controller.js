@@ -3,12 +3,16 @@ TimelineController = function() {
   var view
   var interval = 30 * 1000
   
-  var create_context_menu = function(murmur){
-    return air_menu([
-      ['Copy', copy_to_clipboard ], 
-      ['Reply...', function() { do_reply(murmur) } ], 
-      ['Remurmur...', function() { do_remurmur(murmur) } ]
-    ])
+  var on_context_menu = function(event, murmur_element) {
+    var murmur_id = murmur_element.getAttribute('murmur_id')
+    var murmur = timeline.find(murmur_id)
+    air_show_context_menu(event, function() {
+      return air_menu([
+        ['Copy', copy_to_clipboard ], 
+        ['Reply...', function() { do_reply(murmur) } ], 
+        ['Remurmur...', function() { do_remurmur(murmur) } ]
+      ])
+    })
   }
   
   var do_reply = function(murmur){
@@ -43,10 +47,7 @@ TimelineController = function() {
       $("button.post").click(PostController.open)
       
       $('.murmur').live('contextmenu', function(event){
-        var murmur = timeline.find($(this).attr('murmur_id'))
-        air_show_context_menu(event, function() {
-          return create_context_menu(murmur)
-        })
+        on_context_menu(event, this)
       })
       
       view.scroll(do_scroll)
