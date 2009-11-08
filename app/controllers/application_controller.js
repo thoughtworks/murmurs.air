@@ -6,6 +6,16 @@ ApplicationController = function() {
     timeline_window = TimelineController.open()
   }
   
+  var timeline_controller = function() {
+    if(!timeline_window) return
+    return timeline_window.TimelineController
+  }
+  
+  var refresh_timeline = function() {
+    if(!timeline_controller()) return
+    timeline_controller().refresh()
+  }
+  
   var setup_auto_updater = function() {
     updater.configurationFile = new air.File("app:/config/update_config.xml")
     updater.isCheckForUpdateVisible = false
@@ -25,7 +35,7 @@ ApplicationController = function() {
     preference.addEventListener(air.Event.SELECT, PreferenceController.open)
 
     var refresh = murMenu.submenu.addItem(new air.NativeMenuItem("Refresh"))
-    refresh.addEventListener(air.Event.SELECT, public.refresh_timeline)
+    refresh.addEventListener(air.Event.SELECT, refresh_timeline)
 
     var checkupdate = murMenu.submenu.addItem(new air.NativeMenuItem("Check for Updates..."))
     checkupdate.addEventListener(air.Event.SELECT, public.check_updates)
@@ -47,9 +57,12 @@ ApplicationController = function() {
       updater.checkNow()
     },
     
-    
-    refresh_timeline: function() {
-      
+    reload_timeline: function() {
+      if(!timeline_window) {
+        open_timeline()
+      } else {
+        timeline_window.location.reload()
+      }
     },
   }
   
