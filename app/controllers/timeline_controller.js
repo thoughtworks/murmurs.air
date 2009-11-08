@@ -6,9 +6,9 @@ TimelineController = function() {
   var on_context_menu = function(event, murmur_element) {
     var murmur_id = murmur_element.getAttribute('murmur_id')
     var murmur = timeline.find(murmur_id)
-    air_show_context_menu(event, function() {
-      return air_menu([
-        ['Copy', copy_to_clipboard ], 
+    $.air.show_context_menu(event, function() {
+      return $.air.menu([
+        ['Copy', $.air.copy_to_clipboard], 
         ['Reply...', function() { do_reply(murmur) } ], 
         ['Remurmur...', function() { do_remurmur(murmur) } ]
       ])

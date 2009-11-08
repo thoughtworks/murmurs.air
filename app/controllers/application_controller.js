@@ -30,7 +30,7 @@ ApplicationController = function() {
   }
   
   var setup_menu = function() {
-    air_add_app_menu("Operatinos", air_menu([
+    $.air.add_to_app_menu("Operatinos", $.air.menu([
       ["Preference...", PreferenceController.open],
       ["Refresh", refresh_timeline],
       ["Check for Updates...", check_updates]
