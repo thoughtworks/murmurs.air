@@ -1,0 +1,28 @@
+License Information regarding Bundled Third-Party Software
+
+JQuery
+URL: http://jquery.com/
+Usage: main js library, modified and redistributed with Murmurs.air
+Copyright 2009 John Resig
+License type: Dual licensed under the MIT and GPL licenses (http://docs.jquery.com/License)
+
+
+Google Web Toolkit
+URL: http://code.google.com/webtoolkit
+Usage: copied parts of its source code about Base64 encoding.
+Copyright 2008 Google Inc.
+License type: Apache 2.0
+
+
+Prototype
+URL: http://www.prototypejs.org
+Usage: copied parts of its source code.
+Copyright 2006-2007 Prototype Core Team
+License type: MIT
+
+
+Adobe Air Javascript Library (From SDK)
+URL: http://www.adobe.com/products/air
+Usage: part of the Adobe Air SDK
+Copyright 2009 Adobe Systems Incorporated.
+License type: modify and distribute with the terms of Adobe AIR SDK license agreement (Adobe Air License is attached)
