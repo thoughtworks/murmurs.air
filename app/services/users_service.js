@@ -15,26 +15,11 @@
  */
 
 UsersService = function() {
-  var preference = new Preference()
+  var conn = new MingleConnection("users")
   
-  var general_request_options = function(){
-    return {
-      dataType: 'xml',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', preference.base_auth_token())
-      }      
-    }
-  } 
-
-  var request = function(options) {
-    if(!preference.host()) return
-    $.ajax($.extend(general_request_options(), options))
-  }
-  
-  var public = {
+  return {
     list: function(callback) {
-      request({
-        url: preference.users_list_url(),
+      conn.request({
         data: {},
         async: false,
         success: function(xml) {
@@ -43,6 +28,4 @@ UsersService = function() {
       })
     }
   }
-  
-  return public
 }()

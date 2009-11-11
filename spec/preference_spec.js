@@ -48,13 +48,6 @@ Screw.Unit(function() {
       })
     })
     
-    describe("basic authentication token", function() {
-      it("should be made from user/pass using base64 encoding", function(){
-        p.username("wpc")
-        p.password("pass")
-        expect(p.base_auth_token()).to(equal, make_base_auth("wpc", "pass"))
-      })
-    })
     
     describe("when set attribute to one instance", function() {
       it("should change attribute to all the other instances", function() {

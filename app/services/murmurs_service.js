@@ -13,31 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
- 
 MurmursService = function() {
-  var preference = new Preference()
   
-  var general_request_options = function(){
-    return {
-      dataType: 'xml',
-      url: preference.murmurs_url(),
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', preference.base_auth_token())
-      }      
-    }
-  } 
-
-  var request = function(options) {    
-    if(!preference.host()) return
-    $.ajax($.extend(general_request_options(), options))
-  }
+  var conn = new MingleConnection("murmurs")
   
-  var public = {
+  return  {
     // create new murmur on mingle
     post: function(murmur, callback) {
       if(murmur.blank()) return
       
-      request({
+      conn.request({
         type: "POST",
         data: {'murmur[body]': murmur.content() },
         async: false,
@@ -48,7 +33,7 @@ MurmursService = function() {
     // return 25 murmurs since a murmur's id, 
     // return latest 25 murmurs if since_id is null
     fetch_since: function(since_id, callback) {
-      request({
+      conn.request({
         data: (since_id ? {'since_id': since_id} : {}),
         success: function(xml) {
           callback(Murmur.parse_collection(xml))
@@ -58,7 +43,7 @@ MurmursService = function() {
     
     // return 25 mururs happened before a murmur id
     fetch_before: function(before_id, callback, options) {
-      request($.extend({
+      conn.request($.extend({
         data: {'before_id': before_id},
         success: function(xml) {
           callback(Murmur.parse_collection(xml))
@@ -66,6 +51,4 @@ MurmursService = function() {
       }, options))
     }    
   }
-  
-  return public
 }()

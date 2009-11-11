@@ -50,7 +50,8 @@ MurmurRenderPipes.add(function(content){
 // card link
 MurmurRenderPipes.add(function(content) {
   var card_url = function(number) {
-    return new Preference().card_html_url(number)
+    var preference = new Preference()
+    return preference.host() + "/projects/" + preference.project_id() + "/cards/" + number
   }
   
   return content.gsub(/#(\d+)/, function(match) {
