@@ -1,0 +1,12 @@
+release 0.2:
+
+* Automatically check if there is a new app version available
+* Murmur author icon UI tweak
+* New Murmur loading is more effective
+* Can not post empty Murmur anymore
+* Remurmur
+* Reply a murmur
+* A content wrapping bug is fixed
+* Loading older murmurs on scrolling to bottom
+* Auto link
+* Highlight murmurs that mentioning current user 
