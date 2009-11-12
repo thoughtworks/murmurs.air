@@ -15,7 +15,7 @@
  */
 
 Screw.Unit(function() {
-  describe("MurmurRenderPipes", function() {
+  describe("RenderPipes", function() {
     var preference
 
     before(function() {
@@ -24,7 +24,7 @@ Screw.Unit(function() {
     })
 
     var render = function(content) {
-      return MurmurRenderPipes.render(content)
+      return RenderPipes.render(content)
     }
 
     it("should escape html tag", function() {

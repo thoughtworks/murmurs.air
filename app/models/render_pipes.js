@@ -14,7 +14,7 @@
  * the License.
  */
 
-MurmurRenderPipes = function() {
+RenderPipes = function() {
   var pipes = []
   return {
     add: function(pipe) {
@@ -31,24 +31,24 @@ MurmurRenderPipes = function() {
 }()
 
 // html escape
-MurmurRenderPipes.add(function(content) {
+RenderPipes.add(function(content) {
   return content.escapeHTML()
 })
 
 // cr
-MurmurRenderPipes.add(function(content) {
+RenderPipes.add(function(content) {
   return content.replace(/\n/g, "\n<br/>")
 })
 
 // general link
-MurmurRenderPipes.add(function(content){
+RenderPipes.add(function(content){
   return content.gsub(/(http:\/\/|https:\/\/|www)[\w\-.+:%?&#;=/^s]*/, function(match){
     return '<a href="'+ match[0].replace(/&amp;/g, "&") +'">'+ match[0].replace(/&amp;/g, "&") +'</a>'
   }) 
 })
 
 // card link
-MurmurRenderPipes.add(function(content) {
+RenderPipes.add(function(content) {
   var card_url = function(number) {
     var preference = new Preference()
     return preference.host() + "/projects/" + preference.project_id() + "/cards/" + number
@@ -60,7 +60,7 @@ MurmurRenderPipes.add(function(content) {
 })
 
 // extract mentions
-MurmurRenderPipes.add(function(content) {
+RenderPipes.add(function(content) {
   return content.gsub(/@\w+/, function(match) {
     return '<span class="mention">'+ match[0] + '</span>'
   })
