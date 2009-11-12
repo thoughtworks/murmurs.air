@@ -16,6 +16,7 @@
 
 RenderPipes = function() {
   var pipes = []
+  var preference = new Preference()
   return {
     add: function(pipe) {
       pipes.push(pipe)
@@ -23,7 +24,7 @@ RenderPipes = function() {
     
     render: function(content) {
       $.each(pipes, function() {
-        content = this(content)
+        content = this(content, {'preference': preference})
       })
       return content
     }
@@ -48,12 +49,12 @@ RenderPipes.add(function(content){
 })
 
 // card link
-RenderPipes.add(function(content) {
+RenderPipes.add(function(content, context) {
   var card_url = function(number) {
-    var preference = new Preference()
-    return preference.host() + "/projects/" + preference.project_id() + "/cards/" + number
+    var p = context.preference 
+    return p.host() + "/projects/" + p.project_id() + "/cards/" + number
   }
-  
+
   return content.gsub(/#(\d+)/, function(match) {
     return '<a class="card-number" href="'+ card_url(match[1]) +'">' + match[0] + '</a>'
   })
