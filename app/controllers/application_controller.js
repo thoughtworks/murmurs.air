@@ -45,16 +45,25 @@ ApplicationController = function() {
     setTimeout(check_updates, 3 * 1000) // do a first check
   }
   
-  var setup_menu = function() {
-    $.air.add_to_app_menu("Operatinos", $.air.menu([
+  var operation_menu = function() {
+    return $.air.menu([
       ["Preference...", PreferenceController.open],
       ["Refresh", refresh_timeline],
       ["Check for Updates...", check_updates]
-    ]))
+    ])
+  }
+  
+  var setup_menu = function() {
+    $.air.add_to_app_menu("Operatinos", operation_menu())
+  }
+  
+  var setup_trayicon = function() {
+    $.air.set_tray_icon("app:/images/icon128.png", operation_menu(), "Mumurs.air")
   }
   
   var public =  {
     init: function() {
+      setup_trayicon()
       setup_menu()
       setup_auto_updater()
       
