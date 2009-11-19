@@ -48,6 +48,11 @@ Murmur = function(id) {
     
     display_name: function(){
       return this.author() ? this.author().login : this.jabber_user_name()
+    },
+    
+    from_current_user: function() {
+      if(!User.current() || ! this.author()) { return false }
+      return User.current().login()  == this.author().login
     }
   }
   

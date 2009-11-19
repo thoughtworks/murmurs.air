@@ -77,6 +77,17 @@ Screw.Unit(function() {
       })
     })
     
+    var without_user_current = function(expect) {
+      var backup = User.current
+      try {
+        User.current = function() { return null }
+        expect()
+      } finally {
+        User.current = backup          
+      }
+    }
+    
+    
     describe("a murmur can detect mentions", function() {
       var murmur_with_mention
       var murmur_without_mention
@@ -102,13 +113,9 @@ Screw.Unit(function() {
       })
       
       it("unless current user can not be detected", function() {
-        var backup = User.current
-        try {
-          User.current = function() { return null }
-          expect(murmur_with_mention.mentions_current_user()).to(equal, false)          
-        } finally {
-          User.current = backup          
-        }
+        without_user_current(function() {
+          expect(murmur_with_mention.mentions_current_user()).to(equal, false)
+        })
       })
       
       it("unless there is no @ symbol", function() {
@@ -140,6 +147,47 @@ Screw.Unit(function() {
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
     })
+    
+    describe("#from_current_user", function() {
+      before(function() {
+        User.current_user = new User()
+        User.current_user.name('wang pengchao')
+        User.current_user.login("wpc")
+      })
+      
+      var murmur_by = function(author) {
+        var m = new Murmur(1)
+        m.author(author)
+        return m
+      }
+      
+      describe("when murmur author are same with current user", function() {
+        it("is from_current_user", function() {
+          expect(murmur_by({login: 'wpc'}).from_current_user()).to(be_true)
+        })
+      })
+      
+      describe("when murmur author are others", function() {
+        it("is not from_current_user", function() {
+          expect(murmur_by({login: 'mike'}).from_current_user()).to(be_false)
+        })
+      })
+      
+      describe("when can not decide who current user", function() {
+        it("is not from_current_user", function() {
+          without_user_current(function() {
+            expect(murmur_by({login: 'wpc'}).from_current_user()).to(be_false)
+          })
+        })
+      })
+      
+      describe("when murmur has no author", function() {
+        it("is not from_current_user", function() {
+          expect(murmur_by().from_current_user()).to(be_false)
+        })
+      })
+    })
+
     
     describe("murmur is blank when", function() {
       it("content is null", function() {

@@ -15,45 +15,63 @@ body {
   padding-bottom: 0.5em;
 }
 
-.arrow-to-right {
+.arrow {
   font-size: 0px; 
   line-height: 0%; 
   width: 0px;
   height: 0px;
-
   border: 7px solid transparent;
-  border-right: 7px solid #A7A7A7;
-  left: -14px;
-  top: 2px;
   display:block;
   position: absolute;
 }
 
-.arrow-to-right span{
+.arrow span {
   font-size: 0px; 
   line-height: 0%; 
   width: 0px;
   height: 0px;
-
   border: 7px solid transparent;
-  border-right: 7px solid #FBFBFB;
   position: absolute;
-  
-  left: -6px;
-  top: -7px;
-  
+}
+
+.arrow.point-to-left {
+  border-right: 7px solid #A7A7A7;
+  left: -14px;
+  top: 1px;
+}
+
+.arrow.point-to-left span {
+  border-right: 7px solid #FBFBFB;
+  left: -5px;
+  top: -8px;
+}
+
+.arrow.point-to-right {
+  border-left: 7px solid #A7A7A7;
+  right: -14px;
+  top: 1px;
+}
+
+.arrow.point-to-right span {
+  border-left: 7px solid #FBFBFB;
+  right: -5px;
+  top: -8px;
 }
 
 .murmur {
-  font-size: 75%;  
-  margin: 0.5em;
+  font-size: 75%;
   margin-left: 0.2em;
+  margin-right: 0.2em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  clear: both;
 }
 
 .murmur .icon-border-outer {
   float: left;  
   margin: 0.5em;
   margin-top: 0.2em;  
+  margin-right: 0.2em;
   width: 46px;
   height: 46px;
   border: 1px solid #bebebe;  
@@ -65,20 +83,22 @@ body {
 }
 
 .murmur .icon {
+  background-color: #fff;
   width: 44px;
   height: 44px;
 }
 
 .murmur .body {
-  margin-left: 63px;
-  border: 1px solid #A7A7A7;
-  border-right: 2px solid #A7A7A7;
-  border-bottom: 2px solid #A7A7A7;
+  border: 2px solid #A7A7A7;
   background-color: #FBFBFB;
   -khtml-border-radius: 5px;
   padding: 0.5em;
   min-height: 45px;
   position:relative;
+  width: 78%;
+  margin-bottom: 0.7em;
+  margin-left: 0.5em;
+  float:left;
 }
 
 .murmur .created-at {
@@ -121,7 +141,7 @@ body {
   background-color: #cfebff;
 }
 
-.arrow-to-right.mention span{
+.arrow.mention span{
   border-right: 7px solid #cfebff;
 }
 

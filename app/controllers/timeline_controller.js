@@ -49,7 +49,7 @@ TimelineController = function() {
     open: function() {
       var win = window.open("/app/views/timeline.html", "Mingle Murmurs")
       win.moveTo(150, 150)
-      win.resizeTo(420, 650)
+      win.resizeTo(400, 650)
       return win
     },
     
