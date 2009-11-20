@@ -58,6 +58,15 @@ body {
   top: -8px;
 }
 
+.arrow.point-to-left.mention span {
+  border-right: 7px solid #CFEBFF;
+}
+
+.arrow.point-to-right.mention span {
+  border-left: 7px solid #CFEBFF;
+}
+
+
 div.clear-both {
   clear: both;
 }
@@ -147,10 +156,6 @@ div.clear-both {
 
 .murmur .body.mention {
   background-color: #cfebff;
-}
-
-.arrow.mention span{
-  border-right: 7px solid #cfebff;
 }
 
 .murmur .content .mention {
