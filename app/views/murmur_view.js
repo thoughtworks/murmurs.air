@@ -20,11 +20,13 @@ MurmurView = function(murmur) {
     
     if(murmur.from_current_user()) {
       arrow.addClass('point-to-right')
-      return container.append(body).append(icon)
+      container.append(body).append(icon)
     } else {
       arrow.addClass('point-to-left')
-      return container.append(icon).append(body)
+      container.append(icon).append(body)
     }
+    
+    return container.append($('<div class="clear-both"></div>'))
   }
   
   return {
