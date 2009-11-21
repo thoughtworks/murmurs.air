@@ -78,14 +78,15 @@ div.clear-both {
 .murmur {
   font-size: 76%;
   padding: 0.2em;
-  padding-top: 0.4em;
-  padding-bottom: 0.4em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
   margin: 0.1em;
-  -khtml-border-radius: 10px;
+  -khtml-border-radius: 7px;
+  border: 2px solid transparent;
 }
 
 .murmur:hover {
-  background-color: #B0B0B0;
+  border: 2px solid #666;
 }
 
 
