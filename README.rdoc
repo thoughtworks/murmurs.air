@@ -1,0 +1,4 @@
+== { Murmurs.air }[http://github.com/thoughtworks/murmurs.air]
+An desktop client for { Mingle }[http://www.thoughtworks-studios.com/mingle-agile-project-management]  Murmurs feature. We want it *"fun to use and easy to hack"*
+
+== {Get Murmurs.air}[http://dl.getdropbox.com/u/184027/murmur/Murmur.air]
