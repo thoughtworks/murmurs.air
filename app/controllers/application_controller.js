@@ -35,7 +35,7 @@ ApplicationController = function() {
   var check_updates = function() {
     updater.checkNow()
   }
-  
+
   var setup_auto_updater = function() {
     updater.configurationFile = new air.File("app:/config/update_config.xml")
     updater.isCheckForUpdateVisible = false
@@ -49,7 +49,8 @@ ApplicationController = function() {
     return $.air.menu([
       ["Preference...", PreferenceController.open],
       ["Refresh", refresh_timeline],
-      ["Check for Updates...", check_updates]
+      ["Check for Updates...", check_updates],
+      ["Quit Murmurs.air", $.air.quit]
     ])
   }
   
