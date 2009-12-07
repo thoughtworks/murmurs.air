@@ -54,7 +54,7 @@ ApplicationController = function() {
   }
   
   var setup_menu = function() {
-    $.air.add_to_app_menu("Operatinos", operation_menu())
+    $.air.add_to_app_menu("Operations", operation_menu())
   }
   
   var setup_trayicon = function() {
