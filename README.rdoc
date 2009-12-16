@@ -1,6 +1,8 @@
 = Murmurs.air 
 An desktop client for { Mingle }[http://www.thoughtworks-studios.com/mingle-agile-project-management]  Murmurs feature. We want it *"fun to use and easy to hack"*
 
+{Read community post about it}[http://community.thoughtworks.com/posts/be86052dec]
+
 = Installation
 * Install {Adobe Air Runtime}[http://get.adobe.com/air] if you haven't
 * Get Murmurs.air from {here}[http://dl.getdropbox.com/u/184027/murmur/Murmur.air]
