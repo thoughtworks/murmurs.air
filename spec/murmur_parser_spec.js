@@ -17,13 +17,13 @@
 Screw.Unit(function() {
   describe("MurmurParser", function() {
     describe("parsing murmur from xml", function() {
-      var murmurs
+      var doc
+      // var murmurs
       before(function() {
-        var parser = new DOMParser()
-        var doc = parser.parseFromString('<?xml version="1.0" encoding="UTF-8"?> \
+        doc = new DOMParser().parseFromString('<?xml version="1.0" encoding="UTF-8"?> \
         <murmurs type="array"> \
           <murmur> \
-            <id type="integer">118</id>\
+            <id type="integer">1</id>\
             <author>\
               <id type="integer">638</id>\
               <name>wpc</name>\
@@ -33,48 +33,54 @@ Screw.Unit(function() {
               <light type="boolean">false</light>\
               <icon_path>/user/icon/638/wpc_copy.jpg</icon_path>\
             </author>\
-            <body>hello</body>\
+            <body>murmur from murmur tab</body>\
             <created_at type="datetime">Sun Sep 27 14:50:34 UTC 2009</created_at>\
             <jabber_user_name nil="true"></jabber_user_name>\
             <is_truncated type="boolean">false</is_truncated>\
           </murmur>\
           <murmur>\
-            <id type="integer">119</id>\
+            <id type="integer">2</id>\
             <author nil="true"></author>\
             <body>hello</body>\
             <created_at type="datetime">Wed Sep 30 02:50:04 UTC 2009</created_at>\
             <jabber_user_name>admin</jabber_user_name>\
             <is_truncated type="boolean">false</is_truncated>\
           </murmur>\
-          <murmur>\
-            <id type="integer">120</id>\
-            <author nil="true"></author>\
-            <body>where is the dirty star?</body>\
-            <created_at type="datetime">Wed Sep 30 02:50:16 UTC 2009</created_at>\
-            <jabber_user_name>admin</jabber_user_name>\
-            <is_truncated type="boolean">false</is_truncated>\
-          </murmur>\
         ', "text/xml")
-        murmurs = MurmurParser.parse_collection(doc)
       })
       
-      it("should extract id", function() {
-        expect($.pluck(murmurs, 'id')).to(equal, [118, 119, 120])
+      var parsed = function(section_index) {
+        return MurmurParser.parse($('murmurs murmur', doc)[section_index])
+      }
+      
+      it("should be able to extract id", function() {
+        expect(parsed(0).id).to(equal, 1)
       })
       
-      it("should extract content", function() {
-        expect($.invoke(murmurs, 'content')).to(equal, ['hello', 'hello', 'where is the dirty star?'])
+      it("should be able to extract content", function() {
+        expect(parsed(0).content()).to(equal, "murmur from murmur tab")
       })
       
-      it("should extract created at", function() {
-        expect($.invoke(murmurs, 'created_at')).to(equal, ['Sun Sep 27 14:50:34 UTC 2009', 'Wed Sep 30 02:50:04 UTC 2009', 'Wed Sep 30 02:50:16 UTC 2009'])
+      it("should be able to extract created at", function() {
+        expect(parsed(0).created_at()).to(equal, 'Sun Sep 27 14:50:34 UTC 2009')
       })
       
-      it("should extract author when it exists", function() {
-        var authors = $.invoke(murmurs, 'author')
-        expect(authors[0].name).to(equal, 'wpc')
-        expect(authors[0].login).to(equal, 'wpc')
+      it("should be able to extract author when it exists", function() {
+        expect(parsed(0).author().name).to(equal, 'wpc')
+        expect(parsed(0).author().login).to(equal, 'wpc')
+        expect(parsed(1).author()).to(be_null)
       })
+      
+      it("should be able to extract jabber_user_name when it exists", function() {
+        expect(parsed(0).jabber_user_name()).to(be_null)
+        expect(parsed(1).jabber_user_name()).to(equal, 'admin')
+      })
+      
+      it("should be able to parse out all murmurs", function() {
+        var murmurs = MurmurParser.parse_collection(doc)
+        expect($.pluck(murmurs, 'id')).to(equal, [1, 2])
+      })
+      
     })  
   })
 })
