@@ -36,7 +36,7 @@ MurmursService = function() {
       conn.request({
         data: (since_id ? {'since_id': since_id} : {}),
         success: function(xml) {
-          callback(Murmur.parse_collection(xml))
+          callback(MurmurParser.parse_collection(xml))
         }
       })
     },
@@ -46,7 +46,7 @@ MurmursService = function() {
       conn.request($.extend({
         data: {'before_id': before_id},
         success: function(xml) {
-          callback(Murmur.parse_collection(xml))
+          callback(MurmurParser.parse_collection(xml))
         }
       }, options))
     }    
