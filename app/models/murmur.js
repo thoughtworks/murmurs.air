@@ -70,6 +70,11 @@ Murmur.id_desc_order = function(left, right) {
 }
 
 MurmurParser = function() {
+  
+  var not_nil = function(element) {
+    return element.attr('nil') != 'true'
+  }
+  
   var public =  {
     parse_collection: function(xml) {
       return $("murmurs murmur", xml).map(function() {
@@ -80,14 +85,22 @@ MurmurParser = function() {
     parse: function(xml) {
       var id = parseInt($("id", xml)[0].textContent)
       var murmur = new Murmur(id)
+      
       murmur.content($("body", xml).text())
       murmur.created_at($("created_at", xml).text())
-
-      murmur.author({
-       name: $("author name", xml).text(),
-       icon_path: new Preference().host() + $("author icon_path", xml).text(),
-       login: $("author login", xml).text()
-      })
+      
+      if(not_nil($("jabber_user_name", xml))) {
+        murmur.jabber_user_name($("jabber_user_name", xml).text())
+      }
+      
+      if(not_nil($("author", xml))) {
+        murmur.author({
+         name: $("author name", xml).text(),
+         icon_path: new Preference().host() + $("author icon_path", xml).text(),
+         login: $("author login", xml).text()
+        })        
+      }
+      
       return murmur
     }
   }
