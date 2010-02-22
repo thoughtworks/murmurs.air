@@ -46,6 +46,42 @@ Screw.Unit(function() {
             <jabber_user_name>admin</jabber_user_name>\
             <is_truncated type="boolean">false</is_truncated>\
           </murmur>\
+          <murmur> \
+            <id type="integer">3</id>\
+            <author>\
+              <id type="integer">638</id>\
+              <name>wpc</name>\
+              <login>wpc</login>\
+              <email />\
+              <light type="boolean">false</light>\
+              <icon_path>/user/icon/638/wpc_copy.jpg</icon_path>\
+            </author>\
+            <body>with default stream</body>\
+            <created_at type="datetime">Sun Sep 27 14:50:34 UTC 2009</created_at>\
+            <jabber_user_name nil="true"></jabber_user_name>\
+            <stream type="default" />\
+            <is_truncated type="boolean">false</is_truncated>\
+          </murmur>\
+          <murmur> \
+            <id type="integer">4</id>\
+            <author>\
+              <id type="integer">638</id>\
+              <name>wpc</name>\
+              <login>wpc</login>\
+              <email />\
+              <light type="boolean">false</light>\
+              <icon_path>/user/icon/638/wpc_copy.jpg</icon_path>\
+            </author>\
+            <body>with comment stream</body>\
+            <created_at type="datetime">Sun Sep 27 14:50:34 UTC 2009</created_at>\
+            <jabber_user_name nil="true"></jabber_user_name>\
+            <stream type="comment"> \
+               <origin url="http://localhost:3000/api/v2/projects/lotsa_aggregates/cards/4533.xml"> \
+                 <number type="integer">4533</number> \
+                </origin> \
+            </stream> \
+            <is_truncated type="boolean">false</is_truncated>\
+          </murmur>\
         ', "text/xml")
       })
       
@@ -76,9 +112,16 @@ Screw.Unit(function() {
         expect(parsed(1).jabber_user_name()).to(equal, 'admin')
       })
       
+      it("should be able to extract out stream information when it exists", function() {
+        expect(parsed(0).stream().description()).to(be_null)
+        expect(parsed(1).stream().description()).to(be_null)
+        expect(parsed(2).stream().description()).to(be_null)
+        expect(parsed(3).stream().description()).to(match, '4533')
+      })
+      
       it("should be able to parse out all murmurs", function() {
         var murmurs = MurmurParser.parse_collection(doc)
-        expect($.pluck(murmurs, 'id')).to(equal, [1, 2])
+        expect($.pluck(murmurs, 'id')).to(equal, [1, 2, 3, 4])
       })
       
     })  

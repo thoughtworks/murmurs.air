@@ -1,0 +1,40 @@
+/*
+ * Copyright 2009 ThoughtWorks, Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+Screw.Unit(function() {
+  describe("Stream", function() {
+    describe("parsing", function() {
+      var parse = function(string) {
+        var xml = new DOMParser().parseFromString(string, "text/xml")
+        return Stream.parse($("stream", xml))
+      }
+      
+      it("can parse default type stream", function() {
+        var stream = parse("<stream type=\"default\" />")
+        expect(stream.description()).to(be_null)
+      })
+      
+      it("can parse card comment stream", function() {
+        var stream = parse('<stream type="comment"> \
+             <origin url="http://localhost:3000/api/v2/projects/lotsa_aggregates/cards/4533.xml"> \
+               <number type="integer">4533</number> \
+              </origin> \
+          </stream>')
+        expect(stream.description()).to(equal, '<span class="stream">'+ Card.link_for(4533) +'</span>')
+      })
+    })
+  })
+})
