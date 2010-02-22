@@ -28,6 +28,7 @@ Murmur = function(id) {
     created_at: function(v) { return attr('created_at', v, attr_store) },
     author: function(v) { return attr('author', v, attr_store) },
     jabber_user_name: function(v){ return attr('jabber_user_name', v, attr_store) },
+    stream: function(v){ return attr('stream', v, attr_store) },
     
     mentions_current_user: function() {
       if(!User.current()) { return false }
@@ -72,10 +73,10 @@ Murmur.id_desc_order = function(left, right) {
 MurmurParser = function() {
   
   var not_nil = function(element) {
-    return element.attr('nil') != 'true'
+    return element && element.attr('nil') != 'true'
   }
   
-  var public =  {
+  var public = {
     parse_collection: function(xml) {
       return $("murmurs murmur", xml).map(function() {
         return public.parse(this)
@@ -92,6 +93,8 @@ MurmurParser = function() {
       if(not_nil($("jabber_user_name", xml))) {
         murmur.jabber_user_name($("jabber_user_name", xml).text())
       }
+      
+      murmur.stream(Stream.parse($("stream", xml)))
       
       if(not_nil($("author", xml))) {
         murmur.author({
