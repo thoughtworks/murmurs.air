@@ -33,7 +33,7 @@ MurmurView = function(murmur) {
     render: function() {
       var arrow = $('<span class="arrow"><span></span></span>')
       var author = $('<span class="author"></span>').text(murmur.author().name)
-      var content = $('<div class="content"></div>').html(RenderPipes.render(murmur.content()))
+      var content = $('<div class="content"></div>').html(murmur.stream().description() + RenderPipes.render(murmur.content()))
       var created_at = $('<span class="created-at"></span>').text(murmur.created_at())
       var body = $('<div class="body"></div>').append(created_at).append(author).append(content)
       

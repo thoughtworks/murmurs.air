@@ -113,9 +113,9 @@ Screw.Unit(function() {
       })
       
       it("should be able to extract out stream information when it exists", function() {
-        expect(parsed(0).stream().description()).to(be_null)
-        expect(parsed(1).stream().description()).to(be_null)
-        expect(parsed(2).stream().description()).to(be_null)
+        expect(parsed(0).stream().description()).to(equal, "")
+        expect(parsed(1).stream().description()).to(equal, "")
+        expect(parsed(2).stream().description()).to(equal, "")
         expect(parsed(3).stream().description()).to(match, '4533')
       })
       

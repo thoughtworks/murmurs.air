@@ -166,3 +166,16 @@ div.clear-both {
 .murmur .content .mention {
   color: #1A67CC;
 }
+
+.murmur .stream {
+  margin-right: 0.3em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background-color: #888;
+  font-size: 90%;
+  -khtml-border-radius: 5px;
+}
+
+.murmur .stream .card-number {
+  color: #eee;
+}
