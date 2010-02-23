@@ -50,7 +50,7 @@ RenderPipes.add(function(content){
 // card link
 RenderPipes.add(function(content, context) {
   return content.gsub(/#(\d+)/, function(match) {
-    return Card.link_for(match[1], match[0])
+    return Card.link_for(match[1], { text: match[0] })
   })
 })
 

@@ -24,7 +24,17 @@ Screw.Unit(function() {
       
       it("can parse default type stream", function() {
         var stream = parse("<stream type=\"default\" />")
-        expect(stream.description()).to(be_null)
+        expect(stream.description()).to(equal, "")
+      })
+      
+      it("can parse none stream as default stream", function() {
+        var stream = parse("</>")
+        expect(stream.description()).to(equal, "")
+      })
+      
+      it("can parse unregistered stream as default stream", function() {
+        var stream = parse("<stream type=\"unregistered\" />")
+        expect(stream.description()).to(equal, "")
       })
       
       it("can parse card comment stream", function() {
@@ -33,7 +43,8 @@ Screw.Unit(function() {
                <number type="integer">4533</number> \
               </origin> \
           </stream>')
-        expect(stream.description()).to(equal, '<span class="stream">'+ Card.link_for(4533) +'</span>')
+        var expected_desc = '<span class="stream">'+ Card.link_for(4533, {title: 'from comment of card #4533'}) +'</span>'
+        expect(stream.description()).to(equal, expected_desc)
       })
     })
   })

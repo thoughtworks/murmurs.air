@@ -17,7 +17,7 @@
 Stream = {
   "default": function() {
     return {
-      description: function() { }
+      description: function() { return "" }
     }
   },
   
@@ -25,7 +25,8 @@ Stream = {
     var card_number = $("origin number", xml).text()
     return {
       description: function() {
-        return "<span class=\"stream\">" + Card.link_for(card_number) + "</span>"
+        var card_link = Card.link_for(card_number, {title: 'from comment of card #' + card_number})
+        return "<span class=\"stream\">" + card_link  + "</span>"
       }
     }
   }
