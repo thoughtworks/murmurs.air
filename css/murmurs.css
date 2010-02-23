@@ -151,7 +151,7 @@ div.clear-both {
 
 .murmur .content a {
   text-decoration: none;
-  font-size: 95%;
+  font-size: 92%;
   color: #1A67CC;
 }
 
@@ -168,14 +168,13 @@ div.clear-both {
 }
 
 .murmur .stream {
-  margin-right: 0.3em;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-  background-color: #888;
-  font-size: 90%;
+  margin-right: 0.4em;
+  padding-left: 4px;
+  padding-right: 5px;
+  background-color: #777;
   -khtml-border-radius: 5px;
 }
 
 .murmur .stream .card-number {
-  color: #eee;
+  color: #fff;
 }
