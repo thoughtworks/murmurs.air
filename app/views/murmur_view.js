@@ -32,7 +32,7 @@ MurmurView = function(murmur) {
   return {
     render: function() {
       var arrow = $('<span class="arrow"><span></span></span>')
-      var author = $('<span class="author"></span>').text(murmur.author().name)
+      var author = $('<span class="author"></span>').text(murmur.author_name())
       var content = $('<div class="content"></div>').html(murmur.stream().description() + RenderPipes.render(murmur.content()))
       var created_at = $('<span class="created-at"></span>').text(murmur.created_at())
       var body = $('<div class="body"></div>').append(created_at).append(author).append(content)
@@ -42,7 +42,7 @@ MurmurView = function(murmur) {
         body.addClass("mention")
       }
       
-      var icon = $('<div class="icon-border-outer"><div class="icon-border-inner"><img class="icon" src="' + murmur.author().icon_path + '"></div></img>')
+      var icon = $('<div class="icon-border-outer"><div class="icon-border-inner"><img class="icon" src="' + murmur.author_icon() + '"></div></img>')
       return assemble($('<div class="murmur" murmur_id="'+ murmur.id + '"></div>'), icon, arrow, body)
     }
   }

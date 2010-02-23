@@ -22,6 +22,10 @@ Murmur = function(id) {
     return (public.content().match(tag_reg_exp) != null)
   }
   
+  var reply_adress = function() {
+    return public.author() ? public.author().login : public.jabber_user_name()
+  }
+  
   var public = {
     'id': id,
     content: function(v) { return attr('content', v, attr_store) },
@@ -30,30 +34,34 @@ Murmur = function(id) {
     jabber_user_name: function(v){ return attr('jabber_user_name', v, attr_store) },
     stream: function(v){ return attr('stream', v, attr_store) },
     
+    author_name: function() {
+      return public.author() ? public.author().name : public.jabber_user_name() + " (jabber)"
+    },
+    
+    author_icon: function() {
+      return public.author() && public.author().icon_path
+    },
+    
     mentions_current_user: function() {
       if(!User.current()) { return false }
       return $.any(User.current().possible_mention_strings(), mentions_user)
     },
     
     blank: function() {
-      return this.content() == null || this.content().blank()
+      return public.content() == null || public.content().blank()
     },
     
     remurmur:function() {
-      return 'RM @' + this.display_name() + ': ' + this.content() + ' // '
+      return 'RM @' + reply_adress() + ': ' + public.content() + ' // '
     },
     
     reply:function(){
-      return "@" + this.display_name() + " "
-    },
-    
-    display_name: function(){
-      return this.author() ? this.author().login : this.jabber_user_name()
+      return "@" + reply_adress() + " "
     },
     
     from_current_user: function() {
-      if(!User.current() || ! this.author()) { return false }
-      return User.current().login()  == this.author().login
+      if(!User.current() || ! public.author()) { return false }
+      return User.current().login()  == public.author().login
     }
   }
   

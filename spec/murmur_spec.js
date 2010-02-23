@@ -27,6 +27,34 @@ Screw.Unit(function() {
     }
     
     
+    describe("a murmur can tell author info", function() {
+      var m
+      
+      before(function() {
+        m = new Murmur(1)
+      })
+      
+      it("should be author's info if provided", function() {
+        m.author({name: 'name', login: 'login', icon_path: 'author icon'})
+        m.jabber_user_name("jabber")
+        expect(m.author_name()).to(equal, 'name')
+        expect(m.author_icon()).to(equal, 'author icon')
+      })
+      
+      it("should be jabber user's info if can not get author info", function() {
+        m.jabber_user_name("jabber")
+        expect(m.author_name()).to(equal, 'jabber (jabber)')
+        expect(m.author_icon()).to(be_null)
+      })
+      
+      it("author_name should be null when both author and jabber name are absent", function() {
+        expect(m.author_name()).to(be_null)        
+        expect(m.author_icon()).to(be_null)        
+      })
+      
+    })
+    
+    
     describe("a murmur can detect mentions", function() {
       var murmur_with_mention
       var murmur_without_mention
