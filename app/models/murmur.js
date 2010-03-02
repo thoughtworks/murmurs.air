@@ -35,7 +35,15 @@ Murmur = function(id) {
     stream: function(v){ return attr('stream', v, attr_store) },
     
     author_name: function() {
-      return public.author() ? public.author().name : public.jabber_user_name() + " (jabber)"
+      if(public.author()) {
+        return public.author().name
+      }
+      
+      if (public.jabber_user_name()) {
+        return public.jabber_user_name() + " (jabber)"
+      }
+      
+      return null
     },
     
     author_icon: function() {
