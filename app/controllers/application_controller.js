@@ -62,11 +62,27 @@ ApplicationController = function() {
     $.air.set_tray_icon("app:/images/icon128.png", operation_menu(), "Mumurs.air")
   }
   
+  var save_framerate_on_deactived = function() {
+    var app = air.NativeApplication.nativeApplication
+    app.addEventListener(air.Event.DEACTIVATE, function(event) {
+      $.map(app.openedWindows, function(win) {
+        win.stage.frameRate = 1
+      })
+    })
+    
+    app.addEventListener(air.Event.ACTIVATE, function(event) {
+      $.map(app.openedWindows, function(win) {
+        win.stage.frameRate = 24
+      })
+    })
+  }
+  
   var public =  {
     init: function() {
       setup_trayicon()
       setup_menu()
       setup_auto_updater()
+      save_framerate_on_deactived()
       
       if( new Preference().host() ) {
         open_timeline()
