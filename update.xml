@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <update xmlns="http://ns.adobe.com/air/framework/update/description/1.0"> 
- <version>0.2.6</version> 
+ <version>0.2.7</version> 
  <url>http://github.com/downloads/thoughtworks/murmurs.air/Murmur.air</url> 
  <description><![CDATA[
  This version has added following features comparing with 0.2 version:
@@ -12,5 +12,6 @@
  * Add tray icon for Windows
  * Support "murmurs from a card" feature of Mingle 3.1
  * Move installers to github.com
+ * Reduce CPU usage when timeline window is not active
  ]]></description> 
 </update>
