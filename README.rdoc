@@ -5,7 +5,7 @@ An desktop client for { Mingle }[http://www.thoughtworks-studios.com/mingle-agil
 
 = Installation
 * Install {Adobe Air Runtime}[http://get.adobe.com/air] if you haven't
-* Get Murmurs.air from {here}[http://dl.getdropbox.com/u/184027/murmur/Murmur.air]
+* Get Murmurs.air from {here}[http://github.com/downloads/thoughtworks/murmurs.air/Murmur.air]
 * Install it
 
 = License
