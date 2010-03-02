@@ -1,7 +1,5 @@
 require 'rubygems'
 require 'rake'
-require 'build/github'
-require 'fileutils'
 
 APP_NAME = 'Murmur.air'
 
@@ -20,9 +18,9 @@ task :build do
 end
 
 task :deploy => :build do
-  github_upload('update.xml', 'thoughtworks', 'murmurs.air')
-  github_upload(APP_NAME, 'thoughtworks', 'murmurs.air')
-  FileUtils.rm_rf(APP_NAME)
+  dropbox = "~/Dropbox/Public/murmur"
+  `mv #{APP_NAME} #{dropbox}`
+  `cp update.xml #{dropbox}`
 end
 
 task :default => [:run]
