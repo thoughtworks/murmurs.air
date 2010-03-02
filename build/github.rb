@@ -37,8 +37,8 @@ def github_upload(filename, user, repo)
     :file => file,
     :success_action_status => 201
   })
-  raise "File upload failed" unless res.class == Net::HTTPCreated
-  puts "File uploaded successfully"
+  raise "File #{filename} upload failed" unless res.class == Net::HTTPCreated
+  puts "File #{filename} uploaded successfully"
 end
 
 def github_user
