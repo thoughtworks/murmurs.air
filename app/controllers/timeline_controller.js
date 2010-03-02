@@ -50,6 +50,12 @@ TimelineController = function() {
       var win = window.open("/app/views/timeline.html", "Mingle Murmurs")
       win.moveTo(150, 150)
       win.resizeTo(400, 650)
+      win.nativeWindow.addEventListener(air.Event.DEACTIVATE, function(event) {
+        event.target.stage.frameRate = 1
+      })
+      win.nativeWindow.addEventListener(air.Event.ACTIVATE, function(event) {
+        event.target.stage.frameRate = 24
+      })
       return win
     },
     

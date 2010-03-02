@@ -24,3 +24,5 @@ task :deploy => :build do
   github_upload(APP_NAME, 'thoughtworks', 'murmurs.air')
   FileUtils.rm_rf(APP_NAME)
 end
+
+task :default => [:run]
