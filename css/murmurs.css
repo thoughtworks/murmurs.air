@@ -76,6 +76,7 @@ div.clear-both {
 }
 
 .murmur {
+  position: relative;
   font-size: 76%;
   padding: 0.2em;
   padding-top: 0.2em;
@@ -177,4 +178,18 @@ div.clear-both {
 
 .murmur .stream .card-number {
   color: #fff;
+}
+
+.time_tooltip {
+	position: absolute;
+  white-space: nowrap;
+	top: 2px;
+	right: 0px;
+	width: 0px;
+	z-index: 3000;
+	border: 1px solid #ccc;
+	background-color: #eee;
+	padding: 3px;
+	opacity: 0.85;
+	font-size: 12px;
 }
