@@ -14,6 +14,8 @@
  * the License.
  */
 
+jQuery.timeago.settings.refreshMillis = -1; //stop time ago refreshing
+
 TimelineView = function(container) {
   return {
     prepend: function(murmur) {

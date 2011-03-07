@@ -13,11 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
+ 
 TimelineController = function() {
   var timeline = new Timeline()
   var view
-  var interval = 30 * 1000
+  var murmurRefreshInterval = 30 * 1000
+  var timeStampRefreshInterval = 60 * 1000
   
   var on_context_menu = function(event, murmur_element) {
     var murmur_id = murmur_element.getAttribute('murmur_id')
@@ -45,6 +46,10 @@ TimelineController = function() {
     MurmursService.fetch_before(timeline.oldest_id(), timeline.append_all, { complete: view.remove_spinner })
   }
   
+  var refreshTimeStamp = function() {
+    $('span.created-at').timeago()
+  }
+  
   var public = {
     open: function() {
       var win = window.open("/app/views/timeline.html", "Mingle Murmurs")
@@ -69,7 +74,10 @@ TimelineController = function() {
       view.scroll(do_scroll)
       
       public.refresh()
-      setInterval(public.refresh, interval)
+      setInterval(public.refresh, murmurRefreshInterval)
+      jQuery.timeago.settings.refreshMillis = -1 //disable timeago refreshing
+      
+      setInterval(refreshTimeStamp, timeStampRefreshInterval)
     },
 
     refresh: function() {
