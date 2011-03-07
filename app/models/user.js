@@ -19,7 +19,7 @@ User = function(id) {
   return {
     'id': id,
     login: function(v) { return attr('login', v, attr_store) },
-    name: function(v) { return attr('name', v, attr_store) },
+    name: function(v) { return attr('__name__', v, attr_store) },
     possible_mention_strings: function() {
       var possible_mention_strings = [this.login()]
       possible_mention_strings = possible_mention_strings.concat(this.name().split(' '))
