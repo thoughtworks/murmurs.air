@@ -28,13 +28,45 @@ MurmurView = function(murmur) {
     return container.append($('<div class="clear-both"></div>'))
   }
   
+  var setup_tooltip = function(container, element, tooltip_content) {
+    var timeout = null;
+    var slide_tooltip = function() {
+      container.find("div.time_tooltip").animate({width: '0'}, 200, function() {
+        $(this).remove()
+      });        
+    }
+    
+    var cancel_slide = function() {
+      if(timeout) { 
+        clearTimeout(timeout);
+        timeout = null;
+      }      
+    }
+    element.mouseover(function() {
+      container.find("div.time_tooltip").remove()
+      var tooltip = $('<div class="time_tooltip"></div>').text(tooltip_content)
+      tooltip.mouseover(cancel_slide).mouseout(function() {
+          cancel_slide()
+          timeout = setTimeout(slide_tooltip, 500)
+      });
+      container.append(tooltip)
+      tooltip.animate({width:'175px'}, 200)
+    }).mouseout(function() {
+      cancel_slide()
+      timeout = setTimeout(slide_tooltip, 500)
+    })
+  }
+  
   return {
     render: function() {
+      var container = $('<div class="murmur" murmur_id="'+ murmur.id + '"></div>')
       var arrow = $('<span class="arrow"><span></span></span>')
       var author = $('<span class="author"></span>').text(murmur.author_name())
       var content = $('<div class="content"></div>').html(murmur.stream().description() + RenderPipes.render(murmur.content()))
       var created_at = $('<span class="created-at"></span>').attr('title', murmur.created_at())
       created_at.timeago();
+      setup_tooltip(container, created_at, $.timeago.parse(murmur.created_at()).toLocaleString())
+      
       var body = $('<div class="body"></div>').append(created_at).append(author).append(content)
       
       if (murmur.mentions_current_user()) {
@@ -43,7 +75,7 @@ MurmurView = function(murmur) {
       }
       
       var icon = $('<div class="icon-border-outer"><div class="icon-border-inner"><img class="icon" src="' + murmur.author_icon() + '"></div></img>')
-      return assemble($('<div class="murmur" murmur_id="'+ murmur.id + '"></div>'), icon, arrow, body)
+      return assemble(container, icon, arrow, body)
     }
   }
 }
