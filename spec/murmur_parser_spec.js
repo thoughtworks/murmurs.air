@@ -34,7 +34,7 @@ Screw.Unit(function() {
               <icon_path>/user/icon/638/wpc_copy.jpg</icon_path>\
             </author>\
             <body>murmur from murmur tab</body>\
-            <created_at type="datetime">Sun Sep 27 14:50:34 UTC 2009</created_at>\
+            <created_at type="datetime">2011-03-05T18:57:17Z</created_at> \
             <jabber_user_name nil="true"></jabber_user_name>\
             <is_truncated type="boolean">false</is_truncated>\
           </murmur>\
@@ -42,7 +42,7 @@ Screw.Unit(function() {
             <id type="integer">2</id>\
             <author nil="true"></author>\
             <body>hello</body>\
-            <created_at type="datetime">Wed Sep 30 02:50:04 UTC 2009</created_at>\
+            <created_at type="datetime">2011-03-04T22:10:20Z</created_at>\
             <jabber_user_name>admin</jabber_user_name>\
             <is_truncated type="boolean">false</is_truncated>\
           </murmur>\
@@ -57,7 +57,7 @@ Screw.Unit(function() {
               <icon_path>/user/icon/638/wpc_copy.jpg</icon_path>\
             </author>\
             <body>with default stream</body>\
-            <created_at type="datetime">Sun Sep 27 14:50:34 UTC 2009</created_at>\
+            <created_at type="datetime">2011-03-04T19:30:56Z</created_at>\
             <jabber_user_name nil="true"></jabber_user_name>\
             <stream type="default" />\
             <is_truncated type="boolean">false</is_truncated>\
@@ -73,7 +73,7 @@ Screw.Unit(function() {
               <icon_path>/user/icon/638/wpc_copy.jpg</icon_path>\
             </author>\
             <body>with comment stream</body>\
-            <created_at type="datetime">Sun Sep 27 14:50:34 UTC 2009</created_at>\
+            <created_at type="datetime">2011-03-05T01:57:13Z</created_at>\
             <jabber_user_name nil="true"></jabber_user_name>\
             <stream type="comment"> \
                <origin url="http://localhost:3000/api/v2/projects/lotsa_aggregates/cards/4533.xml"> \
@@ -98,7 +98,7 @@ Screw.Unit(function() {
       })
       
       it("should be able to extract created at", function() {
-        expect(parsed(0).created_at()).to(equal, 'Sun Sep 27 14:50:34 UTC 2009')
+        expect(parsed(0).created_at()).to(equal, '2011-03-05T18:57:17Z')
       })
       
       it("should be able to extract author when it exists", function() {
