@@ -20,9 +20,20 @@ Usage: copied parts of its source code.
 Copyright 2006-2007 Prototype Core Team
 License type: MIT
 
-
 Adobe Air Javascript Library (From SDK)
 URL: http://www.adobe.com/products/air
 Usage: part of the Adobe Air SDK
 Copyright 2009 Adobe Systems Incorporated.
 License type: modify and distribute with the terms of Adobe AIR SDK license agreement (Adobe Air License is attached)
+
+Chat, Say, Talk icon
+URL: http://www.iconfinder.com/icondetails/16823/128/chat_say_talk_icon
+Usage: used as part of Murmurs.air application icon.
+Copyright Christian F. Burprich
+License type: Creative Commons
+
+Timeago jquery Plugin
+URL:http://timeago.yarp.com
+Usage: library, redistributed with Murmurs.air
+Copyright 2008-2011 Ryan McGeary
+License type: MIT
