@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <update xmlns="http://ns.adobe.com/air/framework/update/description/1.0"> 
- <version>0.2.8.1</version> 
+ <version>0.2.9</version> 
  <url>http://dl.dropbox.com/u/184027/murmur/Murmur.air</url> 
  <description><![CDATA[
  This version has added following features comparing with 0.2 version:
@@ -13,5 +13,6 @@
  * Support "murmurs from a card" feature of Mingle 3.1
  * Reduce CPU usage when timeline window is not active
  * Display relative time stamp (e.g. 2 minutes ago)
+ * Update the app icon
  ]]></description> 
 </update>
