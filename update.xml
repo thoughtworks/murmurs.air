@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <update xmlns="http://ns.adobe.com/air/framework/update/description/1.0"> 
- <version>0.2.9</version> 
+ <version>0.2.9.1</version> 
  <url>http://dl.dropbox.com/u/184027/murmur/Murmur.air</url> 
  <description><![CDATA[
  This version has added following features comparing with 0.2 version:
