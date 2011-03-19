@@ -20,6 +20,7 @@ ApplicationController = function() {
   
   var open_timeline = function() {
     timeline_window = TimelineController.open()
+    timeline_window.nativeWindow.addEventListener(air.Event.CLOSING, $.air.quit)
   }
   
   var timeline_controller = function() {
