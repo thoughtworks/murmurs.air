@@ -5,7 +5,7 @@
   http://www.adobe.com/go/air_1.1_application_descriptor. -->
   <id>com.thoughtworks.mingle.murmurs.air</id>
   <name>Murmurs</name>
-  <version>0.2.9.1</version>
+  <version>0.3</version>
   <filename>Murmurs</filename>
   <description>A Twitter like client for Mingle murmurs</description>
   <copyright>Copyright Thoughtworks Inc.</copyright>
