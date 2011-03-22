@@ -14,14 +14,12 @@
  * the License.
  */
 
-Card = function() {
+
+Account = function() {
+  var preference = new Preference()
   return {
-    link_for: function(account, number, options) {
-      var text = options.text || '#' + number
-      var ret = '<a class="card-number" href="'+ account.card_url(number) + '"'
-      if( options.title ) { ret += 'title="'+ options.title + '"' }
-      ret += ">" + text + '</a>'
-      return ret
+    card_url: function(number) {
+     return preference.host() + "/projects/" + preference.project_id() + "/cards/" + number
     }
   }
-}()
+}

@@ -15,6 +15,8 @@
  */
 
 Screw.Unit(function() {
+  var account = { card_url: function(number) { return "http://example.com/" + number} }
+  
   describe("MurmurParser", function() {
     describe("parsing murmur from xml", function() {
       var doc
@@ -113,10 +115,10 @@ Screw.Unit(function() {
       })
       
       it("should be able to extract out stream information when it exists", function() {
-        expect(parsed(0).stream().description()).to(equal, "")
-        expect(parsed(1).stream().description()).to(equal, "")
-        expect(parsed(2).stream().description()).to(equal, "")
-        expect(parsed(3).stream().description()).to(match, '4533')
+        expect(parsed(0).stream().description(account)).to(equal, "")
+        expect(parsed(1).stream().description(account)).to(equal, "")
+        expect(parsed(2).stream().description(account)).to(equal, "")
+        expect(parsed(3).stream().description(account)).to(match, '4533')
       })
       
       it("should be able to parse out all murmurs", function() {

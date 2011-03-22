@@ -15,8 +15,10 @@
  */
 
 Screw.Unit(function() {
+  var account = { card_url: function(number) { return "http://example.com/" + number} }
+  
   describe("Stream", function() {
-    describe("parsing", function() {
+    describe("parsing", function() {      
       var parse = function(string) {
         var xml = new DOMParser().parseFromString(string, "text/xml")
         return Stream.parse($("stream", xml))
@@ -24,17 +26,17 @@ Screw.Unit(function() {
       
       it("can parse default type stream", function() {
         var stream = parse("<stream type=\"default\" />")
-        expect(stream.description()).to(equal, "")
+        expect(stream.description(account)).to(equal, "")
       })
       
       it("can parse none stream as default stream", function() {
         var stream = parse("</>")
-        expect(stream.description()).to(equal, "")
+        expect(stream.description(account)).to(equal, "")
       })
       
       it("can parse unregistered stream as default stream", function() {
         var stream = parse("<stream type=\"unregistered\" />")
-        expect(stream.description()).to(equal, "")
+        expect(stream.description(account)).to(equal, "")
       })
       
       it("can parse card comment stream", function() {
@@ -43,8 +45,8 @@ Screw.Unit(function() {
                <number type="integer">4533</number> \
               </origin> \
           </stream>')
-        var expected_desc = '<span class="stream">'+ Card.link_for(4533, {title: 'from comment of card #4533'}) +'</span>'
-        expect(stream.description()).to(equal, expected_desc)
+        var expected_desc = '<span class="stream">'+ Card.link_for(account, 4533, {title: 'from comment of card #4533'}) +'</span>'
+        expect(stream.description(account)).to(equal, expected_desc)
       })
     })
   })

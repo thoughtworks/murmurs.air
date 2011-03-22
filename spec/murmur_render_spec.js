@@ -16,15 +16,10 @@
 
 Screw.Unit(function() {
   describe("RenderPipes", function() {
-    var preference
-
-    before(function() {
-      preference = new Preference()
-      preference.reset()
-    })
+    var account = { card_url: function(number) { return "http://example.com/" + number} } 
 
     var render = function(content) {
-      return RenderPipes.render(content)
+      return RenderPipes.render(content, account)
     }
 
     it("should escape html tag", function() {
@@ -36,9 +31,7 @@ Screw.Unit(function() {
     })
 
     it("should replace #ddd with card link", function() {
-      preference.host("http://example.com")
-      preference.project_id("n1")
-      expect(render("fix bug #111.")).to(equal, 'fix bug <a class="card-number" href="http://example.com/projects/n1/cards/111">#111</a>.')
+      expect(render("fix bug #111.")).to(equal, 'fix bug <a class="card-number" href="http://example.com/111">#111</a>.')
     })
     
     it("should extract mentions", function() {

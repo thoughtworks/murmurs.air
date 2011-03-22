@@ -25,7 +25,7 @@ ApplicationController = function() {
   
   var timeline_controller = function() {
     if(!timeline_window) return
-    return timeline_window.TimelineController
+    return timeline_window.TimelineController.current
   }
   
   var refresh_timeline = function() {

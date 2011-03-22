@@ -21,9 +21,9 @@ RenderPipes = function() {
       pipes.push(pipe)
     },
     
-    render: function(content) {
+    render: function(content, account) {
       $.each(pipes, function() {
-        content = this(content)
+        content = this(content, account)
       })
       return content
     }
@@ -48,9 +48,9 @@ RenderPipes.add(function(content){
 })
 
 // card link
-RenderPipes.add(function(content, context) {
+RenderPipes.add(function(content, account) {
   return content.gsub(/#(\d+)/, function(match) {
-    return Card.link_for(match[1], { text: match[0] })
+    return Card.link_for(account, match[1], { text: match[0] })
   })
 })
 

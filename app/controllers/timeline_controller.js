@@ -14,11 +14,34 @@
  * the License.
  */
  
-TimelineController = function() {
-  var timeline = new Timeline()
-  var view
+TimelineController = function(container, account) {
   var murmurRefreshInterval = 30 * 1000
   var timeStampRefreshInterval = 60 * 1000
+  
+  var timeline = new Timeline()
+  var view = new TimelineView(container, account)
+
+  
+  var initialize = function () {
+    timeline.onchange(function(event, murmur) {
+      view[event](murmur)
+    })
+
+
+    $("button.post").click(PostController.open)
+
+    $('.murmur').live('contextmenu', function(event){
+      on_context_menu(event, this)
+    })
+
+    view.scroll(do_scroll)    
+    refresh()
+    setInterval(refresh, murmurRefreshInterval)
+    jQuery.timeago.settings.refreshMillis = -1 //disable timeago refreshing
+
+    setInterval(refreshTimeStamp, timeStampRefreshInterval)
+  }
+  
   
   var on_context_menu = function(event, murmur_element) {
     var murmur_id = murmur_element.getAttribute('murmur_id')
@@ -50,41 +73,19 @@ TimelineController = function() {
     $('span.created-at').timeago()
   }
   
-  var public = {
-    open: function() {
-      var win = window.open("/app/views/timeline.html", "Mingle Murmurs")
-      win.moveTo(150, 150)
-      win.resizeTo(400, 650)
-      return win
-    },
-    
-    init: function(container) {
-      view = new TimelineView(container)
-      
-      timeline.onchange(function(event, murmur) {
-        view[event](murmur)
-      })
-      
-      $("button.post").click(PostController.open)
-      
-      $('.murmur').live('contextmenu', function(event){
-        on_context_menu(event, this)
-      })
-      
-      view.scroll(do_scroll)
-      
-      public.refresh()
-      setInterval(public.refresh, murmurRefreshInterval)
-      jQuery.timeago.settings.refreshMillis = -1 //disable timeago refreshing
-      
-      setInterval(refreshTimeStamp, timeStampRefreshInterval)
-    },
-
-    refresh: function() {
-      MurmursService.fetch_since(timeline.latest_id(), timeline.prepend_all)
-    }
+  var refresh =  function() {
+    MurmursService.fetch_since(timeline.latest_id(), timeline.prepend_all)
   }
   
-  
-  return public
-}()
+  initialize()
+  return {
+    'refresh': refresh
+  }
+}
+
+TimelineController.open = function() {
+  var win = window.open("/app/views/timeline.html", "Mingle Murmurs")
+  win.moveTo(150, 150)
+  win.resizeTo(400, 650)
+  return win  
+}

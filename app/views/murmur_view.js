@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-MurmurView = function(murmur) {
+MurmurView = function(murmur, account) {
   var assemble = function(container, icon, arrow, body) {
     body.prepend(arrow)
     
@@ -62,7 +62,7 @@ MurmurView = function(murmur) {
       var container = $('<div class="murmur" murmur_id="'+ murmur.id + '"></div>')
       var arrow = $('<span class="arrow"><span></span></span>')
       var author = $('<span class="author"></span>').text(murmur.author_name())
-      var content = $('<div class="content"></div>').html(murmur.stream().description() + RenderPipes.render(murmur.content()))
+      var content = $('<div class="content"></div>').html(murmur.stream().description(account) + RenderPipes.render(murmur.content(), account))
       var created_at = $('<span class="created-at"></span>').attr('title', murmur.created_at())
       created_at.timeago();
       setup_tooltip(container, created_at, $.timeago.parse(murmur.created_at()).toLocaleString())

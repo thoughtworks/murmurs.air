@@ -20,6 +20,7 @@
 
 
   <script src="/app/models/preference.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/models/account.js" type="text/javascript" charset="utf-8"></script>
   <script src="/app/models/user.js" type="text/javascript" charset="utf-8"></script>
   <script src="/app/models/card.js" type="text/javascript" charset="utf-8"></script>
   <script src="/app/models/stream.js" type="text/javascript" charset="utf-8"></script>
@@ -43,7 +44,7 @@
   <script type="text/javascript" charset="utf-8">
    $(function() {
      StatusBarController.init($("#status_bar"))
-     TimelineController.init($("#container"))
+     TimelineController.current = new TimelineController($("#container"), new Account())
    })
   </script>
   <body>
