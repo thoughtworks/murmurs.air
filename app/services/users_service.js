@@ -28,4 +28,4 @@ UsersService = function() {
       })
     }
   }
-}()
+}

@@ -42,7 +42,8 @@ User.current = function() {
 
 User.find_by_login = function(login) {
   var found_user = null
-  UsersService.list(function(users) {
+  var users_service = new UsersService()
+  users_service.list(function(users) {
     var found_users = $.grep(users, function(user, index) {
       return (user.login() == login)
     })
