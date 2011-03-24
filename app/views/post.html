@@ -16,6 +16,7 @@
   <script src="/lib/prototypelize.js" type="text/javascript" charset="utf-8"></script>
   <script src="/lib/attributes_store.js" type="text/javascript" charset="utf-8"></script>
   <script src="/app/models/murmur.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/app/models/account.js" type="text/javascript" charset="utf-8"></script>
   <script src="/app/models/preference.js" type="text/javascript" charset="utf-8"></script>
   
   <script src="/app/services/mingle_connection.js" type="text/javascript" charset="utf-8"></script>
@@ -27,7 +28,7 @@
   <script type="text/javascript" charset="utf-8">    
     $(function() {
       StatusBarController.init($("#status_bar"))
-      PostController.init()
+      new PostController(new Account())
     })
   </script>
 </head>

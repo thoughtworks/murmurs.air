@@ -14,36 +14,32 @@
  * the License.
  */
 
-PostController = function() {
+PostController = function(account) {
   var new_murmur = new Murmur()
-  var murmurs_service = new MurmursService()
+  var murmurs_service = new MurmursService(account)
   
-  var public = {
-    init: function() {
-      $("button.post").click(public.post)
-      $("textarea").change(function() {
-        new_murmur.content(this.value)
-      })
-      $("textarea").focus()
-
-      if(window.params && window.params['init_content']){
-        $("textarea").text(window.params['init_content'])
-      }
-    },
-    
-    open: function(params) {
-      var post_win = window.open("/app/views/post.html")
-      post_win.resizeTo(400, 150)
-      post_win.params = params
-    },
-    
-    post: function() {
-      murmurs_service.post(new_murmur, function() {
-        window.opener.TimelineController.current.refresh()
-        window.close()
-      })
-    }
+  var post = function() {
+    murmurs_service.post(new_murmur, function() {
+      window.opener.TimelineController.current.refresh()
+      window.close()
+    })
   }
+    
+  $("button.post").click(post)
+  $("textarea").change(function() {
+    new_murmur.content(this.value)
+  })
+  $("textarea").focus()
+
+  if(window.params && window.params['init_content']){
+    $("textarea").text(window.params['init_content'])
+  }    
   
-  return public
-}()
+  return {}
+}
+
+PostController.open = function(params) {
+  var post_win = window.open("/app/views/post.html")
+  post_win.resizeTo(400, 150)
+  post_win.params = params
+}

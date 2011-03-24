@@ -88,7 +88,7 @@ Screw.Unit(function() {
       })
       
       var parsed = function(section_index) {
-        return MurmurParser.parse($('murmurs murmur', doc)[section_index])
+        return (new MurmurParser(new Account())).parse($('murmurs murmur', doc)[section_index])
       }
       
       it("should be able to extract id", function() {
@@ -122,7 +122,7 @@ Screw.Unit(function() {
       })
       
       it("should be able to parse out all murmurs", function() {
-        var murmurs = MurmurParser.parse_collection(doc)
+        var murmurs = (new MurmurParser(new Account())).parse_collection(doc)
         expect($.pluck(murmurs, 'id')).to(equal, [1, 2, 3, 4])
       })
       

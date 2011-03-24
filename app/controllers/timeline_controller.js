@@ -20,7 +20,7 @@ TimelineController = function(container, account) {
   
   var timeline = new Timeline()
   var view = new TimelineView(container, account)
-  var murmurs_service = new MurmursService()
+  var murmurs_service = new MurmursService(account)
 
   
   var initialize = function () {

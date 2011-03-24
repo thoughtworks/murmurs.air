@@ -86,7 +86,7 @@ Murmur.id_desc_order = function(left, right) {
   return left.id < right.id ? 1 : -1
 }
 
-MurmurParser = function() {
+MurmurParser = function(account) {
   
   var not_nil = function(element) {
     return element && element.attr('nil') != 'true'
@@ -102,7 +102,6 @@ MurmurParser = function() {
     parse: function(xml) {
       var id = parseInt($("id", xml)[0].textContent)
       var murmur = new Murmur(id)
-      
       murmur.content($("body", xml).text())
       murmur.created_at($("created_at", xml).text())
       
@@ -125,4 +124,4 @@ MurmurParser = function() {
   }
   
   return public
-}()
+}

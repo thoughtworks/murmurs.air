@@ -13,9 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-MurmursService = function() {
+MurmursService = function(account) {
   
   var conn = new MingleConnection("murmurs")
+  var murmurs_parser = new MurmurParser(account)
   
   return  {
     // create new murmur on mingle
@@ -36,7 +37,7 @@ MurmursService = function() {
       conn.request({
         data: (since_id ? {'since_id': since_id} : {}),
         success: function(xml) {
-          callback(MurmurParser.parse_collection(xml))
+          callback(murmurs_parser.parse_collection(xml))
         }
       })
     },
@@ -46,7 +47,7 @@ MurmursService = function() {
       conn.request($.extend({
         data: {'before_id': before_id},
         success: function(xml) {
-          callback(MurmurParser.parse_collection(xml))
+          callback(murmurs_parser.parse_collection(xml))
         }
       }, options))
     }    
