@@ -16,6 +16,7 @@
 
 PostController = function() {
   var new_murmur = new Murmur()
+  var murmurs_service = new MurmursService()
   
   var public = {
     init: function() {
@@ -37,7 +38,7 @@ PostController = function() {
     },
     
     post: function() {
-      MurmursService.post(new_murmur, function() {
+      murmurs_service.post(new_murmur, function() {
         window.opener.TimelineController.current.refresh()
         window.close()
       })

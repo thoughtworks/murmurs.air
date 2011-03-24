@@ -20,6 +20,7 @@ TimelineController = function(container, account) {
   
   var timeline = new Timeline()
   var view = new TimelineView(container, account)
+  var murmurs_service = new MurmursService()
 
   
   var initialize = function () {
@@ -66,7 +67,7 @@ TimelineController = function(container, account) {
   var do_scroll = function() {
     if(!view.at_bottom() || view.has_spinner()) { return }
     view.append_spinner()
-    MurmursService.fetch_before(timeline.oldest_id(), timeline.append_all, { complete: view.remove_spinner })
+    murmurs_service.fetch_before(timeline.oldest_id(), timeline.append_all, { complete: view.remove_spinner })
   }
   
   var refreshTimeStamp = function() {
@@ -74,7 +75,7 @@ TimelineController = function(container, account) {
   }
   
   var refresh =  function() {
-    MurmursService.fetch_since(timeline.latest_id(), timeline.prepend_all)
+    murmurs_service.fetch_since(timeline.latest_id(), timeline.prepend_all)
   }
   
   initialize()

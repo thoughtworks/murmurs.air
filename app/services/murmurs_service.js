@@ -51,4 +51,4 @@ MurmursService = function() {
       }, options))
     }    
   }
-}()
+}
