@@ -15,18 +15,12 @@
  */
 
 
-MingleConnection = function(resource) {
-  
-  var preference = new Preference()
-  
-  var list_url = function() {
-    return preference.host() + "/api/v2/projects/" + preference.project_id() + "/" + resource + ".xml"
-  }
+MingleConnection = function(account, resource) {
   
   var general_request_options = function(){
     return {
       dataType: 'xml',
-      url: list_url(),
+      url: account.resource_list_url(resource),
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', base_auth_token())
       }
@@ -34,12 +28,12 @@ MingleConnection = function(resource) {
   }
   
   var base_auth_token = function() {
-    return make_base_auth(preference.username(), preference.password())
+    return make_base_auth(account.user_login(), account.password())
   }
   
   return {
     request: function(options) {    
-      if(!preference.host()) return
+      if(!account.configured()) return
       $.ajax($.extend(general_request_options(), options))
     }
   }

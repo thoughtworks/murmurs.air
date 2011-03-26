@@ -32,13 +32,29 @@ Account = function() {
   }
   
   self = {
+    user_login: function() {
+      return preference.username()
+    },
+    
+    password: function() {
+      return preference.password()
+    },
+    
+    configured: function() {
+      return preference.host() != null
+    },
+    
     card_url: function(number) {
-     return preference.host() + "/projects/" + preference.project_id() + "/cards/" + number
+      return preference.host() + "/projects/" + preference.project_id() + "/cards/" + number
+    },
+    
+    resource_list_url: function(resource) {
+      return preference.host() + "/api/v2/projects/" + preference.project_id() + '/' + resource + ".xml"
     },
     
     current_user: function() {
       if (current_user) return current_user
-      current_user = find_user_by_login(preference.username())
+      current_user = find_user_by_login(self.user_login())
       return current_user
     }
   }

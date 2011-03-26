@@ -14,8 +14,8 @@
  * the License.
  */
 
-UsersService = function() {
-  var conn = new MingleConnection("users")
+UsersService = function(account) {
+  var conn = new MingleConnection(account, "users")
   
   return {
     list: function(callback) {

@@ -15,7 +15,7 @@
  */
 MurmursService = function(account) {
   
-  var conn = new MingleConnection("murmurs")
+  var conn = new MingleConnection(account, "murmurs")
   var murmurs_parser = new MurmurParser(account)
   
   return  {
