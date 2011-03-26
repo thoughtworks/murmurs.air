@@ -19,7 +19,7 @@ Screw.Unit(function() {
     var account = { card_url: function(number) { return "http://example.com/" + number} } 
 
     var render = function(content) {
-      return RenderPipes.render(content, account)
+      return RenderPipes.render({content: function() {return content}, account: function() {return account}})
     }
 
     it("should escape html tag", function() {

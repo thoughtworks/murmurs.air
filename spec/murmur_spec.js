@@ -26,12 +26,12 @@ Screw.Unit(function() {
       }
     }
     
-    
+    var account = new Account()
     describe("a murmur can tell author info", function() {
       var m
       
       before(function() {
-        m = new Murmur(1)
+        m = new Murmur(account, 1)
       })
       
       it("should be author's info if provided", function() {
@@ -62,10 +62,10 @@ Screw.Unit(function() {
         User.current_user = new User()
         User.current_user.name('wang pengchao')
         
-        murmur_with_mention = new Murmur(1)
+        murmur_with_mention = new Murmur(account, 1)
         murmur_with_mention.content('@space @bug hello there @wpc')
         
-        murmur_without_mention = new Murmur(2)
+        murmur_without_mention = new Murmur(account, 2)
         murmur_without_mention.content('no mention wpc')
       })
 
@@ -123,7 +123,7 @@ Screw.Unit(function() {
       })
       
       var murmur_by = function(author) {
-        var m = new Murmur(1)
+        var m = new Murmur(account, 1)
         m.author(author)
         return m
       }
@@ -158,24 +158,24 @@ Screw.Unit(function() {
     
     describe("murmur is blank when", function() {
       it("content is null", function() {
-        var murmur = new Murmur(1)
+        var murmur = new Murmur(account, 1)
         expect(murmur.blank()).to(be_true)
       })
       
       it("content is empty string", function() {
-        var murmur = new Murmur(1)
+        var murmur = new Murmur(account, 1)
         murmur.content("")
         expect(murmur.blank()).to(be_true)
       })
       
       it("content only contain spaces", function() {
-        var murmur = new Murmur(1)
+        var murmur = new Murmur(account, 1)
         murmur.content("    ")
         expect(murmur.blank()).to(be_true)
       })
       
       it("content only contain cr or spaces", function() {
-        var murmur = new Murmur(1)
+        var murmur = new Murmur(account, 1)
         murmur.content("  \n  ")
         expect(murmur.blank()).to(be_true)
       })
@@ -184,14 +184,14 @@ Screw.Unit(function() {
     
     describe("remurmur", function(){
       it("to valide author", function(){
-        var murmur = new Murmur(1)
+        var murmur = new Murmur(account, 1)
         murmur.author({login : 'phoenix'})
         murmur.content('hi')
         expect(murmur.remurmur()).to(equal, 'RM @phoenix: hi // ')
       })
       
       it("to valide jabber user name", function(){
-        var murmur = new Murmur(1)
+        var murmur = new Murmur(account, 1)
         murmur.jabber_user_name('phoenix')
         murmur.content('hi')
         expect(murmur.remurmur()).to(equal, 'RM @phoenix: hi // ')
@@ -200,13 +200,13 @@ Screw.Unit(function() {
     
     describe("reply", function(){
       it("valid user login", function(){
-        var murmur = new Murmur(1)
+        var murmur = new Murmur(account, 1)
         murmur.author({login : 'phoenix'})
         expect(murmur.reply()).to(equal, '@phoenix ')
       })
       
       it("valid user jabber user name", function(){
-        var murmur = new Murmur(1)
+        var murmur = new Murmur(account, 1)
         murmur.jabber_user_name('phoenix')
         expect(murmur.reply()).to(equal, '@phoenix ')
       })

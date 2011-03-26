@@ -15,7 +15,7 @@
  */
 
 PostController = function(account) {
-  var new_murmur = new Murmur()
+  var new_murmur = new Murmur(account)
   var murmurs_service = new MurmursService(account)
   
   var post = function() {

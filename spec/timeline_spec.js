@@ -17,9 +17,11 @@
 Screw.Unit(function() {
   describe("Timeline", function() {
     var timeline
+    var account
     
     before(function() {
       timeline = new Timeline()
+      account = new Account()
     })
     
     describe("after freshly created", function() {
@@ -39,7 +41,7 @@ Screw.Unit(function() {
           notified = {'event': event, 'murmur': murmur}
         })
         
-        timeline.prepend_all([new Murmur(1)])
+        timeline.prepend_all([new Murmur(account, 1)])
         
         expect(notified).to_not(be_null)
         expect(notified.event).to(equal, 'prepend')
@@ -54,23 +56,23 @@ Screw.Unit(function() {
           ids.push(murmur.id)
         })
         
-        timeline.prepend_all([new Murmur(3), new Murmur(1), new Murmur(2)])
+        timeline.prepend_all([new Murmur(account, 3), new Murmur(account, 1), new Murmur(account, 2)])
         expect(ids).to(equal, [1, 2, 3])
       })
       
       it("should not change orignal murmurs array", function() {
-        var murmurs = [new Murmur(3), new Murmur(1), new Murmur(2)]
+        var murmurs = [new Murmur(account, 3), new Murmur(account, 1), new Murmur(account, 2)]
         timeline.prepend_all(murmurs)
         expect($.map(murmurs, function(m) { return m.id })).to(equal, [3, 1, 2])
       })
       
       it("should record largest id as latest murmur id", function() {
-        timeline.prepend_all([new Murmur(3), new Murmur(1), new Murmur(2)])
+        timeline.prepend_all([new Murmur(account, 3), new Murmur(account, 1), new Murmur(account, 2)])
         expect(timeline.latest_id()).to(equal, 3)
       })
       
       it("should record smallest id as oldest murmur id", function() {
-        timeline.prepend_all([new Murmur(3), new Murmur(1), new Murmur(2)])
+        timeline.prepend_all([new Murmur(account, 3), new Murmur(account, 1), new Murmur(account, 2)])
         expect(timeline.oldest_id()).to(equal, 1)
       })
     })
@@ -82,18 +84,18 @@ Screw.Unit(function() {
           ids.push(murmur.id)
         })
         
-        timeline.append_all([new Murmur(3), new Murmur(1), new Murmur(2)])
+        timeline.append_all([new Murmur(account, 3), new Murmur(account, 1), new Murmur(account, 2)])
         expect(ids).to(equal, [3, 2, 1])
       })
       
       it("should not change orignal murmurs array", function() {
-        var murmurs = [new Murmur(3), new Murmur(1), new Murmur(2)]
+        var murmurs = [new Murmur(account, 3), new Murmur(account, 1), new Murmur(account, 2)]
         timeline.append_all(murmurs)
         expect($.map(murmurs, function(m) { return m.id })).to(equal, [3, 1, 2])
       })
       
       it("should record smallest id as oldest murmur id", function() {
-        timeline.append_all([new Murmur(3), new Murmur(1), new Murmur(2)])
+        timeline.append_all([new Murmur(account, 3), new Murmur(account, 1), new Murmur(account, 2)])
         expect(timeline.oldest_id()).to(equal, 1)
       })
     })
@@ -101,9 +103,9 @@ Screw.Unit(function() {
     describe("find murmurs with murmur id", function() {
       var m1, m2, m3
       before(function() {
-        m1 = new Murmur(1)
-        m2 = new Murmur(2)
-        m3 = new Murmur(3)
+        m1 = new Murmur(account, 1)
+        m2 = new Murmur(account, 2)
+        m3 = new Murmur(account, 3)
         timeline.prepend_all([m1, m2, m3])
       })
       
@@ -131,7 +133,7 @@ Screw.Unit(function() {
         timeline.onchange(function(event, murmur) {
           ids.push(murmur.id)
         })
-        timeline.prepend_all([new Murmur(1), new Murmur(1), new Murmur(2)])
+        timeline.prepend_all([new Murmur(account, 1), new Murmur(account, 1), new Murmur(account, 2)])
         expect(ids).to(equal, [1, 2])
       })
     })    

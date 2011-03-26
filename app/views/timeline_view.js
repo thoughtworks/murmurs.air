@@ -16,14 +16,14 @@
 
 jQuery.timeago.settings.refreshMillis = -1; //stop time ago refreshing
 
-TimelineView = function(container, account) {
+TimelineView = function(container) {
   return {
     prepend: function(murmur) {
-      container.prepend(new MurmurView(murmur, account).render())
+      container.prepend(new MurmurView(murmur).render())
     },
     
     append: function(murmur) {
-      container.append(new MurmurView(murmur, account).render())
+      container.append(new MurmurView(murmur).render())
     },
     
     scroll: function(handler) {

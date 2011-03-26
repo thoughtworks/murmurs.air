@@ -19,7 +19,7 @@ TimelineController = function(container, account) {
   var timeStampRefreshInterval = 60 * 1000
   
   var timeline = new Timeline()
-  var view = new TimelineView(container, account)
+  var view = new TimelineView(container)
   var murmurs_service = new MurmursService(account)
 
   

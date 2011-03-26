@@ -14,7 +14,7 @@
  * the License.
  */
 
-Murmur = function(id) {
+Murmur = function(account, id) {
   var attr_store = new MemAttributesStore()
   
   var mentions_user = function(index, user) {
@@ -28,6 +28,7 @@ Murmur = function(id) {
   
   var public = {
     'id': id,
+    'account': function() { return account },
     content: function(v) { return attr('content', v, attr_store) },
     created_at: function(v) { return attr('created_at', v, attr_store) },
     author: function(v) { return attr('author', v, attr_store) },
@@ -70,6 +71,10 @@ Murmur = function(id) {
     from_current_user: function() {
       if(!User.current() || ! public.author()) { return false }
       return User.current().login()  == public.author().login
+    },
+    
+    stream_description: function() {
+      return public.stream().description(account)
     }
   }
   
@@ -101,7 +106,7 @@ MurmurParser = function(account) {
 
     parse: function(xml) {
       var id = parseInt($("id", xml)[0].textContent)
-      var murmur = new Murmur(id)
+      var murmur = new Murmur(account, id)
       murmur.content($("body", xml).text())
       murmur.created_at($("created_at", xml).text())
       
