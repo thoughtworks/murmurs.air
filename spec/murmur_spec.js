@@ -16,17 +16,27 @@
 
 Screw.Unit(function() {
   describe("Murmur", function() {
+    var account
+    var current_user
+    
     var without_user_current = function(expect) {
-      var backup = User.current
+      var backup = account.current_user
       try {
-        User.current = function() { return null }
+        account.current_user = function() { return null }
         expect()
       } finally {
-        User.current = backup          
+        account.current_user = backup          
       }
     }
     
-    var account = new Account()
+    before(function() {
+      account = new Account();
+      current_user = new User()
+      current_user.name('wang pengchao')
+      current_user.login('wpc')
+      account.current_user = function() { return current_user }
+    })
+
     describe("a murmur can tell author info", function() {
       var m
       
@@ -59,9 +69,6 @@ Screw.Unit(function() {
       var murmur_with_mention
       var murmur_without_mention
       before(function() {
-        User.current_user = new User()
-        User.current_user.name('wang pengchao')
-        
         murmur_with_mention = new Murmur(account, 1)
         murmur_with_mention.content('@space @bug hello there @wpc')
         
@@ -70,12 +77,12 @@ Screw.Unit(function() {
       })
 
       it("when username is different case", function() {
-        User.current_user.login('WpC')
+        current_user.login('WpC')
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
       it("when form is @login", function() {
-        User.current_user.login('wpc')
+        current_user.login('wpc')
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
@@ -86,41 +93,36 @@ Screw.Unit(function() {
       })
       
       it("unless there is no @ symbol", function() {
-        User.current_user.login('wpc')
+        current_user.login('wpc')
         expect(murmur_without_mention.mentions_current_user()).to(equal, false)
       })
       
       it("when form is @first_part_of_display_name", function() {
-        User.current_user.login("mike")
-        User.current_user.name("space garbage")
+        current_user.login("mike")
+        current_user.name("space garbage")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
       it("when form is @last_part_of_display_name", function() {
-        User.current_user.login("mike")
-        User.current_user.name("yucky bug")
+        current_user.login("mike")
+        current_user.name("yucky bug")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
       
       it("unless they only begin with username", function() {
-        User.current_user.login("wp")
+        current_user.login("wp")
         expect(murmur_with_mention.mentions_current_user()).to(equal, false)
       })
       
       it("when they end with a non-word character", function() {
-        User.current_user.login('maleksiu')
-        User.current_user.name('space baby')
+        current_user.login('maleksiu')
+        current_user.name('space baby')
         murmur_with_mention.content("@space: what's up?")
         expect(murmur_with_mention.mentions_current_user()).to(equal, true)
       })
     })
     
     describe("#from_current_user", function() {
-      before(function() {
-        User.current_user = new User()
-        User.current_user.name('wang pengchao')
-        User.current_user.login("wpc")
-      })
       
       var murmur_by = function(author) {
         var m = new Murmur(account, 1)
@@ -140,7 +142,7 @@ Screw.Unit(function() {
         })
       })
       
-      describe("when can not decide who current user", function() {
+      describe("when can not decide who is current user", function() {
         it("is not from_current_user", function() {
           without_user_current(function() {
             expect(murmur_by({login: 'wpc'}).from_current_user()).to(be_false)

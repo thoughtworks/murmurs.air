@@ -27,33 +27,6 @@ User = function(id) {
     }
   }
 }
-
-User.current_user = null
-
-User.current = function() {
-  if (User.current_user) return User.current_user
-  var preference = new Preference()
-  var user = User.find_by_login(preference.username())
-  if (user) {
-    User.current_user = user
-  }
-  return User.current_user
-}
-
-User.find_by_login = function(login) {
-  var found_user = null
-  var users_service = new UsersService()
-  users_service.list(function(users) {
-    var found_users = $.grep(users, function(user, index) {
-      return (user.login() == login)
-    })
-    if (found_users.length >= 1) {
-      found_user = found_users[0]
-    }
-  })
-  return found_user
-}
-
 User.parse = function(xml) {
   var id = parseInt($("id", xml)[0].textContent)
   var user = new User(id)

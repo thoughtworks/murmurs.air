@@ -22,8 +22,9 @@ RenderPipes = function() {
     },
     
     render: function(murmur) {
+      var content = murmur.content()
       $.each(pipes, function() {
-        content = this(murmur.content(), murmur.account())
+        content = this(content, murmur.account())
       })
       return content
     }

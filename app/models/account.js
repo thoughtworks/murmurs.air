@@ -16,10 +16,31 @@
 
 
 Account = function() {
+  var self
   var preference = new Preference()
-  return {
+  var current_user = null
+  
+  var find_user_by_login = function(login) {
+    var found_user = null
+    var users_service = new UsersService(self)
+    users_service.list(function(users) { //sync call
+      found_user = $.detect(users, function(user) {
+        return user.login() == login
+      })
+    })
+    return found_user
+  }
+  
+  self = {
     card_url: function(number) {
      return preference.host() + "/projects/" + preference.project_id() + "/cards/" + number
+    },
+    
+    current_user: function() {
+      if (current_user) return current_user
+      current_user = find_user_by_login(preference.username())
+      return current_user
     }
   }
+  return self
 }

@@ -52,8 +52,8 @@ Murmur = function(account, id) {
     },
     
     mentions_current_user: function() {
-      if(!User.current()) { return false }
-      return $.any(User.current().possible_mention_strings(), mentions_user)
+      if(!account.current_user()) { return false }
+      return $.any(account.current_user().possible_mention_strings(), mentions_user)
     },
     
     blank: function() {
@@ -69,8 +69,8 @@ Murmur = function(account, id) {
     },
     
     from_current_user: function() {
-      if(!User.current() || ! public.author()) { return false }
-      return User.current().login()  == public.author().login
+      if(!account.current_user() || !public.author()) { return false }
+      return account.current_user().login() == public.author().login
     },
     
     stream_description: function() {
