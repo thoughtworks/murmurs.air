@@ -19,16 +19,11 @@ TimelineController = function(container, account) {
   var timeStampRefreshInterval = 60 * 1000
   
   var timeline = new Timeline()
-  var view = new TimelineView(container)
+  var view = new TimelineView(container, timeline)
   var murmurs_service = new MurmursService(account)
 
   
   var initialize = function () {
-    timeline.onchange(function(event, murmur) {
-      view[event](murmur)
-    })
-
-
     $("button.post").click(PostController.open)
 
     $('.murmur').live('contextmenu', function(event){
