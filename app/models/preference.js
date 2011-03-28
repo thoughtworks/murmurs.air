@@ -20,11 +20,12 @@ Preference = function() {
   var attr_store = new XMLFileAttributesStore(preferences_file)
   var encrypted_attr_store = new EncryptedAttrStore()
   
-  var public = {
+  var self = {
     host: function(v) { return attr('host', v, attr_store) },
     project_id: function(v) { return attr('project_id', v, attr_store) },
     username: function(v) { return attr('username', v, attr_store) },
     password: function(v) { return attr('password', v, encrypted_attr_store) },
+    configured: function() { return self.host() != null },
         
     reset: function() {
       attr_store.reset();
@@ -32,5 +33,5 @@ Preference = function() {
     }
   }
   
-  return public
+  return self
 }

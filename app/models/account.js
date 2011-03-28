@@ -16,7 +16,6 @@
 
 
 Account = function() {
-  var self
   var preference = new Preference()
   var current_user = null
   
@@ -31,7 +30,7 @@ Account = function() {
     return found_user
   }
   
-  self = {
+  var self = {
     user_login: function() {
       return preference.username()
     },
@@ -40,16 +39,21 @@ Account = function() {
       return preference.password()
     },
     
+    //TODO: account.configured should be removed after story #23
     configured: function() {
-      return preference.host() != null
+      return preference.configured()
     },
     
     card_url: function(number) {
-      return preference.host() + "/projects/" + preference.project_id() + "/cards/" + number
+      return self.base_url() + "/projects/" + preference.project_id() + "/cards/" + number
     },
     
-    resource_list_url: function(resource) {
-      return preference.host() + "/api/v2/projects/" + preference.project_id() + '/' + resource + ".xml"
+    resource_list_url: function(resource_name) {
+      return self.base_url() + "/api/v2/projects/" + preference.project_id() + '/' + resource_name + ".xml"
+    },
+    
+    base_url: function() {
+      return preference.host()
     },
     
     current_user: function() {

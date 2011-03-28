@@ -85,7 +85,7 @@ ApplicationController = function() {
       setup_auto_updater()
       save_framerate_on_deactived()
       
-      if( new Preference().host() ) {
+      if( new Preference().configured() ) {
         open_timeline()
       } else {
         PreferenceController.open()

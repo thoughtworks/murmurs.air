@@ -119,7 +119,7 @@ MurmurParser = function(account) {
       if(not_nil($("author", xml))) {
         murmur.author({
          name: $("author name", xml).text(),
-         icon_path: new Preference().host() + $("author icon_path", xml).text(),
+         icon_path: account.base_url() + $("author icon_path", xml).text(),
          login: $("author login", xml).text()
         })        
       }

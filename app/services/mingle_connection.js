@@ -32,7 +32,7 @@ MingleConnection = function(account, resource) {
   }
   
   return {
-    request: function(options) {    
+    request: function(options) {
       if(!account.configured()) return
       $.ajax($.extend(general_request_options(), options))
     }
