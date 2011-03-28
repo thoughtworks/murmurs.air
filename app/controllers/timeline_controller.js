@@ -24,7 +24,9 @@ TimelineController = function(container, account) {
 
   
   var initialize = function () {
-    $("button.post").click(PostController.open)
+    $("button.post").click(function() {
+      PostController.open(account, {after_post: refresh})
+    })
 
     $('.murmur').live('contextmenu', function(event){
       on_context_menu(event, this)
@@ -52,11 +54,11 @@ TimelineController = function(container, account) {
   }
   
   var do_reply = function(murmur){
-    PostController.open({init_content : murmur.reply()})
+    PostController.open(account,{content: murmur.reply(), after_post: refresh})
   }
   
   var do_remurmur = function(murmur) {
-    PostController.open({ init_content : murmur.remurmur()} )
+    PostController.open(account, {content: murmur.remurmur(), after_post: refresh})
   }
   
   var do_scroll = function() {

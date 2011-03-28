@@ -14,32 +14,36 @@
  * the License.
  */
 
-PostController = function(account) {
+PostController = function() {
+  var account = window.params['account']
+  var init_content = window.params['content']
+  var callback = window.params['after_post']
   var new_murmur = new Murmur(account)
   var murmurs_service = new MurmursService(account)
-  
+
   var post = function() {
-    murmurs_service.post(new_murmur, function() {
-      window.opener.TimelineController.current.refresh()
-      window.close()
+    murmurs_service.post(new_murmur, function() { 
+      if (callback) {
+        callback(new_murmur)
+      }
+      window.close() 
     })
   }
-    
+  
   $("button.post").click(post)
-  $("textarea").change(function() {
-    new_murmur.content(this.value)
-  })
+
+  $("textarea").change(function() { new_murmur.content(this.value) })
   $("textarea").focus()
 
-  if(window.params && window.params['init_content']){
-    $("textarea").text(window.params['init_content'])
-  }    
-  
-  return {}
-}
+  if(init_content){
+    $("textarea").text(init_content)
+  }
+};
 
-PostController.open = function(params) {
+PostController.open = function(account, options) {
   var post_win = window.open("/app/views/post.html")
   post_win.resizeTo(400, 150)
-  post_win.params = params
+  post_win.params = options
+  post_win.params["account"] = account
+  return post_win
 }
